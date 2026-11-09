@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CharacterController } from './character/controller';
+import { buildCatalog, type AnimationEntry } from './pose/catalog';
 import { AnimationPlayer } from './pose/player';
 import { createDebug, type StudioDebug } from './debug';
 import { createBuddy, describeBuddy, loadOriginalAssets, type BuddyInfo } from './original';
@@ -32,6 +33,7 @@ export function App() {
   const [rig, setRig] = useState<CharacterRig | null>(null);
   const [controller, setController] = useState<CharacterController | null>(null);
   const [player, setPlayer] = useState<AnimationPlayer | null>(null);
+  const [entries, setEntries] = useState<AnimationEntry[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -47,11 +49,18 @@ export function App() {
       built.subscribe(() => animation.reapply());
       const control = await CharacterController.create(assets, buddy, built);
       const info = await describeBuddy(buddy, assets.wardrobe);
-      return { next: { status: 'ready', info, ms: Math.round(performance.now() - started) } as const, control, animation };
+      const catalog = buildCatalog({
+        clips: animation.clipNames().map(name => ({ name, frameCount: buddy.animations.get(name)!.frameCount, fps: buddy.animations.get(name)!.fps })),
+        moods: assets.moods,
+        pokes: assets.pokes,
+      });
+      if (catalog.missing.length) console.warn('Animations listed in the original XML but missing from the package:', catalog.missing);
+      return { next: { status: 'ready', info, ms: Math.round(performance.now() - started) } as const, control, animation, catalog: catalog.entries };
     })()
-      .then(({ next, control, animation }) => {
+      .then(({ next, control, animation, catalog }) => {
         if (cancelled) return;
-        window.__studio = { ...next, debug: createDebug(control, animation) };
+        window.__studio = { ...next, debug: createDebug(control, animation, catalog) };
+        setEntries(catalog);
         setRig(built);
         setController(control);
         setPlayer(animation);
@@ -75,7 +84,7 @@ export function App() {
     <div className="studio">
       <header className="topbar">
         <span className="brand">BuddyPoke Studio</span>
-        <span className="badge">M2B · presets</span>
+        <span className="badge">M3A · animate</span>
         <span className="spacer" />
         <span className={`status status-${state.status}`}>
           {state.status === 'loading' && 'Loading original assets…'}
@@ -84,11 +93,10 @@ export function App() {
         </span>
       </header>
       <main className="viewport">
-        <Viewport rig={rig} player={player} />
-        <p className="viewport-note">Drag to orbit · scroll to zoom · right-drag to pan</p>
+        <Viewport rig={rig} player={player} entries={entries} />
       </main>
       <aside className="panel">
-        {controller ? <Sidebar controller={controller} /> : <DataPanel state={state} />}
+        {controller && player ? <Sidebar controller={controller} player={player} entries={entries} /> : <DataPanel state={state} />}
         {controller && (
           <details className="data">
             <summary>Original data</summary>

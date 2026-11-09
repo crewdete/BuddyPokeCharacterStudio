@@ -1,7 +1,7 @@
 // Typed entry point to the original BuddyRevival code in ../web/src.
 // Everything here delegates to the original modules; nothing is re-implemented.
 import { Buddy } from '@original/domain/buddy.js';
-import { isWorn, items } from '@original/domain/catalog.js';
+import { attr, fetchXml, isWorn, items } from '@original/domain/catalog.js';
 import { TextureLibrary } from '@original/domain/textures.js';
 import { DEFAULT_LOOK_CODE, Wardrobe, decodeLook, encodeLook } from '@original/domain/wardrobe.js';
 import { describeScene, type SceneInfo } from './scene-info';
@@ -19,18 +19,27 @@ export interface OriginalAssets {
   chick: Uint8Array;
   catalog: string;
   wardrobe: Wardrobe;
+  /** Original mood list (web/assets/moods.xml): name and clip. */
+  moods: { name: string; a0: string }[];
+  /** Original poke list (web/assets/pokes.xml): name, "you" clip and "friend" clip. */
+  pokes: { name: string; a0: string; a1: string }[];
 }
 
 export async function loadOriginalAssets(): Promise<OriginalAssets> {
   const bytes = async (path: string) => new Uint8Array(await (await fetch(assetUrl(path))).arrayBuffer());
   const text = async (path: string) => (await fetch(assetUrl(path))).text();
-  const [textures, chick, catalog, wardrobe] = await Promise.all([
+  const [textures, chick, catalog, wardrobe, moodList, pokeList] = await Promise.all([
     TextureLibrary.load(assetUrl('chick/')),
     bytes('chick.bin'),
     text('chick/catalog.xml'),
     Wardrobe.load(assetUrl('wardrobe.xml')),
+    fetchXml(assetUrl('moods.xml')),
+    fetchXml(assetUrl('pokes.xml')),
   ]);
-  return { textures, chick, catalog, wardrobe };
+  // Same attributes the original main.js reads.
+  const moods = [...moodList.children].map(m => ({ name: attr(m, 'name'), a0: attr(m, 'a0') }));
+  const pokes = [...pokeList.children].map(p => ({ name: attr(p, 'name'), a0: attr(p, 'a0'), a1: attr(p, 'a1') }));
+  return { textures, chick, catalog, wardrobe, moods, pokes };
 }
 
 /** Decode a fresh buddy and dress it with a look code (or the original default look). */

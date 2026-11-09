@@ -31,6 +31,13 @@ Plan and analysis: [`../docs/studio/ANALYSIS_AND_PLAN.md`](../docs/studio/ANALYS
   switch, exact bind-pose restore on Stop and on every clip change (no pose bleed), and on-demand redraw only while
   playing. Driven from tests via `window.__studio.debug.anim`; the Animate UI arrives in M3A-2.
 
+- **M3A-2** animation interface: **Animate** tab (110 entries covering all 94 clips: 39 moods and 28 pokes named from
+  the original `moods.xml` / `pokes.xml`, both poke halves labelled you/friend, 13 idle poses, 2 other; group filter and
+  search) and a transport bar under the viewport (play/pause, stop, frame counter, frame slider, loop, speed 0.25×–2×,
+  clip name, Rest / Animation). Customizing, presets, look codes and undo keep the selected clip and paused frame.
+
+Animation shortcuts: `Space` play/pause, `,` / `.` previous / next frame while paused (ignored in text fields and menus).
+
 Editor shortcuts: `Ctrl/Cmd+Z` undo, `Ctrl/Cmd+Shift+Z` or `Ctrl+Y` redo (text fields keep their own undo).
 
 Preset file format (a preset is a name plus an original look code, so it also works in BuddyRevival as `?buddy=<code>`):
@@ -69,7 +76,8 @@ Vitest 4's optional peer dependencies; installing from the committed lockfile (`
 ```
 src/
   original/   typed adapter around ../web/src (no re-implementation)
-  pose/       BindSnapshot (exact rest pose), AnimationPlayer (original showFrame, timing per Animation.step)
+  pose/       BindSnapshot (exact rest pose), AnimationPlayer (original showFrame, timing per Animation.step,
+              rest/animation mode), catalog.ts (groups and names from the original moods.xml / pokes.xml)
   character/  CharacterController: serialized edits through the original Wardrobe, rig update, undo history;
               presets.ts: look-code validation, preset files, storage (pure, unit-tested)
   scene/      engine scene -> Three.js (CharacterRig, textures, depth offset, framing)
@@ -82,6 +90,7 @@ tests/
   e2e/        Playwright: smoke.mjs, render.mjs (vs the original Canvas 2D renderer), viewport.mjs,
               customize.mjs (every category via the panel; look codes checked in the original app),
               presets.mjs (look codes, Default/Random, presets, files, undo/redo, storage edge cases),
-              animation.mjs (94 clips / 470 frames vs the original renderer, props, Stop, bleed, timing)
+              animation.mjs (94 clips / 470 frames vs the original renderer, props, Stop, bleed, timing),
+              animate.mjs (Animate tab, transport, keyboard, integration, responsive)
     fixtures/original-bind.html   the original renderer drawing the bind pose (reference for render.mjs)
 ```

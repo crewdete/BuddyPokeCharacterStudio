@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { CharacterController } from '../character/controller';
 import { MAX_FILE_BYTES, parsePresetFile, presetFileName, serializePresetFile, type Preset } from '../character/presets';
+import type { AnimationEntry } from '../pose/catalog';
+import type { AnimationPlayer } from '../pose/player';
 import { usePresets } from '../state/presets';
+import { AnimatePanel } from './AnimatePanel';
 import { CustomizePanel } from './CustomizePanel';
 
 type Feedback = { kind: 'ok' | 'error'; text: string } | null;
@@ -202,10 +205,10 @@ function PresetsPanel({ controller }: { controller: CharacterController }) {
   );
 }
 
-const TABS = ['Customize', 'Presets', 'Code'] as const;
+const TABS = ['Customize', 'Animate', 'Presets', 'Code'] as const;
 type Tab = (typeof TABS)[number];
 
-export function Sidebar({ controller }: { controller: CharacterController }) {
+export function Sidebar({ controller, player, entries }: { controller: CharacterController; player: AnimationPlayer; entries: AnimationEntry[] }) {
   const [tab, setTab] = useState<Tab>('Customize');
   return (
     <div className="sidebar">
@@ -221,6 +224,7 @@ export function Sidebar({ controller }: { controller: CharacterController }) {
       </div>
       <div role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`}>
         {tab === 'Customize' && <CustomizePanel controller={controller} />}
+        {tab === 'Animate' && <AnimatePanel player={player} entries={entries} />}
         {tab === 'Presets' && <PresetsPanel controller={controller} />}
         {tab === 'Code' && <CodePanel controller={controller} />}
       </div>

@@ -7,7 +7,9 @@ import type { AnimationPlayer } from '../pose/player';
 import type { CharacterRig } from '../scene/CharacterRig';
 import { FRONT, characterBounds, frameBox, orthoZoomFor } from '../scene/framing';
 import { useViewport } from '../state/viewport';
+import type { AnimationEntry } from '../pose/catalog';
 import { Ground } from './Ground';
+import { Transport } from './Transport';
 import { ViewportToolbar } from './ViewportToolbar';
 
 const FOV = 35;
@@ -159,14 +161,18 @@ function StudioScene({ rig, player }: { rig: CharacterRig | null; player: Animat
   );
 }
 
-export function Viewport({ rig, player }: { rig: CharacterRig | null; player: AnimationPlayer | null }) {
+export function Viewport({ rig, player, entries }: { rig: CharacterRig | null; player: AnimationPlayer | null; entries: AnimationEntry[] }) {
   return (
+    <div className="viewport-column">
     <div className="viewport-stage">
       {/* frameloop="demand": frames are drawn only when something changes (camera, damping, character). */}
       <Canvas flat frameloop="demand" dpr={[1, 2]} gl={{ antialias: true, alpha: true }} data-testid="viewport" onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}>
         <StudioScene rig={rig} player={player} />
       </Canvas>
       <ViewportToolbar />
+      <p className="viewport-note">Drag to orbit · scroll to zoom · right-drag to pan</p>
+    </div>
+    {player && <Transport player={player} entries={entries} />}
     </div>
   );
 }

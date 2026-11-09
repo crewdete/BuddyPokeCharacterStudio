@@ -23,9 +23,12 @@ export interface PoseSink {
 }
 
 export type PlayerState = 'rest' | 'playing' | 'paused' | 'ended';
+/** What the viewport shows: the exact rest pose, or the current animation frame. */
+export type PoseMode = 'rest' | 'animation';
 
 export interface PlayerSnapshot {
   state: PlayerState;
+  mode: PoseMode;
   clip: string | null;
   frame: number;
   frameCount: number;
@@ -58,6 +61,7 @@ export class AnimationPlayer {
   private readonly listeners = new Set<() => void>();
   private clip: Animation | null = null;
   private state: PlayerState = 'rest';
+  private mode: PoseMode = 'rest';
   private frame = 0;
   /** Playback time in clip seconds (already scaled by speed). */
   private time = 0;
@@ -96,6 +100,7 @@ export class AnimationPlayer {
   snapshot(): PlayerSnapshot {
     return (this.snapshotCache ??= {
       state: this.state,
+      mode: this.mode,
       clip: this.clip?.name ?? null,
       frame: this.frame,
       frameCount: this.clip?.frameCount ?? 0,
@@ -122,6 +127,7 @@ export class AnimationPlayer {
     this.lastNow = null;
     this.resetToBind();
     this.prewarm();
+    this.mode = 'animation';
     this.applyFrame(0);
     this.state = 'paused';
     this.emit();
@@ -132,7 +138,11 @@ export class AnimationPlayer {
     if (!this.clip) return;
     if (this.state === 'ended' || this.state === 'rest') {
       this.time = 0;
-      if (this.state === 'rest') this.applyFrame(0);
+      this.frame = 0;
+    }
+    if (this.mode === 'rest' || this.state === 'ended' || this.frame === 0) {
+      this.mode = 'animation';
+      this.applyFrame(this.frame);
     }
     this.state = 'playing';
     this.lastNow = null;
@@ -155,7 +165,38 @@ export class AnimationPlayer {
     this.sink.syncVisibility();
     this.sink.refreshTextures();
     this.state = 'rest';
+    this.mode = 'rest';
     this.emit();
+  }
+
+  /**
+   * Show the exact rest pose but keep the clip and its position (pauses playback). Unlike stop(),
+   * switching back with showAnimation() returns to the same frame.
+   */
+  showRest() {
+    if (this.mode === 'rest') return;
+    if (this.state === 'playing') this.state = 'paused';
+    this.mode = 'rest';
+    this.resetToBind();
+    this.sink.syncPose();
+    this.sink.syncVisibility();
+    this.sink.refreshTextures();
+    this.emit();
+  }
+
+  /** Show the current animation frame again (paused if it was paused or resting). */
+  showAnimation() {
+    if (this.mode === 'animation' || !this.clip) return;
+    this.mode = 'animation';
+    if (this.state === 'rest') this.state = 'paused';
+    this.applyFrame(this.frame);
+    this.emit();
+  }
+
+  /** Step one frame while paused (clamped to the clip). */
+  step(delta: -1 | 1) {
+    if (!this.clip || this.state === 'playing') return;
+    this.seek(this.frame + delta);
   }
 
   /** Show frame `frame` (from the clip start) and pause there. */
@@ -165,6 +206,7 @@ export class AnimationPlayer {
     const target = Math.min(Math.max(0, Math.round(frame)), last);
     this.time = target / this.clip.fps;
     this.lastNow = null;
+    this.mode = 'animation';
     this.applyFrame(target);
     if (this.state !== 'playing') this.state = 'paused';
     this.emit();
@@ -203,7 +245,7 @@ export class AnimationPlayer {
    * props and builds new materials (resetting the face frame), and the frame must show again even when paused.
    */
   reapply() {
-    if (!this.clip || this.state === 'rest') return;
+    if (!this.clip || this.state === 'rest' || this.mode === 'rest') return;
     this.prewarm();
     this.applyFrame(this.frame);
   }

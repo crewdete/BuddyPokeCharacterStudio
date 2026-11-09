@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import type { Look } from '@original/domain/wardrobe.js';
 import type { SceneNode } from '@original/engine/scene-graph.js';
 import type { CharacterController } from './character/controller';
+import type { AnimationEntry } from './pose/catalog';
 import type { AnimationPlayer } from './pose/player';
 import { toThreeMatrix } from './scene/CharacterRig';
 
@@ -16,7 +17,7 @@ function mulberry32(seed: number) {
   };
 }
 
-export function createDebug(controller: CharacterController, player: AnimationPlayer) {
+export function createDebug(controller: CharacterController, player: AnimationPlayer, catalog: AnimationEntry[] = []) {
   const { wardrobe, buddy, rig } = controller;
   const named = () => {
     const nodes: SceneNode[] = [];
@@ -36,6 +37,7 @@ export function createDebug(controller: CharacterController, player: AnimationPl
     setSpeed: (speed: number) => player.setSpeed(speed),
     setLoop: (loop: boolean) => player.setLoop(loop),
     state: () => player.snapshot(),
+    catalog: () => catalog,
     /** Engine world position of every named scene node (original transforms). */
     worldPositions: () => Object.fromEntries(named().map(n => [n.name!, [n.world.e[12], n.world.e[13], n.world.e[14]]])),
     /** Engine local matrix of every named node (exact rest-pose comparisons). */

@@ -250,3 +250,36 @@ describe('AnimationPlayer', () => {
     void noopSink;
   });
 });
+
+describe('AnimationPlayer modes (M3A-2)', () => {
+  it('showRest keeps the clip and frame; showAnimation returns to the same frame; step moves one frame while paused', async () => {
+    const pack = await load();
+    updateWorld(pack);
+    const rest = locals(pack);
+    const player = new AnimationPlayer(pack.scene, pack.animations, { syncPose: () => updateWorld(pack), syncVisibility() {}, refreshTextures() {} });
+    player.select('mood_happy');
+    player.seek(40);
+    const posed = locals(pack);
+    player.showRest();
+    expect(player.snapshot()).toMatchObject({ mode: 'rest', clip: 'mood_happy', frame: 40, state: 'paused' });
+    expect(locals(pack)).toEqual(rest);
+    player.showAnimation();
+    expect(player.snapshot()).toMatchObject({ mode: 'animation', frame: 40 });
+    expect(locals(pack)).toEqual(posed);
+    player.step(1);
+    expect(player.snapshot().frame).toBe(41);
+    player.step(-1);
+    player.step(-1);
+    expect(player.snapshot().frame).toBe(39);
+    player.play();
+    player.step(1); // ignored while playing
+    expect(player.snapshot().frame).toBe(39);
+    player.showRest(); // pauses
+    expect(player.snapshot()).toMatchObject({ state: 'paused', mode: 'rest' });
+    player.play(); // resumes from the kept frame in animation mode
+    expect(player.snapshot()).toMatchObject({ state: 'playing', mode: 'animation', frame: 39 });
+    player.stop();
+    expect(player.snapshot()).toMatchObject({ state: 'rest', mode: 'rest', frame: 0 });
+    expect(locals(pack)).toEqual(rest);
+  });
+});
