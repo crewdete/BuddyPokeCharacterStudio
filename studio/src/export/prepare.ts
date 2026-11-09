@@ -22,6 +22,7 @@ import { createBuddy, type OriginalAssets } from '../original';
 import { BindSnapshot } from '../pose/bind';
 import { ARM_CHAIN, SIDES, TPose } from '../pose/tpose';
 import { CharacterRig, GROUND_MESHES } from '../scene/CharacterRig';
+import { sampleClip, toAnimationClip } from './animation/sample';
 
 export type ExportPose = 'rest' | 'tpose';
 export type RigidParts = 'skin' | 'parent';
@@ -34,6 +35,11 @@ export interface ExportOptions {
   /** Rigid parts (head, short hair): skinned to their bone with weight 1, or parented to it. */
   rigidParts: RigidParts;
   material: MaterialMode;
+  /**
+   * Animated export (M3C): original clip names to include. When set (even empty), the skeleton is bound to
+   * the ORIGINAL REST POSE (clean inverse binds) and `pose` only chooses the file's initial display pose.
+   */
+  animations?: string[];
 }
 
 export const EXPORT_SCALE = 0.01;
@@ -51,10 +57,14 @@ export interface ExportManifest {
   meshes: { name: string; vertices: number; triangles: number; skinned: boolean; parent: string | null; transparent: boolean; texture: [number, number] }[];
   /** Largest joint shift caused by using unit rotation axes (metres). */
   maxJointShift: number;
+  /** What the skin is bound to: the exported pose (M3B), or always the original rest pose (animated export). */
+  bind: 'pose' | 'rest';
+  animations: { name: string; frames: number; fps: number; duration: number }[];
 }
 
 export interface PreparedExport {
   root: THREE.Group;
+  animations: THREE.AnimationClip[];
   manifest: ExportManifest;
   dispose(): void;
 }
@@ -72,10 +82,28 @@ function hierarchy(buddy: Buddy) {
   return parentBone;
 }
 
+/** Same T-pose rule as M3A-3, solved in the export skeleton (unit-axis rotations): exactly horizontal joints. */
+function solveExportTPose(exportBones: Map<string, THREE.Bone>, root: THREE.Object3D) {
+  const xAxis = new THREE.Vector3(1, 0, 0);
+  for (const { side, direction } of SIDES) {
+    for (const name of ARM_CHAIN) {
+      const bone = exportBones.get(`Bip01_${side}_${name}`)!;
+      const world = bone.getWorldQuaternion(new THREE.Quaternion());
+      const turn = new THREE.Quaternion().setFromUnitVectors(xAxis.clone().applyQuaternion(world), direction);
+      const parentWorld = bone.parent!.getWorldQuaternion(new THREE.Quaternion());
+      bone.quaternion.copy(parentWorld.invert().multiply(turn.multiply(world))).normalize();
+      root.updateMatrixWorld(true);
+    }
+  }
+}
+
 export async function prepareExport(assets: OriginalAssets, lookCode: string, options: ExportOptions): Promise<PreparedExport> {
   const buddy = await createBuddy(assets, lookCode);
   const bind = new BindSnapshot(buddy.scene);
-  if (options.pose === 'tpose') new TPose(buddy.scene, bind).apply();
+  const animated = options.animations !== undefined;
+  if (animated && !options.skeleton) throw new Error('Animated export needs the skeleton');
+  // Static/rigged (M3B): the engine itself is posed. Animated (M3C): the engine stays at rest (the bind pose).
+  if (options.pose === 'tpose' && !animated) new TPose(buddy.scene, bind).apply();
   const rig = new CharacterRig(buddy); // syncPose(): engine pose (rest or T-pose) -> Three bones; update(): parts, culling, materials
   rig.root.updateMatrixWorld(true);
   const scene = buddy.scene;
@@ -102,21 +130,7 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
       (parent ? exportBones.get(parent.name!)! : root).add(exportBones.get(name)!);
     }
     root.updateMatrixWorld(true);
-    if (options.pose === 'tpose') {
-      // Same T-pose rule, solved in the export skeleton itself (its rotations are unit-axis), so the
-      // exported joints are exactly horizontal too, not only the mesh.
-      const xAxis = new THREE.Vector3(1, 0, 0);
-      for (const { side, direction } of SIDES) {
-        for (const name of ARM_CHAIN) {
-          const bone = exportBones.get(`Bip01_${side}_${name}`)!;
-          const world = bone.getWorldQuaternion(new THREE.Quaternion());
-          const turn = new THREE.Quaternion().setFromUnitVectors(xAxis.clone().applyQuaternion(world), direction);
-          const parentWorld = bone.parent!.getWorldQuaternion(new THREE.Quaternion());
-          bone.quaternion.copy(parentWorld.invert().multiply(turn.multiply(world))).normalize();
-          root.updateMatrixWorld(true);
-        }
-      }
-    }
+    if (options.pose === 'tpose' && !animated) solveExportTPose(exportBones, root);
     const a = new THREE.Vector3();
     const b = new THREE.Vector3();
     for (const name of scene.boneNames) {
@@ -126,7 +140,27 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
     }
   }
   const skeleton = options.skeleton ? new THREE.Skeleton(scene.boneNames.map(n => exportBones.get(n)!)) : null;
-  if (skeleton) skeleton.calculateInverses(); // the exported pose is the file's rest pose
+  if (skeleton) skeleton.calculateInverses(); // M3B: the exported pose is the bind pose; M3C: the original rest pose
+  // Clean rest joint matrices (metres) and the engine's own inverse binds, for the animated bind shape.
+  const restJoint = skeleton ? skeleton.boneInverses.map(m => m.clone().invert()) : [];
+  const engineInverseBind = scene.boneNames.map(n => new THREE.Matrix4().fromArray(Array.from(scene.node(n)!.inverseBind.e)));
+  const boneIndex = new Map(scene.boneNames.map((n, i) => [n, i]));
+  /**
+   * Animated bind shape (M3C plan, option c): s = Σ wₖ · Jrest_clean(bₖ) · (scale · engineInverseBind(bₖ) · v).
+   * glTF skinning then reproduces the original engine exactly for every vertex whose original weights
+   * sum to 1 (the engine binds with its own, slightly scaled, rest matrices; the file uses clean ones).
+   */
+  const bindShape = (v: THREE.Vector3, bones: number[], weights: number[], out: THREE.Vector3) => {
+    const sum = weights.reduce((a, b) => a + b, 0);
+    out.set(0, 0, 0);
+    const t = new THREE.Vector3();
+    bones.forEach((b, k) => {
+      if (!weights[k]) return;
+      t.copy(v).applyMatrix4(engineInverseBind[b]).multiplyScalar(EXPORT_SCALE).applyMatrix4(restJoint[b]);
+      out.addScaledVector(t, weights[k] / sum);
+    });
+    return out;
+  };
 
   // ---- meshes: exact posed geometry
   const meshes: ExportManifest['meshes'] = [];
@@ -138,11 +172,27 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
     const position = source.getAttribute('position');
     const world = new Float32Array(position.count * 3);
     const skinnedSource = (part as THREE.SkinnedMesh).isSkinnedMesh ? (part as THREE.SkinnedMesh) : null;
+    const node0 = scene.node(part.name)!;
+    const owner0 = skinnedSource ? null : parentBone.get(node0) ?? null;
+    const skinIndex = source.getAttribute('skinIndex');
+    const skinWeight = source.getAttribute('skinWeight');
+    const nodeWorld = new THREE.Matrix4().fromArray(Array.from(node0.world.e));
     for (let i = 0; i < position.count; i++) {
       v.fromBufferAttribute(position, i);
-      if (skinnedSource) skinnedSource.applyBoneTransform(i, v);
-      else v.applyMatrix4(part.matrixWorld);
-      v.multiplyScalar(EXPORT_SCALE).toArray(world, i * 3);
+      if (animated && skinnedSource) {
+        const bones = [0, 1, 2, 3].map(k => skinIndex.getComponent(i, k));
+        const weights = [0, 1, 2, 3].map(k => skinWeight.getComponent(i, k));
+        bindShape(v.clone(), bones, weights, v);
+      } else if (animated && owner0 && (options.rigidParts === 'skin' || !options.skeleton)) {
+        bindShape(v.clone().applyMatrix4(nodeWorld), [boneIndex.get(owner0.name!)!], [1], v);
+      } else if (animated && owner0) {
+        v.applyMatrix4(nodeWorld).applyMatrix4(engineInverseBind[boneIndex.get(owner0.name!)!]).multiplyScalar(EXPORT_SCALE).applyMatrix4(restJoint[boneIndex.get(owner0.name!)!]);
+      } else {
+        if (skinnedSource) skinnedSource.applyBoneTransform(i, v);
+        else v.applyMatrix4(part.matrixWorld);
+        v.multiplyScalar(EXPORT_SCALE);
+      }
+      v.toArray(world, i * 3);
     }
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(world, 3));
@@ -212,6 +262,14 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
   }
   root.updateMatrixWorld(true);
 
+  // Animated: the file may *display* the T-pose; the inverse binds (above) stay the original rest pose.
+  if (animated && options.pose === 'tpose') solveExportTPose(exportBones, root);
+  const animations = animated ? options.animations!.map(name => {
+    const clip = buddy.animations.get(name);
+    if (!clip) throw new Error(`Unknown animation "${name}"`);
+    return toAnimationClip(sampleClip(scene, clip, bind, scene.boneNames, EXPORT_SCALE), scene.boneNames);
+  }) : [];
+
   const manifest: ExportManifest = {
     generator: 'BuddyPoke Studio (original BuddyRevival data)',
     lookCode,
@@ -230,11 +288,17 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
       : [],
     meshes,
     maxJointShift,
+    bind: animated ? 'rest' : 'pose',
+    animations: animations.map(a => {
+      const clip = buddy.animations.get(a.name)!;
+      return { name: a.name, frames: clip.frameCount, fps: clip.fps, duration: a.duration };
+    }),
   };
   root.userData = { buddypoke: { ...manifest, bones: undefined, meshes: undefined } };
 
   return {
     root,
+    animations,
     manifest,
     dispose() {
       for (const d of disposables) d.dispose();

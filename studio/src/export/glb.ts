@@ -21,10 +21,12 @@ interface GltfJson {
   nodes?: { name?: string; children?: number[]; matrix?: number[] }[];
   meshes?: unknown[];
   extensionsUsed?: string[];
+  animations?: { name?: string; channels: { sampler: number; target: { node: number; path: string } }[]; samplers: { input: number; output: number; interpolation?: string }[] }[];
+  accessors?: { max?: number[]; min?: number[]; count: number }[];
 }
 
 export async function writeGlb(prepared: PreparedExport): Promise<ArrayBuffer> {
-  return (await new GLTFExporter().parseAsync(prepared.root, { binary: true, trs: true, onlyVisible: true })) as ArrayBuffer;
+  return (await new GLTFExporter().parseAsync(prepared.root, { binary: true, trs: true, onlyVisible: true, animations: prepared.animations })) as ArrayBuffer;
 }
 
 /** Read the JSON chunk of a GLB (for structural checks). */
@@ -82,6 +84,23 @@ export async function checkGlb(glb: ArrayBuffer, manifest: ExportManifest): Prom
       }
     }
   } else if (json.skins?.length) problems.push('static export contains a skin');
+  // Animations (M3C): every clip present by name, original duration, every bone rotated + root translated, STEP only.
+  const anims = json.animations ?? [];
+  if (anims.length !== manifest.animations.length) problems.push(`${anims.length} animations, expected ${manifest.animations.length}`);
+  for (const expected of manifest.animations) {
+    const a = anims.find(x => x.name === expected.name);
+    if (!a) {
+      problems.push(`animation ${expected.name} missing`);
+      continue;
+    }
+    const rotated = new Set(a.channels.filter(c => c.target.path === 'rotation').map(c => json.nodes?.[c.target.node]?.name));
+    const missing = manifest.bones.filter(b => !rotated.has(b.name)).map(b => b.name);
+    if (missing.length) problems.push(`${expected.name}: bones not keyed: ${missing.join(', ')}`);
+    if (!a.channels.some(c => c.target.path === 'translation' && json.nodes?.[c.target.node]?.name === 'Bip01')) problems.push(`${expected.name}: no root translation`);
+    if (a.samplers.some(s => s.interpolation !== 'STEP')) problems.push(`${expected.name}: non-STEP interpolation`);
+    const end = Math.max(...a.samplers.map(s => json.accessors?.[s.input]?.max?.[0] ?? 0));
+    if (Math.abs(end - expected.duration) > 1e-4) problems.push(`${expected.name}: duration ${end}, expected ${expected.duration}`);
+  }
   return {
     ok: problems.length === 0,
     problems,

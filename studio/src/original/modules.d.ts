@@ -20,6 +20,7 @@ declare module '@original/engine/math.js' {
   export class Matrix4 {
     e: Float64Array;
     identity(): this;
+    rotate(angle: number, x: number, y: number, z: number): this;
     copy(other: Matrix4): this;
     multiply(other: Matrix4): this;
     invertAffine(): this;

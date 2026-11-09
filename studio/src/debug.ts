@@ -5,6 +5,9 @@ import type { SceneNode } from '@original/engine/scene-graph.js';
 import type { CharacterController } from './character/controller';
 import { exportCharacter, type ExportOptions } from './export';
 import { EXPORT_SCALE } from './export/prepare';
+import { createBuddy } from './original';
+import { BindSnapshot } from './pose/bind';
+import { updateWorlds } from './pose/tpose';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { AnimationEntry } from './pose/catalog';
 import type { AnimationPlayer } from './pose/player';
@@ -167,7 +170,98 @@ export function createDebug(controller: CharacterController, player: AnimationPl
     }
     return { meshes: described, parents, maxVertexError, vertexCount, textures };
   };
+  /**
+   * Ground truth from the ORIGINAL engine on a fresh, never-animated buddy with the current look:
+   * world bone positions (metres) and, for `meshClips`, deformed skinned vertices (original Skin.deform,
+   * raw weights) of the given meshes at the given frames.
+   */
+  const animationExpectations = async ({ clips, frames, meshClips = [], meshes = ['Body'] }: { clips: string[]; frames: (n: number) => number[]; meshClips?: string[]; meshes?: string[] }) => {
+    const fresh = await createBuddy(controller.assets, controller.currentCode);
+    const bind = new BindSnapshot(fresh.scene);
+    const out: Record<string, { frames: number; fps: number; samples: Record<number, { heads: Record<string, number[]>; meshes?: Record<string, { positions: number[]; weightSums: number[] }> }> }> = {};
+    const S = fresh.scene;
+    for (const name of clips) {
+      const clip = fresh.animations.get(name)!;
+      clip.decode();
+      bind.restore();
+      out[name] = { frames: clip.frameCount, fps: clip.fps, samples: {} };
+      for (const f of frames(clip.frameCount)) {
+        clip.showFrame(S, f);
+        updateWorlds(S);
+        const sample: (typeof out)[string]['samples'][number] = {
+          heads: Object.fromEntries(S.boneNames.map(b => { const e = S.node(b)!.world.e; return [b, [e[12] * EXPORT_SCALE, e[13] * EXPORT_SCALE, e[14] * EXPORT_SCALE]]; })),
+        };
+        if (meshClips.includes(name)) {
+          sample.meshes = {};
+          for (const m of meshes) {
+            const mesh = S.node(m)?.mesh;
+            if (!mesh?.material || !S.node(m)!.visible) continue;
+            if (!mesh.decoded) mesh.decode(S);
+            if (!mesh.skin) continue; // rigid parts follow their bone (covered by the bone check)
+            const skin = mesh.skin as unknown as { offsets: unknown; deform(v: unknown): { x: number; y: number; z: number }[]; influences: { weights: number[] }[] };
+            skin.offsets = null;
+            sample.meshes[m] = {
+              positions: skin.deform(mesh.vertices).flatMap(v => [v.x * EXPORT_SCALE, v.y * EXPORT_SCALE, v.z * EXPORT_SCALE]),
+              weightSums: skin.influences.map(i => i.weights.reduce((a, b) => a + b, 0)),
+            };
+          }
+        }
+        out[name].samples[f] = sample;
+      }
+      bind.restore();
+    }
+    return out;
+  };
+
+  /** Play an animated GLB with THREE.AnimationMixer and compare with engine expectations. */
+  const checkAnimatedGlb = async (buffer: ArrayBuffer, expected: Awaited<ReturnType<typeof animationExpectations>>) => {
+    const gltf = await new GLTFLoader().parseAsync(buffer, '');
+    const mixer = new THREE.AnimationMixer(gltf.scene);
+    const bones = new Map<string, THREE.Object3D>();
+    gltf.scene.traverse(o => o.name && bones.set(o.name, o));
+    const skinned = new Map<string, THREE.SkinnedMesh>();
+    gltf.scene.traverse(o => (o as THREE.SkinnedMesh).isSkinnedMesh && skinned.set(o.name, o as THREE.SkinnedMesh));
+    const result: Record<string, { bone: number; root: number; worstBone?: string; mesh?: number; meshWeighted?: number }> = {};
+    const v = new THREE.Vector3();
+    for (const [name, clip] of Object.entries(expected)) {
+      const animation = gltf.animations.find(a => a.name === name);
+      if (!animation) { result[name] = { bone: Infinity, root: Infinity }; continue; }
+      mixer.stopAllAction();
+      const action = mixer.clipAction(animation);
+      action.setLoop(THREE.LoopOnce, 1);
+      action.clampWhenFinished = true; // hold the last frame instead of wrapping
+      action.reset().play();
+      let bone = 0, root = 0, mesh = 0, meshWeighted = 0, hasMesh = false, worstBone = '';
+      for (const [f, s] of Object.entries(clip.samples)) {
+        mixer.setTime(Number(f) / clip.fps);
+        gltf.scene.updateMatrixWorld(true);
+        for (const [b, p] of Object.entries(s.heads)) {
+          const d = v.setFromMatrixPosition(bones.get(b)!.matrixWorld).distanceTo(new THREE.Vector3(...p));
+          if (d > bone) { bone = d; worstBone = `${b}@${f}`; }
+          if (b === 'Bip01') root = Math.max(root, d);
+        }
+        for (const [m, data] of Object.entries(s.meshes ?? {})) {
+          const sm = skinned.get(m);
+          if (!sm) continue;
+          hasMesh = true;
+          const pos = sm.geometry.getAttribute('position');
+          for (let i = 0; i < pos.count; i++) {
+            sm.applyBoneTransform(i, v.fromBufferAttribute(pos, i));
+            const d = Math.hypot(v.x - data.positions[i * 3], v.y - data.positions[i * 3 + 1], v.z - data.positions[i * 3 + 2]);
+            mesh = Math.max(mesh, d);
+            if (Math.abs(data.weightSums[i] - 1) < 1e-6) meshWeighted = Math.max(meshWeighted, d);
+          }
+        }
+      }
+      action.stop();
+      result[name] = hasMesh ? { bone, root, worstBone, mesh, meshWeighted } : { bone, root, worstBone };
+    }
+    return result;
+  };
+
   return {
+    animationExpectations,
+    checkAnimatedGlb,
     loadGlbForInspection,
     exportGlb,
     anim,

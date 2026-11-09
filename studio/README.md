@@ -45,6 +45,9 @@ Plan and analysis: [`../docs/studio/ANALYSIS_AND_PLAN.md`](../docs/studio/ANALYS
   static, in the exact Rest pose or the T-pose, unlit (original look) or lit, with embedded textures. Validated in
   Blender 5.2.3 LTS (headless, official glTF importer). See *Export* below.
 
+- **M3C-1** skeletal animation export (exporter only; the Export-tab controls arrive in M3C-3): all 94 original clips
+  in one GLB, bound to the original rest pose, every bone keyed per clip, STEP keys at 30 fps, root motion. See below.
+
 Animation shortcuts: `Space` play/pause, `,` / `.` previous / next frame while paused (ignored in text fields and menus).
 Viewport: `B` skeleton overlay, `X` X-ray (bones through the character).
 
@@ -83,6 +86,26 @@ joints; Blender builds a single armature from them (verified).
 **Not offered yet:** *FBX* needs a binary FBX writer (no maintained browser library; `assimpjs` fails to export, see the
 M0 analysis). It will only be added once it passes the same Blender validation. *OBJ* cannot carry a skeleton, weights or
 transparency modes; the static GLB already covers static use, so OBJ adds little and is not offered.
+
+### Animated GLB (M3C-1)
+
+`exportCharacter(..., { skeleton: true, pose, animations: [clip ids] })` (used by the tests; UI in M3C-3):
+
+- **Bind:** always the original rest pose, with clean inverse bind matrices. `pose` only sets the file's *initial display*
+  (Rest, or T-pose with the arm bones turned while the bind stays the rest pose). A T-pose-bound animated file is not
+  offered: re-binding cannot reproduce the original deformation (up to 3.6 cm, see `docs/studio/M3C_PLAN.md`).
+- **Keys:** sampled from the original engine frame by frame (`Animation.showFrame` on a fresh export copy). One glTF
+  animation per clip named with the original id; every one of the 29 bones gets a rotation channel in every clip (no pose
+  carry-over between clips), plus `Bip01` translation (root motion). STEP interpolation, no smoothing. Key times are float32
+  rounded *down* so a player asked for exactly frame/30 shows that frame. Constant runs are stored once (lossless for STEP).
+- **Bind shape:** compensates the clean inverse binds so glTF skinning reproduces the original engine exactly for every
+  vertex whose original weights sum to 1.
+- **Measured against the original engine (all 94 clips):** bones ≤0.0005 mm, root motion ≤0.00003 mm. Mesh: properly weighted
+  vertices ≤0.07 mm (≤0.23 mm where a clip leaves a bone at its rest rotation); all vertices ≤7 mm, because glTF requires
+  weights summing to 1 while the original quantised weights sum to 0.996–1 (unavoidable, documented).
+- **Blender:** set the scene to **30 fps before importing** (Blender converts glTF seconds to frames at the scene rate and
+  has no import option for it). Each clip becomes an Action with its original name.
+- Props and facial expressions are not exported yet (M3C-2).
 
 ### Blender validation
 
@@ -125,7 +148,8 @@ Vitest 4's optional peer dependencies; installing from the committed lockfile (`
 ```
 src/
   original/   typed adapter around ../web/src (no re-implementation)
-  export/     prepare.ts (fresh buddy -> export scene), glb.ts (write + self-check), index.ts (workflow)
+  export/     prepare.ts (fresh buddy -> export scene), glb.ts (write + self-check), index.ts (workflow),
+              animation/sample.ts (original clips -> STEP keyframes)
   pose/       BindSnapshot (exact rest pose), AnimationPlayer (original showFrame, timing per Animation.step,
               rest/T-pose/animation mode), tpose.ts (T-pose solver), catalog.ts (original moods.xml / pokes.xml)
   character/  CharacterController: serialized edits through the original Wardrobe, rig update, undo history;
@@ -143,7 +167,8 @@ tests/
               animation.mjs (94 clips / 470 frames vs the original renderer, props, Stop, bleed, timing),
               animate.mjs (Animate tab, transport, keyboard, integration, responsive),
               tpose.mjs (modes, T-pose geometry, skeleton overlay, X-ray, camera preservation),
-              export.mjs (GLB structure, pose, skeleton, weights, textures, isolation; Blender if available)
-  blender/    validate_glb.py (headless Blender checks of an exported GLB)
+              export.mjs (GLB structure, pose, skeleton, weights, textures, isolation; Blender if available),
+              animexport.mjs (94 clips: structure, accuracy vs the engine, display pose; Blender if available)
+  blender/    validate_glb.py (static/rigged GLB), validate_anim.py (animated GLB, M3C)
     fixtures/original-bind.html   the original renderer drawing the bind pose (reference for render.mjs)
 ```

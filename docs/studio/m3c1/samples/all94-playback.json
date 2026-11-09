@@ -1,0 +1,494 @@
+{
+  "pose_joinNow": {
+    "bone": 8.402829954156963e-8,
+    "root": 1.3930815612221273e-8,
+    "worstBone": "IG_HairPony@340"
+  },
+  "pose_contra": {
+    "bone": 7.166277626960513e-8,
+    "root": 5.235549771596984e-9,
+    "worstBone": "IG_HairPig_R@0"
+  },
+  "pose_contra_attention": {
+    "bone": 1.3686786606562514e-7,
+    "root": 1.626409401778694e-8,
+    "worstBone": "IG_HairPony@0"
+  },
+  "pose_contra_bow": {
+    "bone": 1.1705171466522123e-7,
+    "root": 2.5244952577759674e-8,
+    "worstBone": "IG_HairPony@53"
+  },
+  "pose_contra_canCan": {
+    "bone": 1.814239580526661e-7,
+    "root": 1.7501247665696026e-8,
+    "worstBone": "IG_HairPony@0",
+    "mesh": 0.00404869560346792,
+    "meshWeighted": 0.00006662298138847751
+  },
+  "pose_contra_lookFeet": {
+    "bone": 7.4615260296289e-8,
+    "root": 1.3306369769878629e-8,
+    "worstBone": "IG_HairPig_L@140"
+  },
+  "pose_contra_shift": {
+    "bone": 1.2726986676601077e-7,
+    "root": 5.454295247844378e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "pose_contra_toStand": {
+    "bone": 1.377238543902807e-7,
+    "root": 9.570849723915044e-9,
+    "worstBone": "IG_HairPony@20"
+  },
+  "pose_stand": {
+    "bone": 6.793866078408294e-8,
+    "root": 5.235549771596984e-9,
+    "worstBone": "IG_HairPig_R@0"
+  },
+  "pose_stand_lookAround": {
+    "bone": 1.122871945981237e-7,
+    "root": 5.235549771596984e-9,
+    "worstBone": "IG_HairPony@160"
+  },
+  "pose_stand_model": {
+    "bone": 1.0157906729093459e-7,
+    "root": 8.363050973523752e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "pose_stand_stretch": {
+    "bone": 1.2422855893429225e-7,
+    "root": 6.583086388095421e-9,
+    "worstBone": "IG_HairPony@215",
+    "mesh": 0.004263554974533575,
+    "meshWeighted": 0.000028724212918315596
+  },
+  "pose_stand_toContra": {
+    "bone": 1.1274022174376359e-7,
+    "root": 9.570849723915044e-9,
+    "worstBone": "IG_HairPony@18"
+  },
+  "mood_impatient": {
+    "bone": 1.441917563442141e-7,
+    "root": 6.8686815680370666e-9,
+    "worstBone": "IG_HairPony@75"
+  },
+  "mood_lookingForLove": {
+    "bone": 4.716992112654148e-8,
+    "root": 1.4878432597099908e-8,
+    "worstBone": "Bip01_L_Finger0@0"
+  },
+  "mood_sneaky": {
+    "bone": 1.0698404560913769e-7,
+    "root": 1.045866988196655e-8,
+    "worstBone": "IG_HairPony@0"
+  },
+  "mood_dreaming": {
+    "bone": 1.1191821094677616e-7,
+    "root": 2.8202805979500845e-8,
+    "worstBone": "IG_HairPony@0"
+  },
+  "mood_confused": {
+    "bone": 1.440291356745262e-7,
+    "root": 5.235549771596984e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "mood_sleeping": {
+    "bone": 6.330739519854937e-8,
+    "root": 5.031183192385911e-9,
+    "worstBone": "IG_HairPony@80"
+  },
+  "hipBump1": {
+    "bone": 4.101599356102561e-8,
+    "root": 9.169759119586606e-9,
+    "worstBone": "Bip01_L_Foot@100"
+  },
+  "hipBump2": {
+    "bone": 5.089041453549749e-8,
+    "root": 8.444281211313609e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "mood_swordTwirl": {
+    "bone": 5.059533340955767e-8,
+    "root": 1.4962170128200028e-8,
+    "worstBone": "Bip01_R_Finger0@110"
+  },
+  "jamB2": {
+    "bone": 3.181235786826786e-7,
+    "root": 6.278228603744417e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "jamB1": {
+    "bone": 3.48632234356461e-7,
+    "root": 1.499684077878411e-8,
+    "worstBone": "IG_HairPony@80"
+  },
+  "jamA2": {
+    "bone": 6.843776266095593e-8,
+    "root": 5.892693568470432e-9,
+    "worstBone": "IG_HairPony@40"
+  },
+  "jamA1": {
+    "bone": 3.48632234356461e-7,
+    "root": 1.499684077878411e-8,
+    "worstBone": "IG_HairPony@80"
+  },
+  "rose2": {
+    "bone": 9.245727674888687e-8,
+    "root": 9.570849723915044e-9,
+    "worstBone": "IG_HairPig_L@0"
+  },
+  "rose1": {
+    "bone": 6.443332907372425e-8,
+    "root": 1.289662825474697e-8,
+    "worstBone": "IG_HairPony@0"
+  },
+  "swordA2": {
+    "bone": 1.3046402892813817e-7,
+    "root": 1.4287922561396734e-8,
+    "worstBone": "IG_HairPony@0"
+  },
+  "swordA1": {
+    "bone": 6.442193874885862e-8,
+    "root": 2.9045092023055482e-8,
+    "worstBone": "IG_HairPig_R@0"
+  },
+  "bearHug1": {
+    "bone": 8.014258394456317e-8,
+    "root": 1.9444500556089222e-8,
+    "worstBone": "IG_HairPony@100"
+  },
+  "bearHug2": {
+    "bone": 6.321059571697441e-8,
+    "root": 2.0764182572843537e-8,
+    "worstBone": "Bip01_R_Finger0@100"
+  },
+  "blowKiss1": {
+    "bone": 6.8068339657118e-8,
+    "root": 7.380251007257117e-9,
+    "worstBone": "IG_HairPig_L@0"
+  },
+  "blowKiss2": {
+    "bone": 3.1844787590152815e-7,
+    "root": 9.570849723915044e-9,
+    "worstBone": "IG_HairPony@50"
+  },
+  "celebrate1": {
+    "bone": 1.0715801559803881e-7,
+    "root": 1.269841454812826e-8,
+    "worstBone": "IG_HairPony@0"
+  },
+  "celebrate2": {
+    "bone": 5.4784070232140713e-8,
+    "root": 2.767152955361738e-8,
+    "worstBone": "Bip01_L_Finger0@30"
+  },
+  "gimmeFive1": {
+    "bone": 5.245589098503674e-8,
+    "root": 7.0293329717995715e-9,
+    "worstBone": "Bip01_R_Finger0@70"
+  },
+  "gimmeFive2": {
+    "bone": 7.191573798415775e-8,
+    "root": 1.141013478218492e-8,
+    "worstBone": "Bip01_R_Finger0@0"
+  },
+  "handshakeHug1": {
+    "bone": 5.546662956967715e-8,
+    "root": 1.3196861169427445e-8,
+    "worstBone": "Bip01_R_Finger0@0"
+  },
+  "handshakeHug2": {
+    "bone": 7.660204288945052e-8,
+    "root": 5.486128660839656e-9,
+    "worstBone": "IG_HairPig_L@70"
+  },
+  "highTen1": {
+    "bone": 6.376922257166903e-8,
+    "root": 9.196032693383853e-9,
+    "worstBone": "Bip01_R_Finger0@50"
+  },
+  "highTen2": {
+    "bone": 7.432035416384131e-8,
+    "root": 9.196032693383853e-9,
+    "worstBone": "Bip01_R_Finger0@50"
+  },
+  "hug1": {
+    "bone": 5.723492063278718e-8,
+    "root": 6.068873748563038e-9,
+    "worstBone": "IG_HairPony@140",
+    "mesh": 0.003987419516886912,
+    "meshWeighted": 0.000025006627772015
+  },
+  "hug2": {
+    "bone": 5.2478279513245024e-8,
+    "root": 6.068873748563038e-9,
+    "worstBone": "Bip01_R_Finger0@140",
+    "mesh": 0.003986670021509166,
+    "meshWeighted": 0.000024987120550220627
+  },
+  "idolize1": {
+    "bone": 5.97828858334505e-8,
+    "root": 9.570849723915044e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "idolize2": {
+    "bone": 6.750077919372728e-8,
+    "root": 9.570849723915044e-9,
+    "worstBone": "Bip01_R_Finger0@0"
+  },
+  "kick1": {
+    "bone": 7.697740129909817e-8,
+    "root": 1.5973205028844836e-8,
+    "worstBone": "Bip01_R_Finger0@80",
+    "mesh": 0.0033853296551885777,
+    "meshWeighted": 0.00005544355440030543
+  },
+  "kick2": {
+    "bone": 6.000487757009049e-8,
+    "root": 1.0885306610363104e-8,
+    "worstBone": "Bip01_R_Finger0@80"
+  },
+  "kissCheek1": {
+    "bone": 4.976946378755383e-8,
+    "root": 9.906177427523116e-9,
+    "worstBone": "Bip01_R_Finger0@0"
+  },
+  "kissCheek2": {
+    "bone": 6.260666068468484e-8,
+    "root": 9.59735573764691e-9,
+    "worstBone": "Bip01_R_Finger0@150"
+  },
+  "mock1": {
+    "bone": 4.4946601014322454e-8,
+    "root": 1.4009811543479562e-8,
+    "worstBone": "Bip01_R_Finger0@190"
+  },
+  "mock2": {
+    "bone": 6.394746643004499e-8,
+    "root": 1.2345577174020991e-8,
+    "worstBone": "Bip01_R_Finger0@190"
+  },
+  "pattyCakes1": {
+    "bone": 4.844808195192652e-8,
+    "root": 6.177174113191134e-9,
+    "worstBone": "IG_HairPony@40"
+  },
+  "pattyCakes2": {
+    "bone": 5.4037902606655544e-8,
+    "root": 1.2738053375502401e-8,
+    "worstBone": "Bip01_R_Finger0@80"
+  },
+  "poke1": {
+    "bone": 6.694416857868715e-8,
+    "root": 9.570849723915044e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "poke2": {
+    "bone": 5.733791992078223e-8,
+    "root": 9.570849723915044e-9,
+    "worstBone": "Bip01_L_Finger0@120"
+  },
+  "punch1": {
+    "bone": 2.2849242287195594e-7,
+    "root": 7.128878499851865e-9,
+    "worstBone": "IG_HairPony@105"
+  },
+  "punch2": {
+    "bone": 5.9217237557507715e-8,
+    "root": 1.667462622224098e-8,
+    "worstBone": "Bip01_L_Finger0@0"
+  },
+  "rubNoses1": {
+    "bone": 6.23867507688732e-8,
+    "root": 1.049853374016866e-8,
+    "worstBone": "Bip01_R_Finger0@75"
+  },
+  "rubNoses2": {
+    "bone": 8.099333086844907e-8,
+    "root": 9.573508178543202e-9,
+    "worstBone": "IG_HairPony@150"
+  },
+  "slapButt1": {
+    "bone": 7.391602979049733e-8,
+    "root": 8.834059247943604e-9,
+    "worstBone": "IG_HairPony@65"
+  },
+  "slapButt2": {
+    "bone": 5.119908148177067e-8,
+    "root": 9.68193581955235e-9,
+    "worstBone": "Bip01_L_Finger0@130"
+  },
+  "slapFace1": {
+    "bone": 7.437983933126395e-8,
+    "root": 9.767258522729532e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "slapFace2": {
+    "bone": 8.366191299706085e-8,
+    "root": 1.4229596942352615e-8,
+    "worstBone": "IG_HairPony@0"
+  },
+  "standBreathe": {
+    "bone": 6.793866078408294e-8,
+    "root": 5.235549771596984e-9,
+    "worstBone": "IG_HairPig_R@0",
+    "mesh": 0.003063861701292599,
+    "meshWeighted": 0.0000071983698216103365
+  },
+  "tickle1": {
+    "bone": 6.508196415682707e-8,
+    "root": 9.570849723915044e-9,
+    "worstBone": "Bip01_R_Finger0@65"
+  },
+  "tickle2": {
+    "bone": 5.585872371565094e-8,
+    "root": 1.1158688084702162e-8,
+    "worstBone": "Bip01_R_Finger0@0"
+  },
+  "waveAt1": {
+    "bone": 6.891222568882479e-8,
+    "root": 9.570849723915044e-9,
+    "worstBone": "IG_HairPony@150"
+  },
+  "waveAt2": {
+    "bone": 5.323187593268136e-8,
+    "root": 9.570849723915044e-9,
+    "worstBone": "Bip01_R_Finger0@0"
+  },
+  "mood_angry": {
+    "bone": 5.207571514049663e-8,
+    "root": 9.576263973241009e-9,
+    "worstBone": "Bip01_R_Finger0@40"
+  },
+  "mood_bashful": {
+    "bone": 1.4321038789487633e-7,
+    "root": 1.4786061590973275e-8,
+    "worstBone": "IG_HairPony@40"
+  },
+  "mood_gonnaSoarNow": {
+    "bone": 1.17969366094701e-7,
+    "root": 1.2866254006689419e-8,
+    "worstBone": "IG_HairPony@0"
+  },
+  "mood_happy": {
+    "bone": 1.4597193650744107e-7,
+    "root": 1.2176264385697267e-8,
+    "worstBone": "IG_HairPony@0",
+    "mesh": 0.0030165518274616644,
+    "meshWeighted": 0.000009395390493460557
+  },
+  "mood_tired": {
+    "bone": 7.732025412400494e-8,
+    "root": 3.0014192383185934e-9,
+    "worstBone": "IG_HairPony@130"
+  },
+  "mood_sad": {
+    "bone": 1.2354599779285122e-7,
+    "root": 1.137009419953747e-8,
+    "worstBone": "IG_HairPig_R@120"
+  },
+  "holdHands1": {
+    "bone": 4.2518661690270357e-7,
+    "root": 1.032709689089299e-8,
+    "worstBone": "IG_HairPony@0"
+  },
+  "holdHands2": {
+    "bone": 1.3620027019159286e-7,
+    "root": 1.032709689089299e-8,
+    "worstBone": "IG_HairPony@0",
+    "mesh": 0.003289358846314177,
+    "meshWeighted": 0.000016663863224588743
+  },
+  "handshake1": {
+    "bone": 1.1962914144816685e-7,
+    "root": 1.3470617660832072e-8,
+    "worstBone": "IG_HairPony@40"
+  },
+  "handshake2": {
+    "bone": 1.111764904152916e-7,
+    "root": 1.3470617660832072e-8,
+    "worstBone": "IG_HairPony@40"
+  },
+  "kiss1": {
+    "bone": 5.2685350986535764e-8,
+    "root": 9.587440762751291e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "kiss2": {
+    "bone": 6.525640825352851e-8,
+    "root": 9.972192542234843e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "gossip1": {
+    "bone": 6.144638838796615e-8,
+    "root": 1.1197358243519642e-8,
+    "worstBone": "Bip01_L_Finger0@0"
+  },
+  "gossip2": {
+    "bone": 5.132950015367251e-8,
+    "root": 9.570849723915044e-9,
+    "worstBone": "Bip01_L_Foot@280"
+  },
+  "mood_giggle": {
+    "bone": 9.029809010997741e-8,
+    "root": 1.2320330589108112e-8,
+    "worstBone": "IG_HairPig_L@30"
+  },
+  "mood_bored": {
+    "bone": 6.04967406055746e-8,
+    "root": 1.3614794134022197e-8,
+    "worstBone": "IG_HairPig_R@140"
+  },
+  "mood_applause": {
+    "bone": 1.1736190078924383e-7,
+    "root": 9.570849723915044e-9,
+    "worstBone": "IG_HairPony@0",
+    "mesh": 0.003275372353462647,
+    "meshWeighted": 0.000027989176155055765
+  },
+  "mood_inLove": {
+    "bone": 3.0194441302257357e-7,
+    "root": 1.4214636856505143e-8,
+    "worstBone": "IG_HairPony@60"
+  },
+  "mood_meditative": {
+    "bone": 4.424045770409332e-8,
+    "root": 9.868804945145093e-10,
+    "worstBone": "Bip01_R_Hand@0"
+  },
+  "mood_zombie": {
+    "bone": 3.871389418631127e-8,
+    "root": 8.507675957116902e-9,
+    "worstBone": "Bip01_R_Finger0@120"
+  },
+  "mood_evil": {
+    "bone": 9.08643579540096e-8,
+    "root": 1.147618924463886e-9,
+    "worstBone": "IG_HairPony@0"
+  },
+  "mood_terrified": {
+    "bone": 7.152942095750872e-8,
+    "root": 9.75666236696386e-9,
+    "worstBone": "IG_HairPony@48"
+  },
+  "mood_talkToHand": {
+    "bone": 5.453498391602291e-8,
+    "root": 5.291186637023813e-9,
+    "worstBone": "IG_HairPony@170"
+  },
+  "mood_flying": {
+    "bone": 1.0053306498903598e-7,
+    "root": 2.2756559414661063e-8,
+    "worstBone": "IG_HairPony@0",
+    "mesh": 0.004397230461647352,
+    "meshWeighted": 0.0000323780906493377
+  },
+  "mood_cry": {
+    "bone": 1.3315983735960884e-7,
+    "root": 1.4805998513900674e-8,
+    "worstBone": "IG_HairPony@0",
+    "mesh": 0.003955202129785266,
+    "meshWeighted": 0.000042657070571942924
+  }
+}

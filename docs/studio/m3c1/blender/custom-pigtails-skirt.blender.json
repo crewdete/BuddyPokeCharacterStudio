@@ -1,0 +1,82 @@
+{
+  "file": "custom-pigtails-skirt.glb",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens in Blender (official glTF importer), scene at 30 fps",
+      "ok": true,
+      "detail": "{'FINISHED'}, 30 fps"
+    },
+    {
+      "name": "armature rest pose = the original rest pose (bind)",
+      "ok": true,
+      "detail": "max 0.000 mm (clean-rotation rest, documented \u22641.22 mm)"
+    },
+    {
+      "name": "all 4 clips imported as Actions with their original names",
+      "ok": true,
+      "detail": "4 actions"
+    },
+    {
+      "name": "every Action spans the original frames 0..n-1 at 30 fps",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "bone positions match the original engine in all 4 clips",
+      "ok": true,
+      "detail": "worst 0.0007 mm"
+    },
+    {
+      "name": "root motion matches the original engine",
+      "ok": true,
+      "detail": "worst 0.00013 mm"
+    },
+    {
+      "name": "mesh deformation, properly weighted vertices (4 clips)",
+      "ok": true,
+      "detail": "worst 0.230 mm"
+    },
+    {
+      "name": "mesh deformation, all vertices incl. glTF weight normalisation (4 clips)",
+      "ok": true,
+      "detail": "worst 7.007 mm"
+    },
+    {
+      "name": "renders of representative clips",
+      "ok": true,
+      "detail": "custom-pigtails-skirt-hug1-56.png, custom-pigtails-skirt-kick1-32.png"
+    }
+  ],
+  "ok": true,
+  "clips": {
+    "hug1": {
+      "bone_mm": 0.0005397430144630323,
+      "root_mm": 7.634573255449234e-05,
+      "mesh_mm": 5.815808195620775,
+      "mesh_weighted_mm": 0.029497796276700683
+    },
+    "mood_flying": {
+      "bone_mm": 0.0007267712227524286,
+      "root_mm": 0.0001326096354179643,
+      "mesh_mm": 7.007155567407608,
+      "mesh_weighted_mm": 0.045507204049499705
+    },
+    "kick1": {
+      "bone_mm": 0.0005411937838555836,
+      "root_mm": 6.828569911354542e-05,
+      "mesh_mm": 5.7086157612502575,
+      "mesh_weighted_mm": 0.06824567390140146
+    },
+    "jamA2": {
+      "bone_mm": 0.0004924151790695877,
+      "root_mm": 2.9919248328269463e-05,
+      "mesh_mm": 5.719355773180723,
+      "mesh_weighted_mm": 0.23036224592942744
+    }
+  },
+  "renders": [
+    "custom-pigtails-skirt-hug1-56.png",
+    "custom-pigtails-skirt-kick1-32.png"
+  ]
+}
