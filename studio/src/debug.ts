@@ -44,6 +44,10 @@ export function createDebug(controller: CharacterController) {
       })),
     code: () => controller.code(),
     version: () => controller.version,
+    historyCodes: () => controller.historyCodes(),
+    history: () => ({ ...controller.historyState(), canUndo: controller.canUndo, canRedo: controller.canRedo }),
+    /** Resolves when every queued edit has been applied. */
+    idle: () => controller.edit(async () => undefined, { record: false }).then(() => controller.code()),
     /** Number of choices per selector id (to enumerate every hairstyle, skirt, ...). */
     selectorSizes() {
       return Object.fromEntries(wardrobe.selectors(buddy).map(s => [s.id, (s.kind === 'color' ? s.colors : s.icons).length]));

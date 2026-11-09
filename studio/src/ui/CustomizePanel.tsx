@@ -75,10 +75,6 @@ export function CustomizePanel({ controller }: { controller: CharacterController
 
   return (
     <section className="customize" aria-label="Customize">
-      <header className="panel-head">
-        <h2>Customize</h2>
-        <span className="muted-inline">{options.length} categories</span>
-      </header>
       <ul className="options">
         {options.map(option => {
           const labels = selectorLabels(option);

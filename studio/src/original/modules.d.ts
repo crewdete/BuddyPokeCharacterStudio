@@ -231,3 +231,11 @@ declare module '@original/domain/wardrobe.js' {
     codeOf(buddy: Buddy): Promise<string>;
   }
 }
+
+declare module '@original/engine/amf3.js' {
+  export function writeAmf3String(s: string): Uint8Array;
+}
+
+declare module '@original/engine/binary.js' {
+  export function deflate(bytes: Uint8Array): Promise<Uint8Array>;
+}

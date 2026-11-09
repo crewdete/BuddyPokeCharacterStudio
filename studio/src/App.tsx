@@ -3,7 +3,7 @@ import { CharacterController } from './character/controller';
 import { createDebug, type StudioDebug } from './debug';
 import { createBuddy, describeBuddy, loadOriginalAssets, type BuddyInfo } from './original';
 import { CharacterRig } from './scene/CharacterRig';
-import { CustomizePanel } from './ui/CustomizePanel';
+import { Sidebar } from './ui/Sidebar';
 import { DataPanel } from './ui/DataPanel';
 import { ComparisonViewport, Viewport } from './viewport/Viewport';
 
@@ -68,7 +68,7 @@ export function App() {
     <div className="studio">
       <header className="topbar">
         <span className="brand">BuddyPoke Studio</span>
-        <span className="badge">M2A · customize</span>
+        <span className="badge">M2B · presets</span>
         <span className="spacer" />
         <span className={`status status-${state.status}`}>
           {state.status === 'loading' && 'Loading original assets…'}
@@ -81,7 +81,7 @@ export function App() {
         <p className="viewport-note">Drag to orbit · scroll to zoom · right-drag to pan</p>
       </main>
       <aside className="panel">
-        {controller ? <CustomizePanel controller={controller} /> : <DataPanel state={state} />}
+        {controller ? <Sidebar controller={controller} /> : <DataPanel state={state} />}
         {controller && (
           <details className="data">
             <summary>Original data</summary>

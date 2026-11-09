@@ -74,12 +74,6 @@ button, input, select, textarea, code { font-family: Arial, Helvetica, sans-seri
 
 /* Customize panel (M2A) */
 .customize { display: flex; flex-direction: column; }
-.panel-head {
-  position: sticky; top: 0; z-index: 1; display: flex; align-items: baseline; justify-content: space-between;
-  padding: 10px 12px 8px; background: var(--panel); border-bottom: 1px solid var(--border);
-}
-.panel-head h2 { margin: 0; }
-.muted-inline { color: var(--mid); font-size: 11px; }
 .options { list-style: none; margin: 0; padding: 0; }
 .option { border-bottom: 1px solid var(--border); }
 .option-row { display: grid; grid-template-columns: 96px 1fr auto; align-items: center; gap: 8px; padding: 6px 12px; }
@@ -110,6 +104,46 @@ button, input, select, textarea, code { font-family: Arial, Helvetica, sans-seri
 }
 .data > section { padding: 0 12px 12px; }
 
+/* Sidebar (M2B): action bar, tabs, presets, look code */
+.sidebar-head { position: sticky; top: 0; z-index: 2; background: var(--panel); border-bottom: 1px solid var(--border); }
+.action-bar { display: flex; gap: 4px; padding: 8px 12px; }
+.action-gap { flex: 1; }
+.action-bar button, .row-actions button, .save-row button, .preset-actions button {
+  font-size: 12px; height: 26px; padding: 0 10px; cursor: pointer; color: var(--text);
+  background: var(--control); border: 1px solid var(--border-strong);
+}
+.action-bar button:hover:not(:disabled), .row-actions button:hover, .save-row button:hover, .preset-actions button:hover { background: #fff; }
+.action-bar button:disabled { color: var(--mid); border-color: var(--border); background: transparent; cursor: default; }
+.sidebar button:focus-visible, .sidebar input:focus-visible, .sidebar textarea:focus-visible { outline: 2px solid var(--text); outline-offset: 1px; }
+.tabs { display: flex; border-top: 1px solid var(--border); }
+.tabs button {
+  flex: 1; height: 30px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer;
+  color: var(--dark); background: var(--panel); border: 0; border-right: 1px solid var(--border); border-bottom: 2px solid transparent;
+}
+.tabs button:last-child { border-right: 0; }
+.tabs button[aria-selected='true'] { background: var(--panel-2); color: var(--text); border-bottom-color: var(--text); }
+.tab-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+.field-label { font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dark); margin-top: 6px; }
+.code-field, .save-row input {
+  width: 100%; font-size: 12px; color: var(--text); background: var(--control); border: 1px solid var(--border-strong); padding: 6px 8px;
+}
+.code-field { resize: vertical; word-break: break-all; line-height: 1.35; }
+.code-field[readonly] { background: var(--panel-2); color: var(--dark); }
+.row-actions { display: flex; gap: 4px; }
+.save-row { display: flex; gap: 4px; }
+.save-row input { flex: 1; min-width: 0; height: 26px; }
+.feedback { min-height: 16px; margin: 0; font-size: 12px; color: var(--dark); }
+.feedback-error { color: var(--text); font-weight: bold; border-left: 3px solid var(--text); padding-left: 6px; }
+.hint { margin: 0; font-size: 11px; color: var(--mid); }
+.preset-list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--border); }
+.preset { display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: var(--panel-2); }
+.preset + .preset { border-top: 1px solid var(--border); }
+.preset-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+.preset-actions { display: flex; gap: 4px; }
+.preset-actions button { height: 24px; padding: 0 8px; font-size: 11px; }
+.preset-actions button.danger { background: var(--dark); border-color: var(--dark); color: #f4f4f4; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
 /* Comparison mode (tests): transparent page. */
 .compare-stage { position: fixed; top: 0; left: 0; }
 html.compare, html.compare body { background: transparent; }
@@ -127,4 +161,6 @@ html.compare, html.compare body { background: transparent; }
   .pickers { grid-column: 1; }
   .reset { height: 32px; }
   .choices.colors .swatch { width: 28px; height: 28px; }
+  .action-bar button, .row-actions button, .save-row button, .save-row input, .preset-actions button { height: 32px; }
+  .tabs button { height: 34px; }
 }

@@ -21,6 +21,19 @@ Plan and analysis: [`../docs/studio/ANALYSIS_AND_PLAN.md`](../docs/studio/ANALYS
   update after every change, responsive (side panel on desktop/tablet, stacked on phones). The viewport renders on
   demand (only when the camera, damping or character changes).
 
+- **M2B** library: action bar (Undo, Redo, Default, Random) and Presets / Code tabs. Look codes in the original format
+  (copy, paste + apply with validation by the original decoder); Default and Random are the original
+  `wearCode(null)` and `Wardrobe.randomize`; named presets saved in `localStorage` (`buddypoke-studio:presets`),
+  exported/imported as `*.buddypoke.json`; undo/redo history of look codes (100 steps) covering every change.
+
+Editor shortcuts: `Ctrl/Cmd+Z` undo, `Ctrl/Cmd+Shift+Z` or `Ctrl+Y` redo (text fields keep their own undo).
+
+Preset file format (a preset is a name plus an original look code, so it also works in BuddyRevival as `?buddy=<code>`):
+
+```json
+{ "format": "buddypoke-studio-preset", "version": 1, "name": "Street look", "code": "eJw1Uk…" }
+```
+
 Viewport shortcuts: `5` perspective/orthographic, `Home` or `F` reset view, `G` grid.
 `?buddy=<look code>` wears a look on load (original BuddyRevival/Flash format).
 
@@ -51,15 +64,17 @@ Vitest 4's optional peer dependencies; installing from the committed lockfile (`
 ```
 src/
   original/   typed adapter around ../web/src (no re-implementation)
-  character/  CharacterController: serialized edits through the original Wardrobe, then rig update
+  character/  CharacterController: serialized edits through the original Wardrobe, rig update, undo history;
+              presets.ts: look-code validation, preset files, storage (pure, unit-tested)
   scene/      engine scene -> Three.js (CharacterRig, textures, depth offset, framing)
   state/      zustand stores
   viewport/   React Three Fiber canvas, cameras, floor, toolbar
   ui/         panels
   debug.ts    window.__studio.debug, used by the browser tests
 tests/
-  unit/       Vitest (Node): rig, skinning, bind pose, look codes, framing, depth offset
+  unit/       Vitest (Node): rig, skinning, bind pose, look codes, framing, depth offset, presets/validation
   e2e/        Playwright: smoke.mjs, render.mjs (vs the original Canvas 2D renderer), viewport.mjs,
-              customize.mjs (every category via the panel; look codes checked in the original app)
+              customize.mjs (every category via the panel; look codes checked in the original app),
+              presets.mjs (look codes, Default/Random, presets, files, undo/redo, storage edge cases)
     fixtures/original-bind.html   the original renderer drawing the bind pose (reference for render.mjs)
 ```
