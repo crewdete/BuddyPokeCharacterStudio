@@ -1,0 +1,165 @@
+{
+  "file": "buddypoke-fbx-animated-13clips-rest-748e72ea.fbx",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens with Blender's FBX importer; scene set to 30 fps from the file",
+      "ok": true,
+      "detail": "{'FINISHED'}, 30 fps"
+    },
+    {
+      "name": "one armature",
+      "ok": true,
+      "detail": "1 armatures"
+    },
+    {
+      "name": "the 29 original bones with their original names (+ 18 Ctrl_ helper bones)",
+      "ok": true,
+      "detail": "29 original, helpers ['Ctrl_Head', 'Ctrl_Head_F02', 'Ctrl_Head_F03', 'Ctrl_Head_F04']\u2026"
+    },
+    {
+      "name": "original hierarchy (every bone's parent)",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "all 20 meshes imported",
+      "ok": true,
+      "detail": "missing []"
+    },
+    {
+      "name": "skinned meshes deformed by the armature (Armature modifier + vertex groups)",
+      "ok": true,
+      "detail": "not skinned: []"
+    },
+    {
+      "name": "embedded textures load; every mesh material has its image",
+      "ok": true,
+      "detail": "41/41 images, 20 textured materials"
+    },
+    {
+      "name": "armature rest pose = the original rest pose (bind)",
+      "ok": true,
+      "detail": "max 0.000 mm (clean unit-axis rest, \u22641.22 mm documented)"
+    },
+    {
+      "name": "all 13 clips imported as Actions (BuddyPoke|<original name>)",
+      "ok": true,
+      "detail": "13 actions"
+    },
+    {
+      "name": "every Action spans the original frames (Blender frames 1..n)",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "bone positions match the original engine in all 13 clips",
+      "ok": true,
+      "detail": "worst 0.0011 mm"
+    },
+    {
+      "name": "root motion matches the original engine",
+      "ok": true,
+      "detail": "worst 0.00006 mm"
+    },
+    {
+      "name": "mesh deformation, properly weighted vertices (3 clips)",
+      "ok": true,
+      "detail": "worst 0.052 mm"
+    },
+    {
+      "name": "mesh deformation, all vertices incl. weight normalisation (3 clips)",
+      "ok": true,
+      "detail": "worst 4.479 mm"
+    },
+    {
+      "name": "bones, props and face in sync at every sampled frame",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop vertices where the engine puts them (Mic, Rose, Strat, Sword)",
+      "ok": true,
+      "detail": "worst 0.00110 mm"
+    },
+    {
+      "name": "face vertices where the engine puts them (14 face nodes)",
+      "ok": true,
+      "detail": "worst 0.00048 mm"
+    },
+    {
+      "name": "facial expression timing: the engine's face at every frame (1213 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop visibility timing: the engine's props at every frame (1213 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "switching swordA1 -> hug1: no pose, prop or face carry-over",
+      "ok": true,
+      "detail": "bones 0.0003 mm, faces ['Head_F03'], props []"
+    },
+    {
+      "name": "switching hug1 -> swordA1: no pose, prop or face carry-over",
+      "ok": true,
+      "detail": "bones 0.0007 mm, faces ['Head_F15'], props ['Sword']"
+    },
+    {
+      "name": "renders",
+      "ok": true,
+      "detail": "buddypoke-fbx-animated-13clips-rest-748e72ea-swordA2-44.png, buddypoke-fbx-animated-13clips-rest-748e72ea-jamA1-54.png, buddypoke-fbx-animated-13clips-rest-748e72ea-rose1-34.png, buddypoke-fbx-animated-13clips-rest-748e72ea-jamA2-54.png, buddypoke-fbx-animated-13clips-rest-748e72ea-mood_happy-32.png"
+    }
+  ],
+  "ok": true,
+  "clips": {
+    "mood_lookingForLove": {
+      "bone_mm": 0.00045491270787935694
+    },
+    "mood_swordTwirl": {
+      "bone_mm": 0.0006437857818252736
+    },
+    "jamB2": {
+      "bone_mm": 0.0005778884717722332
+    },
+    "jamB1": {
+      "bone_mm": 0.0007685663017930298
+    },
+    "jamA2": {
+      "bone_mm": 0.0004906222880450314
+    },
+    "jamA1": {
+      "bone_mm": 0.0007685663017930298
+    },
+    "rose2": {
+      "bone_mm": 0.00040535540904806385
+    },
+    "rose1": {
+      "bone_mm": 0.0006181849584580546
+    },
+    "swordA2": {
+      "bone_mm": 0.0007987425499501364
+    },
+    "swordA1": {
+      "bone_mm": 0.0007395076577032103
+    },
+    "hug1": {
+      "bone_mm": 0.0006271335635041882
+    },
+    "kick1": {
+      "bone_mm": 0.0011198943877740472
+    },
+    "mood_happy": {
+      "bone_mm": 0.00028175240142304137
+    }
+  },
+  "renders": [
+    "buddypoke-fbx-animated-13clips-rest-748e72ea-swordA2-44.png",
+    "buddypoke-fbx-animated-13clips-rest-748e72ea-jamA1-54.png",
+    "buddypoke-fbx-animated-13clips-rest-748e72ea-rose1-34.png",
+    "buddypoke-fbx-animated-13clips-rest-748e72ea-jamA2-54.png",
+    "buddypoke-fbx-animated-13clips-rest-748e72ea-mood_happy-32.png"
+  ]
+}

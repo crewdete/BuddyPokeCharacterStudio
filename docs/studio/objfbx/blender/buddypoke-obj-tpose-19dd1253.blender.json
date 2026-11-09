@@ -1,0 +1,55 @@
+{
+  "file": "buddypoke-obj-tpose-19dd1253.zip",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "ZIP is valid (CRC) and holds the .obj, the .mtl and the textures",
+      "ok": true,
+      "detail": "6 files: buddypoke-obj-tpose-19dd1253.obj, buddypoke-obj-tpose-19dd1253.mtl, buddypoke-obj-tpose-19dd1253_Head_0.png, buddypoke-obj-tpose-19dd1253_Body_1.png\u2026"
+    },
+    {
+      "name": "file opens with Blender's OBJ importer",
+      "ok": true,
+      "detail": "{'FINISHED'}"
+    },
+    {
+      "name": "one object per mesh part (4)",
+      "ok": true,
+      "detail": "['Body', 'Hair_Tied_MainPig', 'Head', 'Skrt']"
+    },
+    {
+      "name": "triangle count of every part = the export",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "vertex positions = the static GLB of the same look and pose (tpose)",
+      "ok": true,
+      "detail": "max 0.00083 mm (OBJ stores 6 decimals)"
+    },
+    {
+      "name": "texture coordinates on every part",
+      "ok": true,
+      "detail": "missing: []"
+    },
+    {
+      "name": "every part has its original texture (loaded, original size)",
+      "ok": true,
+      "detail": "4 materials"
+    },
+    {
+      "name": "transparency: alpha from the texture exactly on the transparent parts (map_d)",
+      "ok": true,
+      "detail": "1 transparent"
+    },
+    {
+      "name": "render",
+      "ok": true,
+      "detail": "buddypoke-obj-tpose-19dd1253-front.png"
+    }
+  ],
+  "ok": true,
+  "renders": [
+    "buddypoke-obj-tpose-19dd1253-front.png"
+  ]
+}

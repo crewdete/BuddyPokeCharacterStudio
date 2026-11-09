@@ -16,8 +16,8 @@
     "test": "npm run test:engine && npm run test:unit",
     "test:engine": "node ../tests/engine.test.mjs",
     "test:unit": "vitest run",
-    "test:e2e": "npm run build && node tests/e2e/smoke.mjs && node tests/e2e/render.mjs && node tests/e2e/viewport.mjs && node tests/e2e/customize.mjs && node tests/e2e/presets.mjs && node tests/e2e/animation.mjs && node tests/e2e/animate.mjs && node tests/e2e/tpose.mjs && node tests/e2e/export.mjs && node tests/e2e/animexport.mjs && node tests/e2e/animprops.mjs && node tests/e2e/exportui.mjs",
-    "test:blender": "npm run build && node tests/e2e/export.mjs && node tests/e2e/animexport.mjs && node tests/e2e/animprops.mjs && node tests/e2e/exportui.mjs"
+    "test:e2e": "npm run build && node tests/e2e/smoke.mjs && node tests/e2e/render.mjs && node tests/e2e/viewport.mjs && node tests/e2e/customize.mjs && node tests/e2e/presets.mjs && node tests/e2e/animation.mjs && node tests/e2e/animate.mjs && node tests/e2e/tpose.mjs && node tests/e2e/export.mjs && node tests/e2e/animexport.mjs && node tests/e2e/animprops.mjs && node tests/e2e/exportui.mjs && node tests/e2e/objfbx.mjs",
+    "test:blender": "npm run build && node tests/e2e/export.mjs && node tests/e2e/animexport.mjs && node tests/e2e/animprops.mjs && node tests/e2e/exportui.mjs && node tests/e2e/objfbx.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.9",
