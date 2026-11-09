@@ -120,7 +120,17 @@ declare module '@original/engine/scene-graph.js' {
 
 declare module '@original/engine/animation.js' {
   import type { Scene } from '@original/engine/scene-graph.js';
+  /** One decoded original track (per-frame data for one target node). */
+  export interface AnimationTrack {
+    target: string;
+    materialFrames: number[] | null;
+    positions: number[] | null;
+    visibility: Uint8Array | number[] | null;
+    rotations: number[] | null;
+  }
   export class Animation {
+    /** Decoded tracks, available after decode(). */
+    tracks: AnimationTrack[] | null;
     name: string;
     start: number;
     end: number;

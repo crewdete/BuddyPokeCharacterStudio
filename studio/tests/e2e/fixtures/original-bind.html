@@ -1,6 +1,7 @@
 <!doctype html>
-<!-- Reference renderer for the M1 comparison tests: the ORIGINAL BuddyRevival Canvas 2D engine,
-     unmodified, drawing the character in its bind pose with the original Camera_Long2 at 692x520.
+<!-- Reference renderer for the comparison tests: the ORIGINAL BuddyRevival Canvas 2D engine,
+     unmodified, drawing the character with the original Camera_Long2 at 692x520: the bind pose
+     (render) or any animation frame from a fresh buddy (prepare + show).
      Served from the repository root (it imports ../../../../web/src). ?buddy=<look code> picks the look. -->
 <meta charset="utf-8">
 <style>html,body{margin:0;background:transparent}</style>
@@ -29,5 +30,32 @@
     return wardrobe.codeOf(buddy);
   }
   const code = await render(new URLSearchParams(location.search).get('buddy'));
-  window.__original = { ready: true, code, render };
+
+  // Animation reference: a FRESH original buddy per clip (no state carried over from other clips),
+  // dressed with `code`, then the original buddy.play(clip) / buddy.showFrame(frame) / buddy.render().
+  let animated = null;
+  async function prepare(code, clip) {
+    animated = await Buddy.load(chick, { width: canvas.width, height: canvas.height, textures, catalog });
+    await wardrobe.wearCode(animated, code);
+    animated.camera = animated.scene.node('Camera_Long2');
+    animated.play(clip);
+    return wardrobe.codeOf(animated);
+  }
+  function show(frame) {
+    animated.showFrame(frame);
+    g.clearRect(0, 0, canvas.width, canvas.height);
+    animated.render(g);
+    const scene = animated.scene;
+    const world = {};
+    scene.find(node => {
+      if (node.name) world[node.name] = [node.world.e[12], node.world.e[13], node.world.e[14]];
+      return false;
+    });
+    return {
+      world,
+      headFrame: scene.node('Head')?.mesh?.material?.frame ?? null,
+      props: scene.propNames.filter(name => scene.node(name)?.visible).sort(),
+    };
+  }
+  window.__original = { ready: true, code, render, prepare, show };
 </script>

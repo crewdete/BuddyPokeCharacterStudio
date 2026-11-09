@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CharacterController } from './character/controller';
+import { AnimationPlayer } from './pose/player';
 import { createDebug, type StudioDebug } from './debug';
 import { createBuddy, describeBuddy, loadOriginalAssets, type BuddyInfo } from './original';
 import { CharacterRig } from './scene/CharacterRig';
@@ -30,6 +31,7 @@ export function App() {
   const [state, setState] = useState<LoadState>({ status: 'loading' });
   const [rig, setRig] = useState<CharacterRig | null>(null);
   const [controller, setController] = useState<CharacterController | null>(null);
+  const [player, setPlayer] = useState<AnimationPlayer | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -39,15 +41,20 @@ export function App() {
       const assets = await loadOriginalAssets();
       const buddy = await createBuddy(assets, LOOK);
       built = new CharacterRig(buddy);
+      // Created before any animation runs, so it snapshots the untouched original bind pose.
+      const animation = new AnimationPlayer(buddy.scene, buddy.animations, built);
+      // Re-dressing hides props and rebuilds materials: show the current animation frame again.
+      built.subscribe(() => animation.reapply());
       const control = await CharacterController.create(assets, buddy, built);
       const info = await describeBuddy(buddy, assets.wardrobe);
-      return { next: { status: 'ready', info, ms: Math.round(performance.now() - started) } as const, control };
+      return { next: { status: 'ready', info, ms: Math.round(performance.now() - started) } as const, control, animation };
     })()
-      .then(({ next, control }) => {
+      .then(({ next, control, animation }) => {
         if (cancelled) return;
-        window.__studio = { ...next, debug: createDebug(control) };
+        window.__studio = { ...next, debug: createDebug(control, animation) };
         setRig(built);
         setController(control);
+        setPlayer(animation);
         setState(next);
       })
       .catch((error: unknown) => {
@@ -62,7 +69,7 @@ export function App() {
     };
   }, []);
 
-  if (COMPARE) return rig ? <ComparisonViewport rig={rig} /> : null;
+  if (COMPARE) return rig ? <ComparisonViewport rig={rig} player={player} /> : null;
 
   return (
     <div className="studio">
@@ -77,7 +84,7 @@ export function App() {
         </span>
       </header>
       <main className="viewport">
-        <Viewport rig={rig} />
+        <Viewport rig={rig} player={player} />
         <p className="viewport-note">Drag to orbit · scroll to zoom · right-drag to pan</p>
       </main>
       <aside className="panel">

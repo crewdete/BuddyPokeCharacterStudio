@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
+import type { AnimationPlayer } from '../pose/player';
 import type { CharacterRig } from '../scene/CharacterRig';
 import { FRONT, characterBounds, frameBox, orthoZoomFor } from '../scene/framing';
 import { useViewport } from '../state/viewport';
@@ -15,6 +16,8 @@ declare global {
   interface Window {
     /** Current camera and controls, read by the end-to-end tests. */
     __studioViewport?: { camera: THREE.Camera; controls: OrbitControlsImpl | null; size: { width: number; height: number } };
+    /** Rendered frames per canvas (tests check that playback redraws and pausing stops redrawing). */
+    __studioFrames?: Record<string, number>;
   }
 }
 
@@ -23,6 +26,23 @@ interface View {
   target: THREE.Vector3;
   direction: THREE.Vector3;
   distance: number;
+}
+
+/**
+ * Drives animation playback. While playing, each rendered frame advances the player (wall clock) and
+ * requests the next frame; when paused, stopped or ended it requests nothing, so the canvas stops redrawing.
+ */
+function Playback({ player, name }: { player: AnimationPlayer | null; name: string }) {
+  const invalidate = useThree(s => s.invalidate);
+  useEffect(() => player?.subscribe(() => invalidate()), [player, invalidate]);
+  useFrame(() => {
+    const frames = (window.__studioFrames ??= {});
+    frames[name] = (frames[name] ?? 0) + 1;
+    if (!player?.playing) return;
+    player.tick(performance.now());
+    if (player.playing) invalidate();
+  }, -1);
+  return null;
 }
 
 function Character({ rig }: { rig: CharacterRig }) {
@@ -110,10 +130,11 @@ function StudioCamera({ rig }: { rig: CharacterRig | null }) {
   );
 }
 
-function StudioScene({ rig }: { rig: CharacterRig | null }) {
+function StudioScene({ rig, player }: { rig: CharacterRig | null; player: AnimationPlayer | null }) {
   const showGrid = useViewport(s => s.showGrid);
   return (
     <>
+      <Playback player={player} name="viewport" />
       <StudioCamera rig={rig} />
       <Ground />
       {showGrid && (
@@ -138,12 +159,12 @@ function StudioScene({ rig }: { rig: CharacterRig | null }) {
   );
 }
 
-export function Viewport({ rig }: { rig: CharacterRig | null }) {
+export function Viewport({ rig, player }: { rig: CharacterRig | null; player: AnimationPlayer | null }) {
   return (
     <div className="viewport-stage">
       {/* frameloop="demand": frames are drawn only when something changes (camera, damping, character). */}
       <Canvas flat frameloop="demand" dpr={[1, 2]} gl={{ antialias: true, alpha: true }} data-testid="viewport" onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}>
-        <StudioScene rig={rig} />
+        <StudioScene rig={rig} player={player} />
       </Canvas>
       <ViewportToolbar />
     </div>
@@ -177,10 +198,11 @@ function OriginalCamera({ rig }: { rig: CharacterRig }) {
   return <perspectiveCamera ref={ref} near={1} far={20000} />;
 }
 
-export function ComparisonViewport({ rig }: { rig: CharacterRig }) {
+export function ComparisonViewport({ rig, player }: { rig: CharacterRig; player: AnimationPlayer | null }) {
   return (
     <div className="compare-stage" style={ORIGINAL_CANVAS}>
       <Canvas flat frameloop="demand" dpr={1} gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }} data-testid="compare">
+        <Playback player={player} name="compare" />
         <OriginalCamera rig={rig} />
         <Character rig={rig} />
       </Canvas>

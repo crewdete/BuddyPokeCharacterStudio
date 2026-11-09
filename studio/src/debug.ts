@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import type { Look } from '@original/domain/wardrobe.js';
 import type { SceneNode } from '@original/engine/scene-graph.js';
 import type { CharacterController } from './character/controller';
+import type { AnimationPlayer } from './pose/player';
 import { toThreeMatrix } from './scene/CharacterRig';
 
 /** Small deterministic PRNG so random looks are reproducible across pages and runs. */
@@ -15,9 +16,49 @@ function mulberry32(seed: number) {
   };
 }
 
-export function createDebug(controller: CharacterController) {
+export function createDebug(controller: CharacterController, player: AnimationPlayer) {
   const { wardrobe, buddy, rig } = controller;
+  const named = () => {
+    const nodes: SceneNode[] = [];
+    rig.scene.find(node => {
+      if (node.name) nodes.push(node);
+      return false;
+    });
+    return nodes;
+  };
+  const anim = {
+    clips: () => player.clipNames().map(name => ({ name, frameCount: buddy.animations.get(name)!.frameCount, fps: buddy.animations.get(name)!.fps })),
+    select: (name: string) => player.select(name),
+    play: (name?: string) => player.play(name),
+    pause: () => player.pause(),
+    stop: () => player.stop(),
+    seek: (frame: number) => player.seek(frame),
+    setSpeed: (speed: number) => player.setSpeed(speed),
+    setLoop: (loop: boolean) => player.setLoop(loop),
+    state: () => player.snapshot(),
+    /** Engine world position of every named scene node (original transforms). */
+    worldPositions: () => Object.fromEntries(named().map(n => [n.name!, [n.world.e[12], n.world.e[13], n.world.e[14]]])),
+    /** Engine local matrix of every named node (exact rest-pose comparisons). */
+    localMatrices: () => Object.fromEntries(named().map(n => [n.name!, Array.from(n.local.e)])),
+    /** Distance from each Three bone to its parent bone (world space). */
+    boneLengths: () => {
+      rig.root.updateMatrixWorld(true);
+      const a = new THREE.Vector3();
+      const b = new THREE.Vector3();
+      return Object.fromEntries(
+        rig.bones.filter(bone => (bone.parent as THREE.Bone)?.isBone).map(bone => [bone.name, a.setFromMatrixPosition(bone.matrixWorld).distanceTo(b.setFromMatrixPosition(bone.parent!.matrixWorld))]),
+      );
+    },
+    /** Original material frame of the face (Head mesh): -1 = as dressed. */
+    headFrame: () => rig.scene.node('Head')?.mesh?.material?.frame ?? null,
+    /** Visible prop meshes in the Three scene, and the engine's own prop visibility. */
+    props: () => ({
+      three: rig.allMeshes().filter(m => m.visible && rig.scene.propNames.includes(m.name)).map(m => m.name).sort(),
+      engine: rig.scene.propNames.filter(name => rig.scene.node(name)?.visible).sort(),
+    }),
+  };
   return {
+    anim,
     async wearCode(code: string | null) {
       await controller.wearCode(code);
       return controller.code();

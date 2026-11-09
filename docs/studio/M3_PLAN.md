@@ -237,6 +237,15 @@ Full `npm test` and `npm run test:e2e` (smoke, render, viewport, customize, pres
 
 ## 7. Known limitations (expected)
 
+- **Found in M3A-1: the original bind rotations are slightly non-unit.** 22 stored bind axes have length
+  0.9987–0.9999 (quantisation in the original file). The original engine uses them as-is, so bind matrices
+  are scaled by up to ~0.13% (compounding to ~0.26% down a chain), and some bones are slightly shorter in the
+  rest pose than in animated frames, where rotations are exact unit quaternions. The Studio reproduces this
+  exactly. Export (M3B/M4) must decide how to present it, since glTF expects clean rotations: for example,
+  orthonormalise the rest rotations and document the ≤0.26% / ≤0.07-unit change.
+- 10 clips (not 9) reveal props: jamA1/jamB1/jamB2 (guitar), jamA2 (mic), swordA1/swordA2/mood_swordTwirl (sword),
+  rose1/rose2/mood_lookingForLove (rose).
+
 - Pokes are two-character animations; M3A plays one side solo.
 - Stepped 30 fps playback, as in the original.
 - `Bip01_Neck`, the fingers and `Bip01_Footsteps` are never animated by the original clips.

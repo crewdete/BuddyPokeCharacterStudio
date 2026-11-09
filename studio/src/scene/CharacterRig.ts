@@ -60,6 +60,11 @@ export class CharacterRig {
     return this.skeleton.bones;
   }
 
+  /** Every mesh part built so far (visible or not). */
+  allMeshes(): THREE.Mesh[] {
+    return [...this.parts.values()].map(p => p.object);
+  }
+
   /** Visible character meshes (excluding the ground shadow). */
   visibleParts(): THREE.Mesh[] {
     return [...this.parts.values()].filter(p => p.object.visible && !GROUND_MESHES.has(p.node.name ?? '')).map(p => p.object);
@@ -120,6 +125,34 @@ export class CharacterRig {
     return () => {
       this.listeners.delete(listener);
     };
+  }
+
+  /**
+   * Per-frame visibility sync for animation playback (cheap; no listeners notified).
+   * Original animation tracks toggle `node.visible` on props (sword, rose, guitar, mic). Props are hidden
+   * by the original hideProps() when dressed, so their parts are built here the first time they show.
+   * A part that becomes visible again also refreshes its material and cull index, in case the character
+   * was re-dressed while it was hidden.
+   */
+  syncVisibility() {
+    this.scene.find(node => {
+      const mesh = node.mesh;
+      if (!mesh) return false;
+      let part = this.parts.get(node);
+      if (!node.visible || mesh.material === null) {
+        if (part?.object.visible) part.object.visible = false;
+        return false;
+      }
+      const wholeMeshCulled = mesh.decoded && !mesh.faceRegions && mesh.meshRegion >= 0 && this.scene.isCulled(mesh.meshRegion);
+      if (part?.object.visible || wholeMeshCulled) return false;
+      if (!mesh.decoded) mesh.decode(this.scene);
+      part ??= this.createPart(node);
+      if (!mesh.faceRegions && mesh.meshRegion >= 0 && this.scene.isCulled(mesh.meshRegion)) return false;
+      this.updateIndex(part);
+      part.object.visible = true;
+      this.updateMaterial(part);
+      return false;
+    });
   }
 
   /** Swap textures whose original material changed frame (expressions, blinks). Cheap; call per frame. */
