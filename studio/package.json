@@ -5,6 +5,9 @@
   "description": "BuddyPoke 3D Character Studio, built on the original BuddyRevival decoder.",
   "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",

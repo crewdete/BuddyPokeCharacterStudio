@@ -199,6 +199,22 @@ Requires Node 22. End-to-end tests use Playwright's Chromium (`npx playwright in
 **Changing dependencies:** use npm 11 or newer (`npx npm@11 install <pkg>`). npm 10.9 crashes while resolving
 Vitest 4's optional peer dependencies; installing from the committed lockfile (`npm ci`) works with npm 10.
 
+## Deployment (Vercel)
+
+Static site: `npm run build` writes everything to `studio/dist/` (the app plus the original assets copied from
+`web/assets/`). `studio/vercel.json` holds the build settings; `package.json` pins Node 22.
+
+| Vercel project setting | Value |
+|---|---|
+| Root Directory | `studio` |
+| Include source files outside of the Root Directory | **on** (the build reads `../web/src` and `../web/assets`) |
+| Framework / install / build / output | from `vercel.json`: Vite, `npm ci`, `npm run build`, `dist` |
+| Production Branch | `production` (a branch that does not exist until a release is approved) |
+
+Branch strategy: development happens on `studio/analysis-plan`; every push there gets a **Preview** deployment only.
+Nothing reaches production until the `production` branch is created from an approved commit (a deliberate, separate step).
+`main` mirrors the original BuddyRevival app (no `studio/` folder), so a build of `main` fails instead of publishing.
+
 ## Layout
 
 ```
