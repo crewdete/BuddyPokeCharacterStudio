@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { CharacterController } from './character/controller';
 import { createDebug, type StudioDebug } from './debug';
 import { createBuddy, describeBuddy, loadOriginalAssets, type BuddyInfo } from './original';
 import { CharacterRig } from './scene/CharacterRig';
+import { CustomizePanel } from './ui/CustomizePanel';
 import { DataPanel } from './ui/DataPanel';
 import { ComparisonViewport, Viewport } from './viewport/Viewport';
 
@@ -27,6 +29,7 @@ if (COMPARE) document.documentElement.classList.add('compare');
 export function App() {
   const [state, setState] = useState<LoadState>({ status: 'loading' });
   const [rig, setRig] = useState<CharacterRig | null>(null);
+  const [controller, setController] = useState<CharacterController | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -36,13 +39,15 @@ export function App() {
       const assets = await loadOriginalAssets();
       const buddy = await createBuddy(assets, LOOK);
       built = new CharacterRig(buddy);
+      const control = await CharacterController.create(assets, buddy, built);
       const info = await describeBuddy(buddy, assets.wardrobe);
-      return { next: { status: 'ready', info, ms: Math.round(performance.now() - started) } as const, debug: createDebug(assets, buddy, built) };
+      return { next: { status: 'ready', info, ms: Math.round(performance.now() - started) } as const, control };
     })()
-      .then(({ next, debug }) => {
+      .then(({ next, control }) => {
         if (cancelled) return;
-        window.__studio = { ...next, debug };
+        window.__studio = { ...next, debug: createDebug(control) };
         setRig(built);
+        setController(control);
         setState(next);
       })
       .catch((error: unknown) => {
@@ -63,7 +68,7 @@ export function App() {
     <div className="studio">
       <header className="topbar">
         <span className="brand">BuddyPoke Studio</span>
-        <span className="badge">M1 · viewport</span>
+        <span className="badge">M2A · customize</span>
         <span className="spacer" />
         <span className={`status status-${state.status}`}>
           {state.status === 'loading' && 'Loading original assets…'}
@@ -76,7 +81,13 @@ export function App() {
         <p className="viewport-note">Drag to orbit · scroll to zoom · right-drag to pan</p>
       </main>
       <aside className="panel">
-        <DataPanel state={state} />
+        {controller ? <CustomizePanel controller={controller} /> : <DataPanel state={state} />}
+        {controller && (
+          <details className="data">
+            <summary>Original data</summary>
+            <DataPanel state={state} />
+          </details>
+        )}
       </aside>
     </div>
   );

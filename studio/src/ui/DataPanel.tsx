@@ -16,7 +16,6 @@ export function DataPanel({ state }: { state: LoadState }) {
   ];
   return (
     <section>
-      <h2>Original data</h2>
       <p className="muted">Decoded in the studio by the unmodified BuddyRevival engine.</p>
       <dl className="facts">
         {rows.map(([k, v]) => (

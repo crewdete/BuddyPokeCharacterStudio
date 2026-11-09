@@ -26,6 +26,9 @@ interface View {
 }
 
 function Character({ rig }: { rig: CharacterRig }) {
+  const invalidate = useThree(s => s.invalidate);
+  // On-demand rendering: draw a new frame whenever the character changes.
+  useEffect(() => rig.subscribe(invalidate), [rig, invalidate]);
   useFrame(() => rig.refreshTextures());
   return <primitive object={rig.root} />;
 }
@@ -38,6 +41,7 @@ function StudioCamera({ rig }: { rig: CharacterRig | null }) {
     controls: OrbitControlsImpl | null;
     size: { width: number; height: number };
   };
+  const invalidate = useThree(s => s.invalidate);
   const view = useRef<View | null>(null);
   const pending = useRef(false);
 
@@ -47,6 +51,7 @@ function StudioCamera({ rig }: { rig: CharacterRig | null }) {
     const framing = frameBox(characterBounds(rig), FOV, size.width / size.height);
     view.current = { target: framing.target, direction: FRONT.clone(), distance: framing.distance };
     pending.current = true;
+    invalidate();
     // `size` is read at reset time only; resizing must not re-frame the user's view.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rig, resetToken]);
@@ -54,11 +59,16 @@ function StudioCamera({ rig }: { rig: CharacterRig | null }) {
   // When the projection changes, re-apply the last view to the new camera once its controls exist.
   useEffect(() => {
     pending.current = true;
-  }, [projection]);
+    invalidate();
+  }, [projection, invalidate]);
 
   useFrame(() => {
     window.__studioViewport = { camera, controls, size };
-    if (!controls || controls.object !== camera) return;
+    if (!controls || controls.object !== camera) {
+      // New camera's controls not attached yet: keep requesting frames until the view can be applied.
+      if (pending.current) invalidate();
+      return;
+    }
     if (pending.current && view.current) {
       const { target, direction, distance } = view.current;
       camera.position.copy(target).addScaledVector(direction, distance);
@@ -70,6 +80,7 @@ function StudioCamera({ rig }: { rig: CharacterRig | null }) {
       controls.target.copy(target);
       controls.update();
       pending.current = false;
+      invalidate();
       return;
     }
     // Track the current view so a projection switch keeps orientation and apparent size.
@@ -130,7 +141,8 @@ function StudioScene({ rig }: { rig: CharacterRig | null }) {
 export function Viewport({ rig }: { rig: CharacterRig | null }) {
   return (
     <div className="viewport-stage">
-      <Canvas flat dpr={[1, 2]} gl={{ antialias: true, alpha: true }} data-testid="viewport" onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}>
+      {/* frameloop="demand": frames are drawn only when something changes (camera, damping, character). */}
+      <Canvas flat frameloop="demand" dpr={[1, 2]} gl={{ antialias: true, alpha: true }} data-testid="viewport" onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}>
         <StudioScene rig={rig} />
       </Canvas>
       <ViewportToolbar />
@@ -168,7 +180,7 @@ function OriginalCamera({ rig }: { rig: CharacterRig }) {
 export function ComparisonViewport({ rig }: { rig: CharacterRig }) {
   return (
     <div className="compare-stage" style={ORIGINAL_CANVAS}>
-      <Canvas flat dpr={1} gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }} data-testid="compare">
+      <Canvas flat frameloop="demand" dpr={1} gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }} data-testid="compare">
         <OriginalCamera rig={rig} />
         <Character rig={rig} />
       </Canvas>

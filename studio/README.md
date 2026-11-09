@@ -16,6 +16,11 @@ Plan and analysis: [`../docs/studio/ANALYSIS_AND_PLAN.md`](../docs/studio/ANALYS
   composed textures, cull regions, transparency, original drop shadow), studio background and floor, orbit/zoom/pan,
   reset view, perspective/orthographic. Unlit, as the original. Pose is the original bind pose (arms down).
 
+- **M2A** customization: sidebar built on the original `Wardrobe` (`visibleOptions`, `choose`, original option rules
+  and selector resets), original SVG icons and palettes, per-category Reset to the original default look, live 3D
+  update after every change, responsive (side panel on desktop/tablet, stacked on phones). The viewport renders on
+  demand (only when the camera, damping or character changes).
+
 Viewport shortcuts: `5` perspective/orthographic, `Home` or `F` reset view, `G` grid.
 `?buddy=<look code>` wears a look on load (original BuddyRevival/Flash format).
 
@@ -46,6 +51,7 @@ Vitest 4's optional peer dependencies; installing from the committed lockfile (`
 ```
 src/
   original/   typed adapter around ../web/src (no re-implementation)
+  character/  CharacterController: serialized edits through the original Wardrobe, then rig update
   scene/      engine scene -> Three.js (CharacterRig, textures, depth offset, framing)
   state/      zustand stores
   viewport/   React Three Fiber canvas, cameras, floor, toolbar
@@ -53,6 +59,7 @@ src/
   debug.ts    window.__studio.debug, used by the browser tests
 tests/
   unit/       Vitest (Node): rig, skinning, bind pose, look codes, framing, depth offset
-  e2e/        Playwright: smoke.mjs, render.mjs (vs the original Canvas 2D renderer), viewport.mjs
+  e2e/        Playwright: smoke.mjs, render.mjs (vs the original Canvas 2D renderer), viewport.mjs,
+              customize.mjs (every category via the panel; look codes checked in the original app)
     fixtures/original-bind.html   the original renderer drawing the bind pose (reference for render.mjs)
 ```

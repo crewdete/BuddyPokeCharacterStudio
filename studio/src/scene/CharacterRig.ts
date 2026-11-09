@@ -32,6 +32,7 @@ export const toThreeMatrix = (m: OriginalMatrix, target = new THREE.Matrix4()) =
 
 export class CharacterRig {
   readonly root = new THREE.Group();
+  private readonly listeners = new Set<() => void>();
   readonly skeleton: THREE.Skeleton;
   readonly scene: Scene;
   private readonly objects = new Map<SceneNode, THREE.Object3D>();
@@ -110,6 +111,15 @@ export class CharacterRig {
       return false;
     });
     this.textures.retain(live);
+    for (const listener of this.listeners) listener();
+  }
+
+  /** Called after every update(); the viewport uses it to request a frame (on-demand rendering). */
+  subscribe(listener: () => void) {
+    this.listeners.add(listener);
+    return () => {
+      this.listeners.delete(listener);
+    };
   }
 
   /** Swap textures whose original material changed frame (expressions, blinks). Cheap; call per frame. */

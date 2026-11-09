@@ -1,10 +1,9 @@
 // Test support exposed as window.__studio.debug. Only uses the original Wardrobe/Buddy API plus the rig.
 import * as THREE from 'three';
 import type { Look } from '@original/domain/wardrobe.js';
-import type { OriginalAssets } from './original';
-import type { Buddy } from '@original/domain/buddy.js';
 import type { SceneNode } from '@original/engine/scene-graph.js';
-import { toThreeMatrix, type CharacterRig } from './scene/CharacterRig';
+import type { CharacterController } from './character/controller';
+import { toThreeMatrix } from './scene/CharacterRig';
 
 /** Small deterministic PRNG so random looks are reproducible across pages and runs. */
 function mulberry32(seed: number) {
@@ -16,28 +15,35 @@ function mulberry32(seed: number) {
   };
 }
 
-export function createDebug(assets: OriginalAssets, buddy: Buddy, rig: CharacterRig) {
-  const { wardrobe } = assets;
-  const redress = async () => {
-    rig.update();
-    return wardrobe.codeOf(buddy);
-  };
+export function createDebug(controller: CharacterController) {
+  const { wardrobe, buddy, rig } = controller;
   return {
     async wearCode(code: string | null) {
-      await wardrobe.wearCode(buddy, code);
-      return redress();
+      await controller.wearCode(code);
+      return controller.code();
     },
     async wearLook(look: Look) {
-      await wardrobe.wearOverDefault(buddy, look);
-      return redress();
+      await controller.wearLook(look);
+      return controller.code();
     },
     /** Like the original Random button, but seeded. */
     async randomLook(seed: number) {
       const random = mulberry32(seed);
-      for (const s of wardrobe.selectors(buddy)) s.set(Math.floor(random() * (s.kind === 'color' ? s.colors : s.icons).length));
-      await buddy.dress();
-      return redress();
+      await controller.edit(async () => {
+        for (const s of wardrobe.selectors(buddy)) s.set(Math.floor(random() * (s.kind === 'color' ? s.colors : s.icons).length));
+        await buddy.dress();
+      });
+      return controller.code();
     },
+    look: () => controller.look(),
+    /** Every original wardrobe option (visible or not) with its selectors. */
+    options: () =>
+      wardrobe.options(buddy).map(o => ({
+        name: o.name,
+        selectors: o.selectors.map(s => ({ id: s.id, kind: s.kind, size: (s.kind === 'color' ? s.colors : s.icons).length })),
+      })),
+    code: () => controller.code(),
+    version: () => controller.version,
     /** Number of choices per selector id (to enumerate every hairstyle, skirt, ...). */
     selectorSizes() {
       return Object.fromEntries(wardrobe.selectors(buddy).map(s => [s.id, (s.kind === 'color' ? s.colors : s.icons).length]));

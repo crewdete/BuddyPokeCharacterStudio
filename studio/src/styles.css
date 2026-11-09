@@ -23,7 +23,7 @@ button, input, select, textarea, code { font-family: Arial, Helvetica, sans-seri
 .studio {
   display: grid;
   height: 100%;
-  grid-template: 'top top' 36px 'view panel' 1fr / 1fr 300px;
+  grid-template: 'top top' 36px 'view panel' 1fr / 1fr 340px;
 }
 .topbar {
   grid-area: top; display: flex; align-items: center; gap: 12px; padding: 0 12px;
@@ -41,7 +41,7 @@ button, input, select, textarea, code { font-family: Arial, Helvetica, sans-seri
   position: absolute; left: 10px; bottom: 8px; margin: 0; color: var(--mid); font-size: 11px; pointer-events: none;
 }
 
-.panel { grid-area: panel; background: var(--panel); border-left: 1px solid var(--border); padding: 12px; overflow: auto; }
+.panel { grid-area: panel; background: var(--panel); border-left: 1px solid var(--border); overflow: auto; min-height: 0; }
 .panel h2 {
   font-size: 11px; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dark); font-weight: bold;
 }
@@ -72,16 +72,59 @@ button, input, select, textarea, code { font-family: Arial, Helvetica, sans-seri
 .viewport-toolbar .segmented { display: flex; }
 .viewport-toolbar .segmented button + button { border-left: 0; }
 
+/* Customize panel (M2A) */
+.customize { display: flex; flex-direction: column; }
+.panel-head {
+  position: sticky; top: 0; z-index: 1; display: flex; align-items: baseline; justify-content: space-between;
+  padding: 10px 12px 8px; background: var(--panel); border-bottom: 1px solid var(--border);
+}
+.panel-head h2 { margin: 0; }
+.muted-inline { color: var(--mid); font-size: 11px; }
+.options { list-style: none; margin: 0; padding: 0; }
+.option { border-bottom: 1px solid var(--border); }
+.option-row { display: grid; grid-template-columns: 96px 1fr auto; align-items: center; gap: 8px; padding: 6px 12px; }
+.option-name { font-size: 12px; color: var(--text); }
+.pickers { display: flex; flex-wrap: wrap; gap: 4px; }
+.picker, .choices button {
+  padding: 1px; line-height: 0; cursor: pointer; background: var(--control); border: 1px solid var(--border);
+}
+.picker:hover, .choices button:hover { border-color: var(--border-strong); }
+.picker[aria-expanded='true'] { border-color: var(--text); outline: 1px solid var(--text); }
+.picker:focus-visible, .choices button:focus-visible, .reset:focus-visible, .data summary:focus-visible { outline: 2px solid var(--text); outline-offset: 1px; }
+.icon { display: inline-block; position: relative; width: 36px; height: 36px; overflow: hidden; background: #fff; }
+.icon img { position: absolute; max-width: none; }
+.swatch { display: inline-block; width: 36px; height: 36px; }
+.reset {
+  font-size: 11px; height: 24px; padding: 0 8px; cursor: pointer; color: var(--text);
+  background: var(--control); border: 1px solid var(--border-strong);
+}
+.reset:hover:not(:disabled) { background: #fff; }
+.reset:disabled { color: var(--mid); border-color: var(--border); background: transparent; cursor: default; }
+.choices { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 12px 10px; background: var(--panel-2); border-top: 1px solid var(--border); }
+.choices.colors { gap: 3px; }
+.choices.colors .swatch { width: 20px; height: 20px; }
+.choices button[aria-selected='true'] { border-color: var(--text); outline: 2px solid var(--text); outline-offset: 0; position: relative; z-index: 1; }
+.data { border-bottom: 1px solid var(--border); }
+.data summary {
+  cursor: pointer; padding: 10px 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dark);
+}
+.data > section { padding: 0 12px 12px; }
+
 /* Comparison mode (tests): transparent page. */
 .compare-stage { position: fixed; top: 0; left: 0; }
 html.compare, html.compare body { background: transparent; }
 
 @media (min-width: 761px) and (max-width: 1024px) {
-  .studio { grid-template-columns: 1fr 260px; }
+  .studio { grid-template-columns: 1fr 300px; }
 }
 @media (max-width: 760px) {
   .studio { grid-template: 'top' 36px 'view' 1fr 'panel' 42% / 1fr; }
   .panel { border-left: 0; border-top: 1px solid var(--border); }
   .badge, .status { display: none; }
   .viewport-toolbar button { height: 30px; padding: 0 12px; }
+  .option-row { grid-template-columns: 1fr auto; }
+  .option-name { grid-column: 1 / -1; }
+  .pickers { grid-column: 1; }
+  .reset { height: 32px; }
+  .choices.colors .swatch { width: 28px; height: 28px; }
 }
