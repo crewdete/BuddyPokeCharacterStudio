@@ -6,7 +6,8 @@ import type { CharacterController } from './character/controller';
 import { exportCharacter, type ExportOptions } from './export';
 import { EXPORT_SCALE } from './export/prepare';
 import { FACE_NODE, faceNodeName } from './export/animation/sample';
-import { estimateAnimated, lookStats } from './export/estimate';
+import { estimateAnimated, estimateFbx, lookStats } from './export/estimate';
+import { exportFbx, exportObj, type FileFormat } from './export/formats';
 import { createBuddy } from './original';
 import { BindSnapshot } from './pose/bind';
 import { updateWorlds } from './pose/tpose';
@@ -407,7 +408,27 @@ export function createDebug(controller: CharacterController, player: AnimationPl
     return { ...estimateAnimated(stats, base.glb.byteLength, options.animations, options.rootMotion ?? 'keep'), base: base.glb.byteLength, facePng: Object.fromEntries(stats.facePng), propBytes: stats.propBytes };
   };
 
+  /** OBJ (zipped with MTL + textures) or FBX export, same code path as the Export tab; returns base64. */
+  const exportFile = async ({ format, options, baseName = 'buddypoke' }: { format: FileFormat; options: ExportOptions; baseName?: string }) => {
+    const result = format === 'obj'
+      ? await exportObj(controller.assets, controller.currentCode, options, baseName)
+      : await exportFbx(controller.assets, controller.currentCode, options);
+    const bytes = new Uint8Array(result.data);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    return { base64: btoa(binary), extension: result.extension, manifest: result.manifest, check: result.check };
+  };
+
+  /** M3C-4: the Export tab's FBX size estimate (same functions the panel uses). */
+  const fbxEstimate = async (options: ExportOptions) => {
+    const base = await exportFbx(controller.assets, controller.currentCode, { ...options, animations: [] });
+    const stats = await lookStats(controller.assets, controller.currentCode);
+    return { ...estimateFbx(stats, base.data.byteLength, options.animations ?? [], options.rootMotion ?? 'keep'), base: base.data.byteLength };
+  };
+
   return {
+    fbxEstimate,
+    exportFile,
     exportEstimate,
     describeAnimatedGlb,
     checkFaceTextures,

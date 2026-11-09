@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { CharacterController } from '../character/controller';
 import { defaultFileName, exportCharacter, type ExportOptions, type ExportStep } from '../export';
-import { estimateAnimated, lookStats, type LookStats } from '../export/estimate';
+import { estimateAnimated, estimateFbx, lookStats, type LookStats } from '../export/estimate';
+import { exportFbx, exportObj, type FileExportResult } from '../export/formats';
 import { downloadFile } from '../export/glb';
 import { GROUPS, filterCatalog, type AnimationEntry, type AnimationGroup } from '../pose/catalog';
 import { useExportUi, type ExportFormat } from '../state/export';
@@ -49,6 +50,33 @@ function Check({ checked, mixed, onChange, label, disabled, testId }: { checked:
   return <input ref={ref} type="checkbox" aria-label={label} checked={checked} disabled={disabled} data-testid={testId} onChange={e => onChange(e.target.checked)} />;
 }
 
+const FORMAT_ROWS: [ExportFormat, string][][] = [
+  [['static', 'GLB · static mesh'], ['rigged', 'GLB · rigged'], ['animated', 'GLB · animated']],
+  [['obj', 'OBJ'], ['fbx', 'FBX']],
+];
+
+/** The five formats in one radio group: the three GLB modes, and OBJ / FBX on the row below. */
+function FormatChoice({ value, onChange, disabled }: { value: ExportFormat; onChange: (v: ExportFormat) => void; disabled?: boolean }) {
+  return (
+    <fieldset className="choice" disabled={disabled}>
+      <legend className="field-label">Format</legend>
+      <div className="format-rows" role="radiogroup" aria-label="Format">
+        {FORMAT_ROWS.map((row, i) => (
+          <div key={i} className="segmented-row">
+            {row.map(([id, text]) => (
+              <button key={id} type="button" role="radio" aria-checked={value === id} onClick={() => onChange(id)}>
+                {text}
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+const safeName = (s: string) => s.replace(/[\\/:*?"<>|]+/g, '-');
+
 // One look-stats computation at a time, reused while the look stays the same.
 let statsCache: { code: string; promise: Promise<LookStats> } | null = null;
 
@@ -59,6 +87,11 @@ export function ExportPanel({ controller, entries }: { controller: CharacterCont
   const [base, setBase] = useState<{ key: string; bytes: number } | null>(null);
   const [stats, setStats] = useState<LookStats | null>(null);
   const animated = ui.format === 'animated';
+  const fbx = ui.format === 'fbx';
+  const obj = ui.format === 'obj';
+  const glb = !fbx && !obj;
+  /** Formats that carry animations: the animated GLB and FBX (FBX may also be exported with no clips). */
+  const withClips = animated || fbx;
 
   // Clips in the original package order (the order of the exported Actions), as listed by the catalog.
   const allClips = useMemo(() => {
@@ -74,13 +107,19 @@ export function ExportPanel({ controller, entries }: { controller: CharacterCont
 
   const options: ExportOptions = {
     pose: ui.pose,
-    skeleton: ui.format !== 'static',
+    skeleton: ui.format !== 'static' && !obj,
     rigidParts: ui.rigidParts,
     material: ui.material,
-    ...(animated ? { animations: selected, rootMotion: ui.rootMotion } : {}),
+    ...(withClips ? { animations: selected, rootMotion: ui.rootMotion } : {}),
   };
-  const suggested = defaultFileName(code, options);
-  const name = (ui.fileName.trim() || suggested).replace(/[\\/:*?"<>|]+/g, '-').replace(/(\.glb)?$/i, '.glb');
+  const extension = obj ? 'zip' : fbx ? 'fbx' : 'glb';
+  const id = defaultFileName(code, { ...options, animations: undefined }).match(/-([0-9a-f]{8})\.glb$/)![1];
+  const suggested = obj
+    ? `buddypoke-obj-${ui.pose}-${id}.zip`
+    : fbx
+      ? `buddypoke-fbx-${selected.length ? `animated-${selected.length}clip${selected.length === 1 ? '' : 's'}` : 'rigged'}-${ui.pose}${selected.length && ui.rootMotion === 'inPlace' ? '-inplace' : ''}-${id}.fbx`
+      : defaultFileName(code, options);
+  const name = safeName(ui.fileName.trim() || suggested).replace(/\.(glb|zip|fbx|obj)$/i, '') + `.${extension}`;
 
   // Exact size of the same export without clips (the whole file for static/rigged), recomputed after changes.
   const baseKey = JSON.stringify([code, ui.format, ui.pose, ui.rigidParts, ui.material]);
@@ -88,8 +127,12 @@ export function ExportPanel({ controller, entries }: { controller: CharacterCont
     let cancelled = false;
     const timer = setTimeout(async () => {
       try {
-        const result = await exportCharacter(controller.assets, code, { ...options, animations: animated ? [] : undefined, rootMotion: undefined });
-        if (!cancelled) setBase({ key: baseKey, bytes: result.glb.byteLength });
+        const bytes = obj
+          ? (await exportObj(controller.assets, code, options, 'estimate')).data.byteLength
+          : fbx
+            ? (await exportFbx(controller.assets, code, { ...options, animations: [], rootMotion: undefined })).data.byteLength
+            : (await exportCharacter(controller.assets, code, { ...options, animations: animated ? [] : undefined, rootMotion: undefined })).glb.byteLength;
+        if (!cancelled) setBase({ key: baseKey, bytes });
       } catch {
         if (!cancelled) setBase(null);
       }
@@ -101,22 +144,22 @@ export function ExportPanel({ controller, entries }: { controller: CharacterCont
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseKey]);
   useEffect(() => {
-    if (!animated) return;
+    if (!withClips) return;
     let cancelled = false;
     if (statsCache?.code !== code) statsCache = { code, promise: lookStats(controller.assets, code) };
     statsCache.promise.then(s => !cancelled && setStats(s)).catch(() => !cancelled && setStats(null));
     return () => {
       cancelled = true;
     };
-  }, [animated, code, controller.assets]);
+  }, [withClips, code, controller.assets]);
 
   const estimate = useMemo(() => {
     if (!base || base.key !== baseKey) return null;
-    if (!animated) return { bytes: base.bytes, text: `${formatBytes(base.bytes)}` };
+    if (!withClips || (fbx && !selected.length)) return { bytes: base.bytes, text: `${formatBytes(base.bytes)}${obj ? ' (ZIP: .obj, .mtl and PNG textures)' : ''}`, exact: true };
     if (!stats || stats.lookCode !== code) return null;
-    const e = estimateAnimated(stats, base.bytes, selected, ui.rootMotion);
-    return { bytes: e.bytes, text: `≈ ${formatBytes(e.bytes)} · ${e.clips} clip${e.clips === 1 ? '' : 's'} · ${e.props.length ? `props: ${e.props.join(', ')}` : 'no props'} · ${e.faces} facial expression${e.faces === 1 ? '' : 's'}` };
-  }, [base, baseKey, animated, stats, code, selected, ui.rootMotion]);
+    const e = (fbx ? estimateFbx : estimateAnimated)(stats, base.bytes, selected, ui.rootMotion);
+    return { bytes: e.bytes, text: `≈ ${formatBytes(e.bytes)} · ${e.clips} clip${e.clips === 1 ? '' : 's'} · ${e.props.length ? `props: ${e.props.join(', ')}` : 'no props'} · ${e.faces} facial expression${e.faces === 1 ? '' : 's'}`, exact: false };
+  }, [base, baseKey, withClips, fbx, obj, stats, code, selected, ui.rootMotion]);
   const propsOf = (clip: string) => stats?.clips.get(clip)?.shows ?? [];
 
   const busy = status.kind === 'busy';
@@ -125,6 +168,33 @@ export function ExportPanel({ controller, entries }: { controller: CharacterCont
     if (blocked) return;
     const started = performance.now();
     try {
+      if (!glb) {
+        const onStep = (step: ExportStep, done?: number, total?: number) => setStatus({ kind: 'busy', step, done, total });
+        const file: FileExportResult = obj ? await exportObj(controller.assets, code, options, name, onStep) : await exportFbx(controller.assets, code, options, onStep);
+        if (!file.check.ok) {
+          setStatus({ kind: 'error', text: `The file failed verification and was not saved: ${file.check.problems.slice(0, 3).join('; ')}` });
+          return;
+        }
+        downloadFile(name, file.data, file.type);
+        const s = file.check.summary;
+        const m = file.manifest;
+        setStatus({
+          kind: 'done',
+          text: `Saved ${name} (${formatBytes(file.data.byteLength)}) in ${((performance.now() - started) / 1000).toFixed(1)} s`,
+          detail: (obj
+            ? [`${s.objects} objects`, `${s.triangles} triangles`, `${s.textures} PNG textures`, `${s.transparent} transparent materials`, `${m.pose === 'tpose' ? 'T-pose' : 'Rest pose'}`, 'verified']
+            : [
+                `${s.meshes} meshes`,
+                `${s.bones} bones${Number(s.helperBones) ? ` + ${s.helperBones} helper bones (props / expressions)` : ''}`,
+                `${m.animations.length} animation${m.animations.length === 1 ? '' : 's'}${m.animations.length ? ` (30 fps, ${m.rootMotion === 'inPlace' ? 'in place' : 'root motion kept'})` : ''}`,
+                m.animations.length ? (m.props.length ? `props: ${m.props.map(p => p.name).join(', ')}` : 'no props') : null,
+                m.animations.length ? `${m.faces.length} facial expressions` : null,
+                `${s.textures} embedded textures`,
+                'verified',
+              ]).filter(Boolean).join(' · '),
+        });
+        return;
+      }
       const result = await exportCharacter(controller.assets, code, options, (step, done, total) => setStatus({ kind: 'busy', step, done, total }));
       if (!result.check.ok) {
         setStatus({ kind: 'error', text: `The file failed verification and was not saved: ${result.check.problems.slice(0, 3).join('; ')}` });
@@ -160,21 +230,17 @@ export function ExportPanel({ controller, entries }: { controller: CharacterCont
 
   return (
     <section className="tab-body export" aria-label="Export">
-      <Choice<ExportFormat>
-        label="Format"
-        value={ui.format}
-        options={[['static', 'GLB · static mesh'], ['rigged', 'GLB · rigged'], ['animated', 'GLB · animated']]}
-        onChange={format => ui.set({ format })}
-        disabled={busy}
-      />
+      <FormatChoice value={ui.format} onChange={format => ui.set({ format })} disabled={busy} />
       <p className="hint">
         {ui.format === 'static' && 'Binary glTF 2.0 with the posed meshes and embedded textures, no skeleton. For static renders and 3D printing previews.'}
         {ui.format === 'rigged' && 'Binary glTF 2.0 with the original 29-bone skeleton (original names and hierarchy), skin weights and embedded textures. Opens in Blender, Unity, Unreal, Godot and three.js.'}
         {animated && 'The rigged character plus the original animations: one action per clip, every frame of the original at 30 fps without interpolation, with the props and facial expressions each clip uses.'}
+        {obj && 'Wavefront OBJ: the posed meshes with an MTL material file and the original textures as PNG files, in one ZIP. Static geometry only: OBJ cannot store a skeleton, skin weights or animation.'}
+        {fbx && 'Binary FBX 7.4 with the original 29-bone skeleton, skin weights and embedded textures, plus the selected animations (optional) with their props and facial expressions. Opens in Blender, Maya, 3ds Max, Unity and Unreal.'}
       </p>
-      <Choice label={animated ? 'Initial pose' : 'Pose'} value={ui.pose} options={[['rest', 'Rest'], ['tpose', 'T-pose']]} onChange={pose => ui.set({ pose })} disabled={busy} />
-      {animated && <p className="hint">The pose the file opens in. The skin is always bound to the original Rest pose, so every animation plays exactly as in the original.</p>}
-      {animated && (
+      <Choice label={withClips ? 'Initial pose' : 'Pose'} value={ui.pose} options={[['rest', 'Rest'], ['tpose', 'T-pose']]} onChange={pose => ui.set({ pose })} disabled={busy} />
+      {withClips && <p className="hint">The pose the file opens in. The skin is always bound to the original Rest pose, so every animation plays exactly as in the original.</p>}
+      {withClips && (
         <>
           <Choice label="Root motion" value={ui.rootMotion} options={[['keep', 'Keep root motion'], ['inPlace', 'In place']]} onChange={rootMotion => ui.set({ rootMotion })} disabled={busy} />
           <p className="hint">
@@ -233,18 +299,18 @@ export function ExportPanel({ controller, entries }: { controller: CharacterCont
           </fieldset>
         </>
       )}
-      {ui.format !== 'static' && (
+      {ui.format !== 'static' && !obj && (
         <Choice label="Head and short hair" value={ui.rigidParts} options={[['skin', 'Skin to bone'], ['parent', 'Keep parented']]} onChange={rigidParts => ui.set({ rigidParts })} disabled={busy} />
       )}
-      <Choice label="Material" value={ui.material} options={[['unlit', 'Unlit (original look)'], ['lit', 'Lit (PBR)']]} onChange={material => ui.set({ material })} disabled={busy} />
+      {glb && <Choice label="Material" value={ui.material} options={[['unlit', 'Unlit (original look)'], ['lit', 'Lit (PBR)']]} onChange={material => ui.set({ material })} disabled={busy} />}
       <label className="field-label" htmlFor="export-name">File name</label>
       <input id="export-name" className="code-field" value={ui.fileName} placeholder={suggested} spellCheck={false} onChange={e => ui.set({ fileName: e.target.value })} disabled={busy} />
       <p className="hint" id="export-estimate" aria-live="polite">
-        {blocked ? 'Select at least one animation to export.' : estimate ? `${animated ? 'Estimated size' : 'Size'}: ${estimate.text}` : 'Estimating size…'}
+        {blocked ? 'Select at least one animation to export.' : estimate ? `${estimate.exact ? 'Size' : 'Estimated size'}: ${estimate.text}` : 'Estimating size…'}
       </p>
       <div className="row-actions">
         <button type="button" className="primary" onClick={run} disabled={busy || blocked}>
-          {busy ? 'Exporting…' : 'Export GLB'}
+          {busy ? 'Exporting…' : `Export ${obj ? 'OBJ' : fbx ? 'FBX' : 'GLB'}`}
         </button>
       </div>
       {busy && status.step === 'sampling' && status.total ? <progress className="export-progress" value={status.done} max={status.total} aria-label="Export progress" /> : null}
@@ -261,8 +327,15 @@ export function ExportPanel({ controller, entries }: { controller: CharacterCont
           objects with their own slot in each Action: assign the Action to the armature and to them (see the README).
         </p>
       )}
+      {fbx && (
+        <p className="hint export-note" id="export-blender-note">
+          <strong>Blender:</strong> File → Import → FBX. The importer sets the scene to <strong>30 fps</strong> from the file. Each clip becomes an Action
+          “BuddyPoke|<em>clip</em>” starting at frame 1 (the importer's Animation Offset). Props and facial expressions are driven by helper bones named
+          “Ctrl_…” (their visibility is the helper's scale), because Blender's FBX importer ignores animation on meshes attached to bones.
+        </p>
+      )}
       <p className="hint">
-        Exports the current look as dressed, never the live animation frame. {animated ? 'The ground shadow is not included.' : 'Props and the ground shadow are not included.'} Units are metres (1 original unit = 1 cm). FBX and OBJ are not offered: see the README for why.
+        Exports the current look as dressed, never the live animation frame. {withClips ? 'The ground shadow is not included.' : 'Props and the ground shadow are not included.'} Units are metres (1 original unit = 1 cm).
       </p>
     </section>
   );

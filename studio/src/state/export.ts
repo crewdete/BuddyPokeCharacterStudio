@@ -2,7 +2,7 @@
 import { create } from 'zustand';
 import type { ExportPose, MaterialMode, RigidParts, RootMotion } from '../export/prepare';
 
-export type ExportFormat = 'static' | 'rigged' | 'animated';
+export type ExportFormat = 'static' | 'rigged' | 'animated' | 'obj' | 'fbx';
 
 interface ExportUiState {
   format: ExportFormat;

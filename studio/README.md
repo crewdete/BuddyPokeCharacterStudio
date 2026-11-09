@@ -56,6 +56,10 @@ Plan and analysis: [`../docs/studio/ANALYSIS_AND_PLAN.md`](../docs/studio/ANALYS
   categories, single clips, search), Rest or T-pose initial pose, root motion or in place, size estimate, progress,
   messages and file name. See *Export tab* below.
 
+- **OBJ and FBX export** (Export tab, below the three GLB options): OBJ (static customized character with MTL and
+  PNG textures, in a ZIP) and binary FBX 7.4 (original rig and skin, optional animations with props and facial
+  expressions). Both validated in Blender 5.2.3. See *OBJ and FBX* below.
+
 Animation shortcuts: `Space` play/pause, `,` / `.` previous / next frame while paused (ignored in text fields and menus).
 Viewport: `B` skeleton overlay, `X` X-ray (bones through the character).
 
@@ -91,9 +95,40 @@ non-unit axes (M3A-1), so exported bones use the unit-axis rotation (joints move
 Original weights that sum to 0.996–1 are normalised. Three.js writes one skin per skinned mesh, all sharing the same
 joints; Blender builds a single armature from them (verified).
 
-**Not offered yet:** *FBX* needs a binary FBX writer (no maintained browser library; `assimpjs` fails to export, see the
-M0 analysis). It will only be added once it passes the same Blender validation. *OBJ* cannot carry a skeleton, weights or
-transparency modes; the static GLB already covers static use, so OBJ adds little and is not offered.
+### OBJ and FBX
+
+Both start from the same preparation as the GLB export (fresh original buddy, current look), are verified by reading the
+file back before the download is offered, and are written without any third-party exporter.
+
+| | OBJ | FBX |
+|---|---|---|
+| File | ZIP: `.obj`, `.mtl`, one PNG per texture | one binary FBX 7.4 file, textures embedded |
+| Geometry | exact posed vertices, Rest or T-pose (identical to the static GLB) | skin bound to the original Rest pose (like the animated GLB); Rest or T-pose initial display |
+| Skeleton / weights | — (OBJ cannot store them) | the 29 original bones, original names and hierarchy; skin clusters + bind pose |
+| Materials | `map_Kd` texture; `map_d` alpha on transparent parts | Lambert with the embedded texture; alpha linked on transparent parts |
+| Animation | — (OBJ cannot store it) | the selected clips (optional), one AnimationStack each, 30 fps, root motion or in place |
+| Props / facial expressions | — | yes, for the selected clips (see below) |
+| Units / axes | metres, Y up | metres (UnitScaleFactor 100), Y up |
+
+FBX details and limitations:
+
+- **Rotation curves are Euler angles** (FBX has no quaternion curves). Each key is converted from the exact quaternion
+  with an exact conversion, and each bone uses the rotation order that stays farthest from gimbal lock over all its keys
+  (`RotationOrder` + `RotationActive`). Measured storage error ≤ 0.00001°.
+- **No interpolation:** keys are flagged constant, and every change is preceded by a hold key on the previous frame, so
+  importers that interpolate linearly (Blender) still show the original value on every frame.
+- **Props and facial expressions use helper bones.** Blender's FBX importer ignores animation on meshes attached to bones,
+  so each animated prop or face node is skinned (weight 1) to a helper bone `Ctrl_<name>` (child of its original bone);
+  its visibility is that bone's scale (1 shown, 1e-6 hidden). The 29 original bones are unchanged; helpers are extra.
+- **In Blender:** File → Import → FBX with default settings. The importer sets the scene to 30 fps from the file; each clip
+  becomes an Action `BuddyPoke|<clip>` starting at frame 1 (the importer's "Animation Offset"), so original frame *f* is
+  Blender frame *f + 1*. Materials become Principled BSDF (FBX has no unlit material), so the look is lit.
+- **Size:** FBX stores doubles and Euler curves; all 94 clips are about 20 MB (GLB: 8.4 MB) and take a few seconds.
+
+Measured (Blender 5.2.3, official importers): OBJ vertices = static GLB within 0.0009 mm, textures and transparency
+correct. FBX: bones ≤ 0.0013 mm and root ≤ 0.0001 mm from the original engine; prop and face vertices ≤ 0.001 mm; prop
+visibility and facial expression on every frame exactly the engine's; no carry-over between Actions; skinned deformation
+within the same limits as the animated GLB.
 
 ### Export tab (M3C-3)
 
@@ -224,7 +259,8 @@ src/
   original/   typed adapter around ../web/src (no re-implementation)
   export/     prepare.ts (fresh buddy -> export scene), glb.ts (write + self-check), index.ts (workflow),
               animation/sample.ts (original clips -> STEP keyframes, prop visibility/rotation, face frames),
-              estimate.ts (file-size estimate for the Export tab)
+              estimate.ts (file-size estimate for the Export tab), obj.ts + zip.ts (OBJ/MTL/PNG in a ZIP),
+              fbx/binary.ts (binary FBX encoder/parser), fbx/writer.ts (FBX document), formats.ts (OBJ/FBX workflow + checks)
   pose/       BindSnapshot (exact rest pose), AnimationPlayer (original showFrame, timing per Animation.step,
               rest/T-pose/animation mode), tpose.ts (T-pose solver), catalog.ts (original moods.xml / pokes.xml)
   character/  CharacterController: serialized edits through the original Wardrobe, rig update, undo history;
@@ -245,7 +281,9 @@ tests/
               export.mjs (GLB structure, pose, skeleton, weights, textures, isolation; Blender if available),
               animexport.mjs (94 clips: structure, accuracy vs the engine, display pose; Blender if available),
               animprops.mjs (props + facial expressions: every-frame timing, textures, sync; Blender if available),
-              exportui.mjs (the Export tab: selection, options, estimate, progress, errors, downloads; Blender if available)
-  blender/    validate_glb.py (static/rigged GLB), validate_anim.py (animated GLB, M3C)
+              exportui.mjs (the Export tab: selection, options, estimate, progress, errors, downloads; Blender if available),
+              objfbx.mjs (OBJ and FBX: format area, downloads, geometry/animation vs GLB and engine; Blender if available)
+  blender/    validate_glb.py (static/rigged GLB), validate_anim.py (animated GLB, M3C),
+              validate_obj.py (OBJ ZIP), validate_fbx.py (FBX: rig, animation, props, faces vs the engine)
     fixtures/original-bind.html   the original renderer drawing the bind pose (reference for render.mjs)
 ```

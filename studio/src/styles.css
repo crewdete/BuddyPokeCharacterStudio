@@ -263,3 +263,6 @@ html.compare, html.compare body { background: transparent; }
   .clip-bulk button { height: 32px; }
   .export input[type='checkbox'] { width: 18px; height: 18px; }
 }
+
+/* Export formats: GLB modes on the first row, OBJ / FBX below (one radio group) */
+.format-rows .segmented-row + .segmented-row { margin-top: -1px; }
