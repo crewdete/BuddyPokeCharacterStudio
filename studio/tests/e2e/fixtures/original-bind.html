@@ -1,0 +1,61 @@
+<!doctype html>
+<!-- Reference renderer for the comparison tests: the ORIGINAL BuddyRevival Canvas 2D engine,
+     unmodified, drawing the character with the original Camera_Long2 at 692x520: the bind pose
+     (render) or any animation frame from a fresh buddy (prepare + show).
+     Served from the repository root (it imports ../../../../web/src). ?buddy=<look code> picks the look. -->
+<meta charset="utf-8">
+<style>html,body{margin:0;background:transparent}</style>
+<canvas id="stage" width="692" height="520"></canvas>
+<script type="module">
+  import { Buddy } from '../../../../web/src/domain/buddy.js';
+  import { TextureLibrary } from '../../../../web/src/domain/textures.js';
+  import { Wardrobe } from '../../../../web/src/domain/wardrobe.js';
+
+  const assets = '../../../../web/assets/';
+  const canvas = document.getElementById('stage');
+  const [textures, chick, catalog, wardrobe] = await Promise.all([
+    TextureLibrary.load(assets + 'chick/'),
+    fetch(assets + 'chick.bin').then(r => r.arrayBuffer()).then(b => new Uint8Array(b)),
+    fetch(assets + 'chick/catalog.xml').then(r => r.text()),
+    Wardrobe.load(assets + 'wardrobe.xml'),
+  ]);
+  const buddy = await Buddy.load(chick, { width: canvas.width, height: canvas.height, textures, catalog });
+  buddy.camera = buddy.scene.node('Camera_Long2');
+  const g = canvas.getContext('2d');
+  // Wear a look code and redraw. No animation is ever played, so this is the bind pose.
+  async function render(code) {
+    await wardrobe.wearCode(buddy, code);
+    g.clearRect(0, 0, canvas.width, canvas.height);
+    buddy.render(g);
+    return wardrobe.codeOf(buddy);
+  }
+  const code = await render(new URLSearchParams(location.search).get('buddy'));
+
+  // Animation reference: a FRESH original buddy per clip (no state carried over from other clips),
+  // dressed with `code`, then the original buddy.play(clip) / buddy.showFrame(frame) / buddy.render().
+  let animated = null;
+  async function prepare(code, clip) {
+    animated = await Buddy.load(chick, { width: canvas.width, height: canvas.height, textures, catalog });
+    await wardrobe.wearCode(animated, code);
+    animated.camera = animated.scene.node('Camera_Long2');
+    animated.play(clip);
+    return wardrobe.codeOf(animated);
+  }
+  function show(frame) {
+    animated.showFrame(frame);
+    g.clearRect(0, 0, canvas.width, canvas.height);
+    animated.render(g);
+    const scene = animated.scene;
+    const world = {};
+    scene.find(node => {
+      if (node.name) world[node.name] = [node.world.e[12], node.world.e[13], node.world.e[14]];
+      return false;
+    });
+    return {
+      world,
+      headFrame: scene.node('Head')?.mesh?.material?.frame ?? null,
+      props: scene.propNames.filter(name => scene.node(name)?.visible).sort(),
+    };
+  }
+  window.__original = { ready: true, code, render, prepare, show };
+</script>

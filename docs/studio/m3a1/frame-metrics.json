@@ -1,0 +1,6582 @@
+[
+  {
+    "clip": "pose_joinNow",
+    "frame": 0,
+    "iou": 0.9935075719829083,
+    "bboxDelta": 1,
+    "colorDiff": 4.980132014203782,
+    "shadow": 0.9647287312645134,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_joinNow",
+    "frame": 170,
+    "iou": 0.9961853720050441,
+    "bboxDelta": 1,
+    "colorDiff": 6.132857579880756,
+    "shadow": 0.9290956092542308,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      27,
+      27
+    ]
+  },
+  {
+    "clip": "pose_joinNow",
+    "frame": 340,
+    "iou": 0.9935187563263888,
+    "bboxDelta": 1,
+    "colorDiff": 4.9903895866907595,
+    "shadow": 0.9486364171671798,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_joinNow",
+    "frame": 67,
+    "iou": 0.9936530119078814,
+    "bboxDelta": 1,
+    "colorDiff": 4.979489583637881,
+    "shadow": 0.9564426181391253,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_joinNow",
+    "frame": 206,
+    "iou": 0.9958887545344619,
+    "bboxDelta": 1,
+    "colorDiff": 5.87164750957802,
+    "shadow": 0.9311260822618361,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      5,
+      5
+    ]
+  },
+  {
+    "clip": "pose_contra",
+    "frame": 0,
+    "iou": 0.9943549456866184,
+    "bboxDelta": 0,
+    "colorDiff": 4.998878414165802,
+    "shadow": 0.9838580069760254,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra",
+    "frame": 80,
+    "iou": 0.9941492026999145,
+    "bboxDelta": 0,
+    "colorDiff": 5.030058654648372,
+    "shadow": 0.9903960736889493,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra",
+    "frame": 160,
+    "iou": 0.9943403734763961,
+    "bboxDelta": 0,
+    "colorDiff": 5.019017268212399,
+    "shadow": 0.9852461191455486,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra",
+    "frame": 9,
+    "iou": 0.9942405986242249,
+    "bboxDelta": 0,
+    "colorDiff": 5.040213537190465,
+    "shadow": 0.9814144001122679,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra",
+    "frame": 10,
+    "iou": 0.9942706492282314,
+    "bboxDelta": 1,
+    "colorDiff": 5.041156225773363,
+    "shadow": 0.9831124899218284,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_attention",
+    "frame": 0,
+    "iou": 0.9945032273276548,
+    "bboxDelta": 1,
+    "colorDiff": 3.6749549282559677,
+    "shadow": 0.9724362133513172,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      19,
+      19
+    ]
+  },
+  {
+    "clip": "pose_contra_attention",
+    "frame": 53,
+    "iou": 0.9924409927588304,
+    "bboxDelta": 1,
+    "colorDiff": 4.638256494515411,
+    "shadow": 0.9709239504135478,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "pose_contra_attention",
+    "frame": 105,
+    "iou": 0.9942525347795331,
+    "bboxDelta": 0,
+    "colorDiff": 4.770551092401403,
+    "shadow": 0.9932064130038503,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "pose_contra_attention",
+    "frame": 77,
+    "iou": 0.9936207256772756,
+    "bboxDelta": 0,
+    "colorDiff": 4.614800173822089,
+    "shadow": 0.9571959076436364,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "pose_contra_attention",
+    "frame": 88,
+    "iou": 0.9941316599848934,
+    "bboxDelta": 1,
+    "colorDiff": 4.752868692771592,
+    "shadow": 0.9501855948408383,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "pose_contra_bow",
+    "frame": 0,
+    "iou": 0.993716814159292,
+    "bboxDelta": 0,
+    "colorDiff": 3.998565222984221,
+    "shadow": 1.0025641914134238,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_bow",
+    "frame": 53,
+    "iou": 0.994090571640683,
+    "bboxDelta": 1,
+    "colorDiff": 4.549294021586909,
+    "shadow": 0.9183845245126994,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_bow",
+    "frame": 105,
+    "iou": 0.9939123256979452,
+    "bboxDelta": 0,
+    "colorDiff": 4.012586078195963,
+    "shadow": 1.000397740832074,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_bow",
+    "frame": 33,
+    "iou": 0.9958308116468294,
+    "bboxDelta": 1,
+    "colorDiff": 4.202056182051677,
+    "shadow": 0.9620000666762977,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_bow",
+    "frame": 14,
+    "iou": 0.992977966419075,
+    "bboxDelta": 1,
+    "colorDiff": 4.250589307602838,
+    "shadow": 0.9670982061539914,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_canCan",
+    "frame": 0,
+    "iou": 0.9943086314175341,
+    "bboxDelta": 1,
+    "colorDiff": 4.014038001463174,
+    "shadow": 0.9668446288298704,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_canCan",
+    "frame": 58,
+    "iou": 0.9950709137409904,
+    "bboxDelta": 1,
+    "colorDiff": 4.67955408092751,
+    "shadow": 0.9553680802344355,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_canCan",
+    "frame": 115,
+    "iou": 0.9941093308199811,
+    "bboxDelta": 1,
+    "colorDiff": 4.025336770166803,
+    "shadow": 0.981498391349986,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_canCan",
+    "frame": 60,
+    "iou": 0.9952879415578255,
+    "bboxDelta": 0,
+    "colorDiff": 4.632128029147287,
+    "shadow": 0.9537894065532516,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_canCan",
+    "frame": 103,
+    "iou": 0.9935812144517714,
+    "bboxDelta": 1,
+    "colorDiff": 3.9927156605939715,
+    "shadow": 0.9554770704568718,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pose_contra_lookFeet",
+    "frame": 0,
+    "iou": 0.9941367118444313,
+    "bboxDelta": 0,
+    "colorDiff": 5.011030101853577,
+    "shadow": 0.9665306903480008,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_lookFeet",
+    "frame": 70,
+    "iou": 0.9929804662885948,
+    "bboxDelta": 0,
+    "colorDiff": 4.873330541206638,
+    "shadow": 0.9697510388350677,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      27,
+      27
+    ]
+  },
+  {
+    "clip": "pose_contra_lookFeet",
+    "frame": 140,
+    "iou": 0.9942835253558063,
+    "bboxDelta": 1,
+    "colorDiff": 5.021910717283796,
+    "shadow": 0.9848006299156868,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_lookFeet",
+    "frame": 94,
+    "iou": 0.9933909506863243,
+    "bboxDelta": 1,
+    "colorDiff": 4.920884510405574,
+    "shadow": 0.9473931396301196,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      27,
+      27
+    ]
+  },
+  {
+    "clip": "pose_contra_lookFeet",
+    "frame": 102,
+    "iou": 0.9933381814404072,
+    "bboxDelta": 1,
+    "colorDiff": 5.0013944631095315,
+    "shadow": 0.9522292993630573,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      27,
+      27
+    ]
+  },
+  {
+    "clip": "pose_contra_shift",
+    "frame": 0,
+    "iou": 0.9945470355032202,
+    "bboxDelta": 0,
+    "colorDiff": 5.008639212838028,
+    "shadow": 0.9756076090879482,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_shift",
+    "frame": 80,
+    "iou": 0.995281058942245,
+    "bboxDelta": 1,
+    "colorDiff": 5.079603399432665,
+    "shadow": 0.9358549838682289,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_shift",
+    "frame": 160,
+    "iou": 0.9942076406084188,
+    "bboxDelta": 0,
+    "colorDiff": 5.013698020902057,
+    "shadow": 0.9927438362331507,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_shift",
+    "frame": 75,
+    "iou": 0.9953654877378529,
+    "bboxDelta": 1,
+    "colorDiff": 4.9755405990232395,
+    "shadow": 0.9518650073680355,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_shift",
+    "frame": 111,
+    "iou": 0.9952740322842669,
+    "bboxDelta": 1,
+    "colorDiff": 5.128548322475602,
+    "shadow": 0.9369360541551326,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_toStand",
+    "frame": 0,
+    "iou": 0.9941041212192677,
+    "bboxDelta": 0,
+    "colorDiff": 5.011491014767023,
+    "shadow": 0.9803732162458837,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_toStand",
+    "frame": 20,
+    "iou": 0.9946420755542811,
+    "bboxDelta": 1,
+    "colorDiff": 5.109162089162031,
+    "shadow": 0.9100336417157275,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_toStand",
+    "frame": 40,
+    "iou": 0.993972188820029,
+    "bboxDelta": 1,
+    "colorDiff": 5.08370169316203,
+    "shadow": 0.9427860696517413,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_toStand",
+    "frame": 23,
+    "iou": 0.9938748657763796,
+    "bboxDelta": 1,
+    "colorDiff": 5.141705723618113,
+    "shadow": 0.9647982295376742,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_contra_toStand",
+    "frame": 15,
+    "iou": 0.9941906441997689,
+    "bboxDelta": 1,
+    "colorDiff": 5.088608111277065,
+    "shadow": 0.9519834236640895,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand",
+    "frame": 0,
+    "iou": 0.993726783705051,
+    "bboxDelta": 1,
+    "colorDiff": 5.060496546303623,
+    "shadow": 0.9528059106757429,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand",
+    "frame": 80,
+    "iou": 0.9937118550027741,
+    "bboxDelta": 1,
+    "colorDiff": 5.041524494901828,
+    "shadow": 0.9519399767866026,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand",
+    "frame": 160,
+    "iou": 0.9937880539499037,
+    "bboxDelta": 1,
+    "colorDiff": 5.079466021424605,
+    "shadow": 0.9531733200679849,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand",
+    "frame": 159,
+    "iou": 0.9938802565051178,
+    "bboxDelta": 1,
+    "colorDiff": 5.0663564689149165,
+    "shadow": 0.9496053480714179,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand",
+    "frame": 114,
+    "iou": 0.9941970847623713,
+    "bboxDelta": 1,
+    "colorDiff": 5.19310160729705,
+    "shadow": 0.953430539552542,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand_lookAround",
+    "frame": 0,
+    "iou": 0.9937409428668331,
+    "bboxDelta": 1,
+    "colorDiff": 4.0829248112527505,
+    "shadow": 0.9475527645231208,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "pose_stand_lookAround",
+    "frame": 80,
+    "iou": 0.9941782289404081,
+    "bboxDelta": 1,
+    "colorDiff": 3.979440076493061,
+    "shadow": 0.9455129643424489,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "pose_stand_lookAround",
+    "frame": 160,
+    "iou": 0.993604660122359,
+    "bboxDelta": 1,
+    "colorDiff": 5.100228508798399,
+    "shadow": 0.9434852813315117,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand_lookAround",
+    "frame": 120,
+    "iou": 0.9941272240958251,
+    "bboxDelta": 1,
+    "colorDiff": 3.790528552767848,
+    "shadow": 0.9754047752886644,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "pose_stand_lookAround",
+    "frame": 133,
+    "iou": 0.9945426762715565,
+    "bboxDelta": 1,
+    "colorDiff": 3.8751146229639093,
+    "shadow": 0.9484290556013557,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "pose_stand_model",
+    "frame": 0,
+    "iou": 0.9934949097284164,
+    "bboxDelta": 1,
+    "colorDiff": 5.117161741714115,
+    "shadow": 0.9509008507320751,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand_model",
+    "frame": 70,
+    "iou": 0.9940550482822046,
+    "bboxDelta": 1,
+    "colorDiff": 5.302263340491835,
+    "shadow": 0.962823836481315,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand_model",
+    "frame": 140,
+    "iou": 0.99367000877882,
+    "bboxDelta": 1,
+    "colorDiff": 5.042644429977526,
+    "shadow": 0.9269146748907736,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand_model",
+    "frame": 55,
+    "iou": 0.9943580072292943,
+    "bboxDelta": 1,
+    "colorDiff": 6.40886029934678,
+    "shadow": 0.9245443489734438,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "pose_stand_model",
+    "frame": 84,
+    "iou": 0.9934811141898789,
+    "bboxDelta": 1,
+    "colorDiff": 4.029583743131332,
+    "shadow": 0.9678175456346697,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      24,
+      24
+    ]
+  },
+  {
+    "clip": "pose_stand_stretch",
+    "frame": 0,
+    "iou": 0.9939412626223695,
+    "bboxDelta": 1,
+    "colorDiff": 5.041449518136442,
+    "shadow": 0.9427423364386955,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "pose_stand_stretch",
+    "frame": 108,
+    "iou": 0.9918895159232056,
+    "bboxDelta": 1,
+    "colorDiff": 5.206049689795526,
+    "shadow": 0.9810199988465901,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      26,
+      26
+    ]
+  },
+  {
+    "clip": "pose_stand_stretch",
+    "frame": 215,
+    "iou": 0.993696540032365,
+    "bboxDelta": 1,
+    "colorDiff": 5.058026759310209,
+    "shadow": 0.9368373506344188,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "pose_stand_stretch",
+    "frame": 121,
+    "iou": 0.9918558233048749,
+    "bboxDelta": 1,
+    "colorDiff": 4.16844646170875,
+    "shadow": 0.994387619791704,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "pose_stand_stretch",
+    "frame": 208,
+    "iou": 0.9930827761125202,
+    "bboxDelta": 1,
+    "colorDiff": 4.935422954878972,
+    "shadow": 0.953032394587401,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "pose_stand_toContra",
+    "frame": 0,
+    "iou": 0.9934669727739172,
+    "bboxDelta": 1,
+    "colorDiff": 5.08062306455466,
+    "shadow": 0.9539806410556988,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand_toContra",
+    "frame": 18,
+    "iou": 0.9938538205980066,
+    "bboxDelta": 1,
+    "colorDiff": 5.194556293335438,
+    "shadow": 0.9805870853349902,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand_toContra",
+    "frame": 35,
+    "iou": 0.9942070429386359,
+    "bboxDelta": 0,
+    "colorDiff": 5.028130312733963,
+    "shadow": 0.9838583610703716,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand_toContra",
+    "frame": 20,
+    "iou": 0.9934703602611856,
+    "bboxDelta": 1,
+    "colorDiff": 5.1938271604930275,
+    "shadow": 0.9865551844672288,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pose_stand_toContra",
+    "frame": 33,
+    "iou": 0.9936454109841504,
+    "bboxDelta": 1,
+    "colorDiff": 5.0111384791912705,
+    "shadow": 1.0005415083628106,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "mood_impatient",
+    "frame": 0,
+    "iou": 0.9941915341610397,
+    "bboxDelta": 1,
+    "colorDiff": 4.969653594293442,
+    "shadow": 0.914665085951393,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "mood_impatient",
+    "frame": 75,
+    "iou": 0.9944058811469408,
+    "bboxDelta": 0,
+    "colorDiff": 5.5557404571152835,
+    "shadow": 0.9224947227019766,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      26,
+      26
+    ]
+  },
+  {
+    "clip": "mood_impatient",
+    "frame": 150,
+    "iou": 0.9938700212079835,
+    "bboxDelta": 1,
+    "colorDiff": 4.983187177238052,
+    "shadow": 0.9297912713472486,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "mood_impatient",
+    "frame": 39,
+    "iou": 0.9941174761794097,
+    "bboxDelta": 1,
+    "colorDiff": 4.975897218609629,
+    "shadow": 0.9266248538658409,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "mood_impatient",
+    "frame": 141,
+    "iou": 0.9943914256350022,
+    "bboxDelta": 1,
+    "colorDiff": 4.716685368926223,
+    "shadow": 0.9460428654824452,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      27,
+      27
+    ]
+  },
+  {
+    "clip": "mood_lookingForLove",
+    "frame": 0,
+    "iou": 0.9940688554697497,
+    "bboxDelta": 1,
+    "colorDiff": 5.712026450619063,
+    "shadow": 0.9373531795287383,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      24,
+      24
+    ]
+  },
+  {
+    "clip": "mood_lookingForLove",
+    "frame": 45,
+    "iou": 0.9947019060958529,
+    "bboxDelta": 1,
+    "colorDiff": 5.048666380963625,
+    "shadow": 0.913471796399704,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "mood_lookingForLove",
+    "frame": 90,
+    "iou": 0.9941106475275263,
+    "bboxDelta": 1,
+    "colorDiff": 5.694606060605496,
+    "shadow": 0.9242292422924229,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      24,
+      24
+    ]
+  },
+  {
+    "clip": "mood_lookingForLove",
+    "frame": 53,
+    "iou": 0.994789327104483,
+    "bboxDelta": 1,
+    "colorDiff": 4.781856768716291,
+    "shadow": 0.9136263248753485,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "mood_lookingForLove",
+    "frame": 82,
+    "iou": 0.9950556820663193,
+    "bboxDelta": 1,
+    "colorDiff": 4.5346907639331295,
+    "shadow": 0.8845602179416833,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "mood_sneaky",
+    "frame": 0,
+    "iou": 0.992932968453974,
+    "bboxDelta": 1,
+    "colorDiff": 5.069775072182273,
+    "shadow": 0.9603817803322903,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "mood_sneaky",
+    "frame": 60,
+    "iou": 0.993299183989517,
+    "bboxDelta": 1,
+    "colorDiff": 5.557271209985621,
+    "shadow": 0.9339490350310786,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      26,
+      26
+    ]
+  },
+  {
+    "clip": "mood_sneaky",
+    "frame": 120,
+    "iou": 0.9933192897983749,
+    "bboxDelta": 1,
+    "colorDiff": 5.098673048957211,
+    "shadow": 0.9576917769059401,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "mood_sneaky",
+    "frame": 5,
+    "iou": 0.9929456711389206,
+    "bboxDelta": 1,
+    "colorDiff": 5.137887853770021,
+    "shadow": 0.9650836516927941,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "mood_sneaky",
+    "frame": 44,
+    "iou": 0.9932079018784397,
+    "bboxDelta": 1,
+    "colorDiff": 5.068456696839172,
+    "shadow": 0.9497125962687011,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "mood_dreaming",
+    "frame": 0,
+    "iou": 0.9947719156142999,
+    "bboxDelta": 1,
+    "colorDiff": 4.481500672366678,
+    "shadow": 0.963172831021408,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_dreaming",
+    "frame": 40,
+    "iou": 0.9938797732136823,
+    "bboxDelta": 1,
+    "colorDiff": 4.494156907190839,
+    "shadow": 0.981291399339029,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_dreaming",
+    "frame": 80,
+    "iou": 0.9949636981895046,
+    "bboxDelta": 1,
+    "colorDiff": 4.471221050168739,
+    "shadow": 0.9505929678050228,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_dreaming",
+    "frame": 13,
+    "iou": 0.9941234448515054,
+    "bboxDelta": 1,
+    "colorDiff": 4.428038735183109,
+    "shadow": 0.9668016042051615,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_dreaming",
+    "frame": 24,
+    "iou": 0.9929597296536187,
+    "bboxDelta": 1,
+    "colorDiff": 4.4734543391948955,
+    "shadow": 0.9938367812933758,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_confused",
+    "frame": 0,
+    "iou": 0.9941758967211912,
+    "bboxDelta": 1,
+    "colorDiff": 4.974943926336247,
+    "shadow": 0.9678576452384302,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "mood_confused",
+    "frame": 40,
+    "iou": 0.9948581612083321,
+    "bboxDelta": 1,
+    "colorDiff": 4.7279436956111045,
+    "shadow": 0.9472825297550389,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "mood_confused",
+    "frame": 80,
+    "iou": 0.994061740434017,
+    "bboxDelta": 1,
+    "colorDiff": 4.8684119338002585,
+    "shadow": 0.9646726208488601,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "mood_confused",
+    "frame": 13,
+    "iou": 0.9940863652214343,
+    "bboxDelta": 1,
+    "colorDiff": 4.794203195111663,
+    "shadow": 0.9630076913853058,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "mood_confused",
+    "frame": 24,
+    "iou": 0.9940844742885381,
+    "bboxDelta": 1,
+    "colorDiff": 3.6995101981142318,
+    "shadow": 0.9746855976845646,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      19,
+      19
+    ]
+  },
+  {
+    "clip": "mood_sleeping",
+    "frame": 0,
+    "iou": 0.9957590894614211,
+    "bboxDelta": 0,
+    "colorDiff": 4.252620474491224,
+    "shadow": 0.9103978129713424,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "mood_sleeping",
+    "frame": 40,
+    "iou": 0.9958428706072439,
+    "bboxDelta": 1,
+    "colorDiff": 4.214143667573838,
+    "shadow": 0.8881605510034438,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "mood_sleeping",
+    "frame": 80,
+    "iou": 0.9961601019501316,
+    "bboxDelta": 0,
+    "colorDiff": 4.25429796211521,
+    "shadow": 0.8631871029880523,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "mood_sleeping",
+    "frame": 13,
+    "iou": 0.9959695025694422,
+    "bboxDelta": 1,
+    "colorDiff": 4.238272687417958,
+    "shadow": 0.88600916369695,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "mood_sleeping",
+    "frame": 24,
+    "iou": 0.9957449671202004,
+    "bboxDelta": 1,
+    "colorDiff": 4.224172099674728,
+    "shadow": 0.8583890126206385,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "hipBump1",
+    "frame": 0,
+    "iou": 0.9951495149514952,
+    "bboxDelta": 1,
+    "colorDiff": 2.6146201475080604,
+    "shadow": 0.9592302969009607,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "hipBump1",
+    "frame": 100,
+    "iou": 0.9958508323635076,
+    "bboxDelta": 0,
+    "colorDiff": 4.943594781204337,
+    "shadow": 0.9124223050967857,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "hipBump1",
+    "frame": 200,
+    "iou": 0.9953160421389519,
+    "bboxDelta": 0,
+    "colorDiff": 2.5960375810153637,
+    "shadow": 0.9331452798000102,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "hipBump1",
+    "frame": 174,
+    "iou": 0.9953227771010962,
+    "bboxDelta": 1,
+    "colorDiff": 2.583440751437379,
+    "shadow": 0.9483258772542988,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "hipBump1",
+    "frame": 155,
+    "iou": 0.9940655733105123,
+    "bboxDelta": 0,
+    "colorDiff": 1.9767886041173075,
+    "shadow": 0.9724757607591231,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "hipBump2",
+    "frame": 0,
+    "iou": 0.994949242386358,
+    "bboxDelta": 1,
+    "colorDiff": 2.5973674217040785,
+    "shadow": 0.9569054850812936,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "hipBump2",
+    "frame": 100,
+    "iou": 0.9953885482280997,
+    "bboxDelta": 1,
+    "colorDiff": 4.9953615890331005,
+    "shadow": 0.951906400550585,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "hipBump2",
+    "frame": 200,
+    "iou": 0.9954007665389102,
+    "bboxDelta": 1,
+    "colorDiff": 2.590127342328872,
+    "shadow": 0.9268376745909338,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "hipBump2",
+    "frame": 174,
+    "iou": 0.994644962662125,
+    "bboxDelta": 1,
+    "colorDiff": 2.7281832600668046,
+    "shadow": 0.9743290141434575,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "hipBump2",
+    "frame": 155,
+    "iou": 0.9947536914550045,
+    "bboxDelta": 1,
+    "colorDiff": 1.961106779140407,
+    "shadow": 0.9621357672364291,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "mood_swordTwirl",
+    "frame": 0,
+    "iou": 0.9931719602630474,
+    "bboxDelta": 1,
+    "colorDiff": 4.594230462182441,
+    "shadow": 1.0194303719263562,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "mood_swordTwirl",
+    "frame": 55,
+    "iou": 0.99489933266269,
+    "bboxDelta": 1,
+    "colorDiff": 5.213474985402378,
+    "shadow": 0.9388017426715656,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "mood_swordTwirl",
+    "frame": 110,
+    "iou": 0.9938428963461351,
+    "bboxDelta": 1,
+    "colorDiff": 4.582465484616473,
+    "shadow": 1.0023075900155665,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "mood_swordTwirl",
+    "frame": 34,
+    "iou": 0.9951122945937423,
+    "bboxDelta": 1,
+    "colorDiff": 5.090881350163067,
+    "shadow": 0.9535171018781861,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "mood_swordTwirl",
+    "frame": 65,
+    "iou": 0.9956938872836424,
+    "bboxDelta": 0,
+    "colorDiff": 4.953559571939915,
+    "shadow": 0.8777044563155383,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "jamB2",
+    "frame": 0,
+    "iou": 0.9951360389116887,
+    "bboxDelta": 1,
+    "colorDiff": 6.723181100758233,
+    "shadow": 0.9461431373146765,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "jamB2",
+    "frame": 40,
+    "iou": 0.9954223539396975,
+    "bboxDelta": 0,
+    "colorDiff": 6.748744327341188,
+    "shadow": 0.9358967877617463,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "jamB2",
+    "frame": 80,
+    "iou": 0.9954362527486205,
+    "bboxDelta": 1,
+    "colorDiff": 6.750390160092622,
+    "shadow": 0.9272688088176435,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "jamB2",
+    "frame": 49,
+    "iou": 0.9944851140069706,
+    "bboxDelta": 1,
+    "colorDiff": 7.042163389585455,
+    "shadow": 0.9291675220235811,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "jamB2",
+    "frame": 3,
+    "iou": 0.9947405768668866,
+    "bboxDelta": 1,
+    "colorDiff": 7.122715976855288,
+    "shadow": 0.9425624238733252,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "jamB1",
+    "frame": 0,
+    "iou": 0.9925706817087432,
+    "bboxDelta": 1,
+    "colorDiff": 5.729396816596072,
+    "shadow": 0.9825432816375617,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamB1",
+    "frame": 40,
+    "iou": 0.9938047830321394,
+    "bboxDelta": 1,
+    "colorDiff": 5.909450569393256,
+    "shadow": 0.9470832324973291,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamB1",
+    "frame": 80,
+    "iou": 0.9926479699310231,
+    "bboxDelta": 1,
+    "colorDiff": 5.683338187769432,
+    "shadow": 0.9578260231773508,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamB1",
+    "frame": 49,
+    "iou": 0.9942929526819037,
+    "bboxDelta": 1,
+    "colorDiff": 5.782102037927251,
+    "shadow": 0.9488824240550701,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamB1",
+    "frame": 3,
+    "iou": 0.9934337529568503,
+    "bboxDelta": 1,
+    "colorDiff": 5.705279963507615,
+    "shadow": 0.942824308554436,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamA2",
+    "frame": 0,
+    "iou": 0.9943802449791331,
+    "bboxDelta": 1,
+    "colorDiff": 4.844545454544977,
+    "shadow": 0.9394850084496246,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      28,
+      28
+    ]
+  },
+  {
+    "clip": "jamA2",
+    "frame": 40,
+    "iou": 0.9939334526752479,
+    "bboxDelta": 0,
+    "colorDiff": 4.68779332656698,
+    "shadow": 0.980261158498288,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      28,
+      28
+    ]
+  },
+  {
+    "clip": "jamA2",
+    "frame": 80,
+    "iou": 0.9940113340480932,
+    "bboxDelta": 1,
+    "colorDiff": 4.88522678829112,
+    "shadow": 0.9642134659601133,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      28,
+      28
+    ]
+  },
+  {
+    "clip": "jamA2",
+    "frame": 49,
+    "iou": 0.9937849330849203,
+    "bboxDelta": 1,
+    "colorDiff": 5.302454824736651,
+    "shadow": 0.980738145877643,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamA2",
+    "frame": 3,
+    "iou": 0.9948416158093577,
+    "bboxDelta": 1,
+    "colorDiff": 4.742632488618851,
+    "shadow": 0.9509036224747811,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      28,
+      28
+    ]
+  },
+  {
+    "clip": "jamA1",
+    "frame": 0,
+    "iou": 0.9926277422460629,
+    "bboxDelta": 1,
+    "colorDiff": 5.704753195046696,
+    "shadow": 0.9756694482500934,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamA1",
+    "frame": 40,
+    "iou": 0.9941907024092297,
+    "bboxDelta": 1,
+    "colorDiff": 6.053640422133211,
+    "shadow": 0.947319500733197,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamA1",
+    "frame": 80,
+    "iou": 0.9929248854079202,
+    "bboxDelta": 1,
+    "colorDiff": 5.6747718398371845,
+    "shadow": 0.9628233555062823,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamA1",
+    "frame": 49,
+    "iou": 0.9941402248296021,
+    "bboxDelta": 1,
+    "colorDiff": 6.103432167293915,
+    "shadow": 0.9431153438227801,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "jamA1",
+    "frame": 3,
+    "iou": 0.9935323450684131,
+    "bboxDelta": 1,
+    "colorDiff": 5.667323112831024,
+    "shadow": 0.9365882791203722,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      29,
+      29
+    ]
+  },
+  {
+    "clip": "rose2",
+    "frame": 0,
+    "iou": 0.9932885906040269,
+    "bboxDelta": 0,
+    "colorDiff": 5.133142171516193,
+    "shadow": 0.9815517021004644,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "rose2",
+    "frame": 63,
+    "iou": 0.9942170141530969,
+    "bboxDelta": 1,
+    "colorDiff": 5.774656870247862,
+    "shadow": 0.9429631915202555,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      5,
+      5
+    ]
+  },
+  {
+    "clip": "rose2",
+    "frame": 125,
+    "iou": 0.9930057415554395,
+    "bboxDelta": 1,
+    "colorDiff": 5.513401215470077,
+    "shadow": 0.9962287750151607,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "rose2",
+    "frame": 79,
+    "iou": 0.9931884528057088,
+    "bboxDelta": 1,
+    "colorDiff": 5.260792114481924,
+    "shadow": 0.9826830775943568,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      5,
+      5
+    ]
+  },
+  {
+    "clip": "rose2",
+    "frame": 15,
+    "iou": 0.9928639169167146,
+    "bboxDelta": 0,
+    "colorDiff": 4.460247617257885,
+    "shadow": 0.9782991336416766,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "rose1",
+    "frame": 0,
+    "iou": 0.9937805679246661,
+    "bboxDelta": 1,
+    "colorDiff": 4.6394589803479045,
+    "shadow": 0.963355866407871,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "rose1",
+    "frame": 63,
+    "iou": 0.9942631984178505,
+    "bboxDelta": 1,
+    "colorDiff": 4.627208632583179,
+    "shadow": 0.9294205276958573,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "rose1",
+    "frame": 125,
+    "iou": 0.9934035151131794,
+    "bboxDelta": 1,
+    "colorDiff": 4.5862251936745535,
+    "shadow": 0.9619037358703219,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "rose1",
+    "frame": 79,
+    "iou": 0.9934028196168213,
+    "bboxDelta": 1,
+    "colorDiff": 4.592205678704834,
+    "shadow": 0.9643514202506374,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "rose1",
+    "frame": 15,
+    "iou": 0.9940591445168104,
+    "bboxDelta": 1,
+    "colorDiff": 4.014053054338119,
+    "shadow": 0.9292902249512557,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "swordA2",
+    "frame": 0,
+    "iou": 0.9942271038161449,
+    "bboxDelta": 1,
+    "colorDiff": 5.085574527165036,
+    "shadow": 0.9034187445469991,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "swordA2",
+    "frame": 33,
+    "iou": 0.993526782586765,
+    "bboxDelta": 1,
+    "colorDiff": 5.10173132700546,
+    "shadow": 0.9478068739015919,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "swordA2",
+    "frame": 65,
+    "iou": 0.9945602776324125,
+    "bboxDelta": 1,
+    "colorDiff": 4.995809043787594,
+    "shadow": 0.9394046275395034,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "swordA2",
+    "frame": 49,
+    "iou": 0.994721090697481,
+    "bboxDelta": 1,
+    "colorDiff": 4.927713472529211,
+    "shadow": 0.9544430865250844,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "swordA2",
+    "frame": 16,
+    "iou": 0.9944867568489257,
+    "bboxDelta": 1,
+    "colorDiff": 4.75439122897217,
+    "shadow": 0.9346707050402705,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "swordA1",
+    "frame": 0,
+    "iou": 0.9949631860776439,
+    "bboxDelta": 1,
+    "colorDiff": 5.258996395274564,
+    "shadow": 0.9628039229860961,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "swordA1",
+    "frame": 33,
+    "iou": 0.9931597975415762,
+    "bboxDelta": 1,
+    "colorDiff": 3.314637117715488,
+    "shadow": 0.9615047559929162,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      19,
+      19
+    ]
+  },
+  {
+    "clip": "swordA1",
+    "frame": 65,
+    "iou": 0.9944902655759185,
+    "bboxDelta": 1,
+    "colorDiff": 5.296212466709979,
+    "shadow": 0.9773043727167317,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "swordA1",
+    "frame": 49,
+    "iou": 0.9931442864030858,
+    "bboxDelta": 1,
+    "colorDiff": 3.9954283171253664,
+    "shadow": 0.9716665891003863,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "swordA1",
+    "frame": 16,
+    "iou": 0.9942444876783398,
+    "bboxDelta": 1,
+    "colorDiff": 4.569680663133634,
+    "shadow": 0.9478169480682676,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      15,
+      15
+    ]
+  },
+  {
+    "clip": "bearHug1",
+    "frame": 0,
+    "iou": 0.9938463316336111,
+    "bboxDelta": 1,
+    "colorDiff": 3.6733138568725447,
+    "shadow": 0.9799133665227789,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "bearHug1",
+    "frame": 100,
+    "iou": 0.9944252760995013,
+    "bboxDelta": 1,
+    "colorDiff": 4.057746599799301,
+    "shadow": 0.92590780644172,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "bearHug1",
+    "frame": 200,
+    "iou": 0.9943347664169554,
+    "bboxDelta": 1,
+    "colorDiff": 3.6614415378463154,
+    "shadow": 0.9686823484413846,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "bearHug1",
+    "frame": 174,
+    "iou": 0.9943640912097076,
+    "bboxDelta": 1,
+    "colorDiff": 3.6534609564022,
+    "shadow": 0.9741554959785523,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "bearHug1",
+    "frame": 155,
+    "iou": 0.9947699890470975,
+    "bboxDelta": 1,
+    "colorDiff": 4.213851193261131,
+    "shadow": 0.9326613330723623,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "bearHug2",
+    "frame": 0,
+    "iou": 0.9945098836618205,
+    "bboxDelta": 1,
+    "colorDiff": 5.25116469265196,
+    "shadow": 0.9789042330150919,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "bearHug2",
+    "frame": 100,
+    "iou": 0.9965099941077823,
+    "bboxDelta": 1,
+    "colorDiff": 5.3272183308565655,
+    "shadow": 0.9462476401614216,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "bearHug2",
+    "frame": 200,
+    "iou": 0.9947110704270374,
+    "bboxDelta": 1,
+    "colorDiff": 5.247233137108229,
+    "shadow": 0.9637760230953629,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "bearHug2",
+    "frame": 174,
+    "iou": 0.9948672463430948,
+    "bboxDelta": 1,
+    "colorDiff": 5.297043305417292,
+    "shadow": 0.9780443143885964,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      9,
+      9
+    ]
+  },
+  {
+    "clip": "bearHug2",
+    "frame": 155,
+    "iou": 0.9945441054515298,
+    "bboxDelta": 1,
+    "colorDiff": 5.226854696352922,
+    "shadow": 0.9696185825524614,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      9,
+      9
+    ]
+  },
+  {
+    "clip": "blowKiss1",
+    "frame": 0,
+    "iou": 0.9945944158828294,
+    "bboxDelta": 1,
+    "colorDiff": 4.355555186207374,
+    "shadow": 0.9537999860422919,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "blowKiss1",
+    "frame": 50,
+    "iou": 0.9952056377079482,
+    "bboxDelta": 1,
+    "colorDiff": 4.204880659869635,
+    "shadow": 0.9474474819702787,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      22,
+      22
+    ]
+  },
+  {
+    "clip": "blowKiss1",
+    "frame": 100,
+    "iou": 0.9949384676458912,
+    "bboxDelta": 1,
+    "colorDiff": 4.3666555832643805,
+    "shadow": 0.9426147301923986,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "blowKiss1",
+    "frame": 90,
+    "iou": 0.9948062259126321,
+    "bboxDelta": 1,
+    "colorDiff": 4.366393428994535,
+    "shadow": 0.9391443182081125,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "blowKiss1",
+    "frame": 99,
+    "iou": 0.9949220946772966,
+    "bboxDelta": 1,
+    "colorDiff": 4.360963796667593,
+    "shadow": 0.9429204510046046,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "blowKiss2",
+    "frame": 0,
+    "iou": 0.9942756621919744,
+    "bboxDelta": 1,
+    "colorDiff": 5.235004930679835,
+    "shadow": 0.9796475310337495,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "blowKiss2",
+    "frame": 50,
+    "iou": 0.9945871638456912,
+    "bboxDelta": 1,
+    "colorDiff": 5.037779313521517,
+    "shadow": 0.949534942182001,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      9,
+      9
+    ]
+  },
+  {
+    "clip": "blowKiss2",
+    "frame": 100,
+    "iou": 0.9944647850779831,
+    "bboxDelta": 1,
+    "colorDiff": 5.191206455041178,
+    "shadow": 0.9735906052264683,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      9,
+      9
+    ]
+  },
+  {
+    "clip": "blowKiss2",
+    "frame": 90,
+    "iou": 0.9953565222345668,
+    "bboxDelta": 0,
+    "colorDiff": 5.137135088722852,
+    "shadow": 0.9489958224816906,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      9,
+      9
+    ]
+  },
+  {
+    "clip": "blowKiss2",
+    "frame": 99,
+    "iou": 0.994319738188948,
+    "bboxDelta": 1,
+    "colorDiff": 5.1947879965388735,
+    "shadow": 0.9886502254044021,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      9,
+      9
+    ]
+  },
+  {
+    "clip": "celebrate1",
+    "frame": 0,
+    "iou": 0.9934574288406492,
+    "bboxDelta": 1,
+    "colorDiff": 3.6718564517384036,
+    "shadow": 0.9655297289322263,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "celebrate1",
+    "frame": 15,
+    "iou": 0.9936132958263965,
+    "bboxDelta": 1,
+    "colorDiff": 3.8504908687342394,
+    "shadow": 0.9636821827080974,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "celebrate1",
+    "frame": 30,
+    "iou": 0.9937228821395547,
+    "bboxDelta": 1,
+    "colorDiff": 3.6565383628895463,
+    "shadow": 0.9614414591358923,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "celebrate1",
+    "frame": 29,
+    "iou": 0.9934884499497824,
+    "bboxDelta": 0,
+    "colorDiff": 3.6175352282751745,
+    "shadow": 0.9582337129040537,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "celebrate1",
+    "frame": 28,
+    "iou": 0.9942491405395986,
+    "bboxDelta": 0,
+    "colorDiff": 3.6971435248630575,
+    "shadow": 0.9616004761629792,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "celebrate2",
+    "frame": 0,
+    "iou": 0.9937677135751055,
+    "bboxDelta": 1,
+    "colorDiff": 4.138964471928811,
+    "shadow": 0.9595645137820188,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "celebrate2",
+    "frame": 15,
+    "iou": 0.9941130512200883,
+    "bboxDelta": 0,
+    "colorDiff": 3.9714997654431454,
+    "shadow": 0.9611287123381111,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "celebrate2",
+    "frame": 30,
+    "iou": 0.9936069889207093,
+    "bboxDelta": 1,
+    "colorDiff": 4.154167151895907,
+    "shadow": 0.9659468034804435,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "celebrate2",
+    "frame": 29,
+    "iou": 0.9941200477651647,
+    "bboxDelta": 0,
+    "colorDiff": 4.024880387625356,
+    "shadow": 0.9586357102790632,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "celebrate2",
+    "frame": 28,
+    "iou": 0.994072412688241,
+    "bboxDelta": 1,
+    "colorDiff": 3.975831318829211,
+    "shadow": 0.9618666357581648,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "gimmeFive1",
+    "frame": 0,
+    "iou": 0.9941807044410413,
+    "bboxDelta": 1,
+    "colorDiff": 4.80046259621065,
+    "shadow": 0.9240318726426484,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gimmeFive1",
+    "frame": 70,
+    "iou": 0.9936411472615431,
+    "bboxDelta": 1,
+    "colorDiff": 4.726465381784336,
+    "shadow": 0.9623733960721497,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gimmeFive1",
+    "frame": 140,
+    "iou": 0.994321341802535,
+    "bboxDelta": 1,
+    "colorDiff": 4.821552984583404,
+    "shadow": 0.9397647891060218,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gimmeFive1",
+    "frame": 138,
+    "iou": 0.9939436016367047,
+    "bboxDelta": 1,
+    "colorDiff": 3.8902561663722155,
+    "shadow": 0.9269992493257834,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "gimmeFive1",
+    "frame": 126,
+    "iou": 0.9935222893377429,
+    "bboxDelta": 1,
+    "colorDiff": 3.7758367721228496,
+    "shadow": 0.962491771230226,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "gimmeFive2",
+    "frame": 0,
+    "iou": 0.9934645216891698,
+    "bboxDelta": 1,
+    "colorDiff": 5.143834791199201,
+    "shadow": 0.9640694840371018,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gimmeFive2",
+    "frame": 70,
+    "iou": 0.993919413919414,
+    "bboxDelta": 1,
+    "colorDiff": 5.371666543818879,
+    "shadow": 0.9627957361989774,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gimmeFive2",
+    "frame": 140,
+    "iou": 0.9929402291909302,
+    "bboxDelta": 1,
+    "colorDiff": 5.191867705406514,
+    "shadow": 0.991845241183694,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gimmeFive2",
+    "frame": 138,
+    "iou": 0.9928523499722847,
+    "bboxDelta": 1,
+    "colorDiff": 5.092212231624534,
+    "shadow": 0.9924203953431511,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gimmeFive2",
+    "frame": 126,
+    "iou": 0.9934063523831718,
+    "bboxDelta": 1,
+    "colorDiff": 5.033775827490973,
+    "shadow": 0.9838225312635809,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshakeHug1",
+    "frame": 0,
+    "iou": 0.9939866506720803,
+    "bboxDelta": 1,
+    "colorDiff": 4.861196639383058,
+    "shadow": 0.9258523746859673,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshakeHug1",
+    "frame": 70,
+    "iou": 0.9943980055726647,
+    "bboxDelta": 1,
+    "colorDiff": 3.8001809029420097,
+    "shadow": 0.9564262450886079,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "handshakeHug1",
+    "frame": 140,
+    "iou": 0.9940576988207765,
+    "bboxDelta": 1,
+    "colorDiff": 4.853063247227447,
+    "shadow": 0.923735755127359,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshakeHug1",
+    "frame": 26,
+    "iou": 0.9944146280579131,
+    "bboxDelta": 1,
+    "colorDiff": 4.153477255849741,
+    "shadow": 0.9396531681639612,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "handshakeHug1",
+    "frame": 105,
+    "iou": 0.9948593584363156,
+    "bboxDelta": 1,
+    "colorDiff": 4.022551781517844,
+    "shadow": 0.9810391142799759,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "handshakeHug2",
+    "frame": 0,
+    "iou": 0.9933778803224164,
+    "bboxDelta": 1,
+    "colorDiff": 5.24975868725803,
+    "shadow": 0.9653224857541477,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshakeHug2",
+    "frame": 70,
+    "iou": 0.9946835406463543,
+    "bboxDelta": 1,
+    "colorDiff": 3.6950274263752063,
+    "shadow": 0.9810096965460867,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "handshakeHug2",
+    "frame": 140,
+    "iou": 0.9940619001919386,
+    "bboxDelta": 1,
+    "colorDiff": 5.3040286409616355,
+    "shadow": 0.9353308159579707,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshakeHug2",
+    "frame": 26,
+    "iou": 0.9943782462572563,
+    "bboxDelta": 1,
+    "colorDiff": 4.501771851123132,
+    "shadow": 0.9534554671063155,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "handshakeHug2",
+    "frame": 105,
+    "iou": 0.9946816218879517,
+    "bboxDelta": 1,
+    "colorDiff": 4.301087331302959,
+    "shadow": 0.978798190180608,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "highTen1",
+    "frame": 0,
+    "iou": 0.9933311342808381,
+    "bboxDelta": 1,
+    "colorDiff": 4.173842318539134,
+    "shadow": 1.0056712419323974,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "highTen1",
+    "frame": 50,
+    "iou": 0.9940609608109072,
+    "bboxDelta": 1,
+    "colorDiff": 3.098100887082838,
+    "shadow": 0.9851987193455923,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "highTen1",
+    "frame": 100,
+    "iou": 0.9939647101188333,
+    "bboxDelta": 1,
+    "colorDiff": 4.16414997729653,
+    "shadow": 0.9688483691648249,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "highTen1",
+    "frame": 83,
+    "iou": 0.9939074450157716,
+    "bboxDelta": 0,
+    "colorDiff": 4.210184621626949,
+    "shadow": 0.9773704912544983,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "highTen1",
+    "frame": 71,
+    "iou": 0.9944047516570543,
+    "bboxDelta": 1,
+    "colorDiff": 4.146496999076512,
+    "shadow": 0.9654615043173119,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "highTen2",
+    "frame": 0,
+    "iou": 0.9941054986662077,
+    "bboxDelta": 1,
+    "colorDiff": 5.237904253527932,
+    "shadow": 0.9701855239090672,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "highTen2",
+    "frame": 50,
+    "iou": 0.9943793044567135,
+    "bboxDelta": 1,
+    "colorDiff": 4.381367372151082,
+    "shadow": 0.9703235447203613,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "highTen2",
+    "frame": 100,
+    "iou": 0.995000792381611,
+    "bboxDelta": 1,
+    "colorDiff": 5.245048071353471,
+    "shadow": 0.94779882208381,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "highTen2",
+    "frame": 83,
+    "iou": 0.9948138010516459,
+    "bboxDelta": 1,
+    "colorDiff": 5.235377597566511,
+    "shadow": 0.9509496464574277,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "highTen2",
+    "frame": 71,
+    "iou": 0.9944234187740123,
+    "bboxDelta": 1,
+    "colorDiff": 5.196736200209842,
+    "shadow": 0.9690992204049778,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "hug1",
+    "frame": 0,
+    "iou": 0.9939578425673815,
+    "bboxDelta": 1,
+    "colorDiff": 4.828442009469063,
+    "shadow": 0.9260117380177766,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "hug1",
+    "frame": 70,
+    "iou": 0.9946339911765113,
+    "bboxDelta": 1,
+    "colorDiff": 3.956316596912193,
+    "shadow": 0.953313244433305,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "hug1",
+    "frame": 140,
+    "iou": 0.9940147259173083,
+    "bboxDelta": 1,
+    "colorDiff": 4.84981109605295,
+    "shadow": 0.9523488922860017,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "hug1",
+    "frame": 79,
+    "iou": 0.9940161522045388,
+    "bboxDelta": 1,
+    "colorDiff": 3.922237501871054,
+    "shadow": 0.9537202960654461,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "hug1",
+    "frame": 28,
+    "iou": 0.994222055950451,
+    "bboxDelta": 1,
+    "colorDiff": 4.040773568952841,
+    "shadow": 0.9697926084832285,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "hug2",
+    "frame": 0,
+    "iou": 0.9940735309841299,
+    "bboxDelta": 1,
+    "colorDiff": 5.197523086614374,
+    "shadow": 0.9614632529621344,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "hug2",
+    "frame": 70,
+    "iou": 0.995338350024899,
+    "bboxDelta": 1,
+    "colorDiff": 4.248604451855939,
+    "shadow": 0.9618560710682217,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "hug2",
+    "frame": 140,
+    "iou": 0.9941757368227957,
+    "bboxDelta": 1,
+    "colorDiff": 5.211311857716884,
+    "shadow": 0.9717115266077666,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "hug2",
+    "frame": 79,
+    "iou": 0.9953340668830174,
+    "bboxDelta": 1,
+    "colorDiff": 4.232221320421483,
+    "shadow": 0.9483256563144657,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "hug2",
+    "frame": 28,
+    "iou": 0.9949229246216943,
+    "bboxDelta": 1,
+    "colorDiff": 4.300829649423996,
+    "shadow": 0.9722998123939133,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "idolize1",
+    "frame": 0,
+    "iou": 0.9939034172950425,
+    "bboxDelta": 0,
+    "colorDiff": 4.550933059407044,
+    "shadow": 0.9630546211757168,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      10,
+      10
+    ]
+  },
+  {
+    "clip": "idolize1",
+    "frame": 75,
+    "iou": 0.9942789471928478,
+    "bboxDelta": 1,
+    "colorDiff": 5.834118982514111,
+    "shadow": 0.9378713987131675,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      10,
+      10
+    ]
+  },
+  {
+    "clip": "idolize1",
+    "frame": 150,
+    "iou": 0.9937144436846164,
+    "bboxDelta": 1,
+    "colorDiff": 4.520920879881923,
+    "shadow": 0.9798997121208238,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      10,
+      10
+    ]
+  },
+  {
+    "clip": "idolize1",
+    "frame": 127,
+    "iou": 0.993812375249501,
+    "bboxDelta": 1,
+    "colorDiff": 4.548604137376435,
+    "shadow": 0.9312548060118839,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      10,
+      10
+    ]
+  },
+  {
+    "clip": "idolize1",
+    "frame": 36,
+    "iou": 0.9951251713806937,
+    "bboxDelta": 1,
+    "colorDiff": 5.253343765769182,
+    "shadow": 0.9304826740719414,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      10,
+      10
+    ]
+  },
+  {
+    "clip": "idolize2",
+    "frame": 0,
+    "iou": 0.994528460712316,
+    "bboxDelta": 1,
+    "colorDiff": 5.2783947464422845,
+    "shadow": 0.966189570789761,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "idolize2",
+    "frame": 75,
+    "iou": 0.9932590494951983,
+    "bboxDelta": 1,
+    "colorDiff": 5.127366822646504,
+    "shadow": 1.007339201083277,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "idolize2",
+    "frame": 150,
+    "iou": 0.9947253705318222,
+    "bboxDelta": 1,
+    "colorDiff": 5.263099463896473,
+    "shadow": 0.9530044017676527,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "idolize2",
+    "frame": 127,
+    "iou": 0.9948692634476156,
+    "bboxDelta": 1,
+    "colorDiff": 5.375893989284003,
+    "shadow": 0.935739372061376,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "idolize2",
+    "frame": 36,
+    "iou": 0.9938480239556465,
+    "bboxDelta": 1,
+    "colorDiff": 5.004360385622532,
+    "shadow": 0.9674722956969728,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "kick1",
+    "frame": 0,
+    "iou": 0.993389172897274,
+    "bboxDelta": 1,
+    "colorDiff": 4.13340932457216,
+    "shadow": 0.9607065859934627,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "kick1",
+    "frame": 40,
+    "iou": 0.9944547422857054,
+    "bboxDelta": 1,
+    "colorDiff": 4.299401135076051,
+    "shadow": 0.9700919982737479,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "kick1",
+    "frame": 80,
+    "iou": 0.9935180557291016,
+    "bboxDelta": 1,
+    "colorDiff": 4.15287668935753,
+    "shadow": 0.9805641804849046,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "kick1",
+    "frame": 49,
+    "iou": 0.9930579176845296,
+    "bboxDelta": 1,
+    "colorDiff": 4.320810433500969,
+    "shadow": 0.977423940489559,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "kick1",
+    "frame": 3,
+    "iou": 0.9932055488018119,
+    "bboxDelta": 1,
+    "colorDiff": 4.129295842345755,
+    "shadow": 0.9823873542973971,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "kick2",
+    "frame": 0,
+    "iou": 0.9947271893626777,
+    "bboxDelta": 1,
+    "colorDiff": 5.135880003072263,
+    "shadow": 0.9427816308666083,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "kick2",
+    "frame": 40,
+    "iou": 0.9938476183760533,
+    "bboxDelta": 1,
+    "colorDiff": 3.11200785190203,
+    "shadow": 1.0100784711471735,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "kick2",
+    "frame": 80,
+    "iou": 0.9926340506288398,
+    "bboxDelta": 1,
+    "colorDiff": 3.927403326852375,
+    "shadow": 1.017128610283642,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "kick2",
+    "frame": 49,
+    "iou": 0.9940169113831313,
+    "bboxDelta": 0,
+    "colorDiff": 4.128847669645467,
+    "shadow": 1.0042386436340371,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "kick2",
+    "frame": 3,
+    "iou": 0.9937499108149375,
+    "bboxDelta": 1,
+    "colorDiff": 5.134259990522242,
+    "shadow": 0.9835625391946439,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "kissCheek1",
+    "frame": 0,
+    "iou": 0.9939611769156893,
+    "bboxDelta": 1,
+    "colorDiff": 3.6758994929756796,
+    "shadow": 0.968432833922621,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "kissCheek1",
+    "frame": 75,
+    "iou": 0.9949892719026634,
+    "bboxDelta": 1,
+    "colorDiff": 3.8947828295215854,
+    "shadow": 0.9247514219076067,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "kissCheek1",
+    "frame": 150,
+    "iou": 0.9939607375176448,
+    "bboxDelta": 1,
+    "colorDiff": 3.655295598957946,
+    "shadow": 0.9749937656396453,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "kissCheek1",
+    "frame": 148,
+    "iou": 0.9939897549333488,
+    "bboxDelta": 1,
+    "colorDiff": 4.438048109160199,
+    "shadow": 0.9771063455519052,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "kissCheek1",
+    "frame": 121,
+    "iou": 0.9940181638237178,
+    "bboxDelta": 1,
+    "colorDiff": 3.665671015320684,
+    "shadow": 0.9678886120173659,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "kissCheek2",
+    "frame": 0,
+    "iou": 0.9948310434459711,
+    "bboxDelta": 1,
+    "colorDiff": 5.212913885860573,
+    "shadow": 0.9621694489898005,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "kissCheek2",
+    "frame": 75,
+    "iou": 0.9943683093760469,
+    "bboxDelta": 1,
+    "colorDiff": 4.590103966114442,
+    "shadow": 0.9534015835392606,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "kissCheek2",
+    "frame": 150,
+    "iou": 0.9937369519832986,
+    "bboxDelta": 1,
+    "colorDiff": 5.35550887021401,
+    "shadow": 0.9470494659495493,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      9,
+      9
+    ]
+  },
+  {
+    "clip": "kissCheek2",
+    "frame": 148,
+    "iou": 0.9938176698117788,
+    "bboxDelta": 1,
+    "colorDiff": 5.335868332056987,
+    "shadow": 0.9435433064251935,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      9,
+      9
+    ]
+  },
+  {
+    "clip": "kissCheek2",
+    "frame": 121,
+    "iou": 0.9935200635033776,
+    "bboxDelta": 1,
+    "colorDiff": 5.198264007782516,
+    "shadow": 0.9680414319087536,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      9,
+      9
+    ]
+  },
+  {
+    "clip": "mock1",
+    "frame": 0,
+    "iou": 0.993636056199465,
+    "bboxDelta": 1,
+    "colorDiff": 4.961087046204006,
+    "shadow": 0.9610695495251248,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "mock1",
+    "frame": 95,
+    "iou": 0.9951928009262652,
+    "bboxDelta": 1,
+    "colorDiff": 4.298342243101289,
+    "shadow": 0.9674458953520226,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mock1",
+    "frame": 190,
+    "iou": 0.9936421435059037,
+    "bboxDelta": 1,
+    "colorDiff": 4.9450314504378605,
+    "shadow": 0.9582967369868916,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "mock1",
+    "frame": 125,
+    "iou": 0.9946767073487406,
+    "bboxDelta": 1,
+    "colorDiff": 4.498131469153176,
+    "shadow": 0.9560756685700201,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mock1",
+    "frame": 3,
+    "iou": 0.9940048510365659,
+    "bboxDelta": 1,
+    "colorDiff": 5.065413341517693,
+    "shadow": 0.9332263026502703,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "mock2",
+    "frame": 0,
+    "iou": 0.993920177315335,
+    "bboxDelta": 1,
+    "colorDiff": 4.9512910252830675,
+    "shadow": 0.970778863180012,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "mock2",
+    "frame": 95,
+    "iou": 0.9950636035693944,
+    "bboxDelta": 1,
+    "colorDiff": 5.028747694459772,
+    "shadow": 0.9649286354297713,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      11,
+      11
+    ]
+  },
+  {
+    "clip": "mock2",
+    "frame": 190,
+    "iou": 0.9935481884113762,
+    "bboxDelta": 1,
+    "colorDiff": 4.925526419109626,
+    "shadow": 0.978646601250699,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "mock2",
+    "frame": 125,
+    "iou": 0.9950369604006417,
+    "bboxDelta": 1,
+    "colorDiff": 3.497362948675652,
+    "shadow": 0.9921727132825076,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      11,
+      11
+    ]
+  },
+  {
+    "clip": "mock2",
+    "frame": 3,
+    "iou": 0.9939202708942589,
+    "bboxDelta": 1,
+    "colorDiff": 4.955803329461271,
+    "shadow": 0.9666480626448154,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "pattyCakes1",
+    "frame": 0,
+    "iou": 0.9949712758000605,
+    "bboxDelta": 1,
+    "colorDiff": 5.074991069952317,
+    "shadow": 0.943998229193018,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pattyCakes1",
+    "frame": 40,
+    "iou": 0.9944251288814291,
+    "bboxDelta": 1,
+    "colorDiff": 4.1713635541624265,
+    "shadow": 0.9468781771425154,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "pattyCakes1",
+    "frame": 80,
+    "iou": 0.9952112765686649,
+    "bboxDelta": 1,
+    "colorDiff": 5.103524898089174,
+    "shadow": 0.9441517218220051,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pattyCakes1",
+    "frame": 2,
+    "iou": 0.9954587170480078,
+    "bboxDelta": 0,
+    "colorDiff": 5.080473473106927,
+    "shadow": 0.9412950654417007,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pattyCakes1",
+    "frame": 59,
+    "iou": 0.9948181234308402,
+    "bboxDelta": 1,
+    "colorDiff": 4.694432624633384,
+    "shadow": 0.9693847127180703,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "pattyCakes2",
+    "frame": 0,
+    "iou": 0.9949747150489053,
+    "bboxDelta": 1,
+    "colorDiff": 5.435860259596248,
+    "shadow": 0.9695048798677086,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pattyCakes2",
+    "frame": 40,
+    "iou": 0.9942371308395827,
+    "bboxDelta": 0,
+    "colorDiff": 4.473989541617216,
+    "shadow": 0.9760577238438832,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "pattyCakes2",
+    "frame": 80,
+    "iou": 0.9951022349025203,
+    "bboxDelta": 1,
+    "colorDiff": 5.4823911693021605,
+    "shadow": 0.9594936297187645,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pattyCakes2",
+    "frame": 2,
+    "iou": 0.9952571536619186,
+    "bboxDelta": 1,
+    "colorDiff": 5.418984743177044,
+    "shadow": 0.9781499323227992,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "pattyCakes2",
+    "frame": 59,
+    "iou": 0.9951664013785249,
+    "bboxDelta": 1,
+    "colorDiff": 4.947115102423706,
+    "shadow": 0.9707576493091531,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "poke1",
+    "frame": 0,
+    "iou": 0.9935775776991634,
+    "bboxDelta": 1,
+    "colorDiff": 4.697758761205698,
+    "shadow": 0.9492620981581055,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "poke1",
+    "frame": 60,
+    "iou": 0.9950886513869154,
+    "bboxDelta": 1,
+    "colorDiff": 4.126954317347271,
+    "shadow": 0.9468858538882675,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "poke1",
+    "frame": 120,
+    "iou": 0.9933280646828171,
+    "bboxDelta": 1,
+    "colorDiff": 4.744457534539461,
+    "shadow": 0.958856605791512,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "poke1",
+    "frame": 76,
+    "iou": 0.9934398802447937,
+    "bboxDelta": 0,
+    "colorDiff": 4.732513935668828,
+    "shadow": 0.9472111622994448,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "poke1",
+    "frame": 80,
+    "iou": 0.9931422096993008,
+    "bboxDelta": 1,
+    "colorDiff": 4.678935807175792,
+    "shadow": 0.9483404042924881,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "poke2",
+    "frame": 0,
+    "iou": 0.9935144636552362,
+    "bboxDelta": 1,
+    "colorDiff": 5.163461196267664,
+    "shadow": 0.9811203724945409,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "poke2",
+    "frame": 60,
+    "iou": 0.993982860268644,
+    "bboxDelta": 0,
+    "colorDiff": 5.0636286739221115,
+    "shadow": 0.9722943869477283,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "poke2",
+    "frame": 120,
+    "iou": 0.9935288323103736,
+    "bboxDelta": 1,
+    "colorDiff": 5.16677852690175,
+    "shadow": 0.9770954300734468,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "poke2",
+    "frame": 76,
+    "iou": 0.9950723085163363,
+    "bboxDelta": 1,
+    "colorDiff": 4.266997831536617,
+    "shadow": 0.9603956989247312,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "poke2",
+    "frame": 80,
+    "iou": 0.9945609945609946,
+    "bboxDelta": 1,
+    "colorDiff": 4.34289726307195,
+    "shadow": 0.9627002641600055,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "punch1",
+    "frame": 0,
+    "iou": 0.9945329859168438,
+    "bboxDelta": 1,
+    "colorDiff": 4.644431942993083,
+    "shadow": 0.9498362079172751,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "punch1",
+    "frame": 53,
+    "iou": 0.9947814961955423,
+    "bboxDelta": 0,
+    "colorDiff": 5.227191705869184,
+    "shadow": 0.9481990799647646,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "punch1",
+    "frame": 105,
+    "iou": 0.9945589003251183,
+    "bboxDelta": 0,
+    "colorDiff": 5.1746330171629715,
+    "shadow": 0.9507254155687843,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "punch1",
+    "frame": 73,
+    "iou": 0.9947108663061971,
+    "bboxDelta": 0,
+    "colorDiff": 5.195383807765374,
+    "shadow": 0.9477599172240735,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "punch1",
+    "frame": 62,
+    "iou": 0.9944421052631579,
+    "bboxDelta": 1,
+    "colorDiff": 5.192858554209544,
+    "shadow": 0.9531588898255837,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "punch2",
+    "frame": 0,
+    "iou": 0.9936616488053042,
+    "bboxDelta": 1,
+    "colorDiff": 5.103165610529961,
+    "shadow": 0.9585483430410677,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "punch2",
+    "frame": 53,
+    "iou": 0.9950437773608505,
+    "bboxDelta": 1,
+    "colorDiff": 2.8543123359994365,
+    "shadow": 0.9874609984399376,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "punch2",
+    "frame": 105,
+    "iou": 0.992268154461187,
+    "bboxDelta": 1,
+    "colorDiff": 2.6598485854695215,
+    "shadow": 0.9229211341434358,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "punch2",
+    "frame": 73,
+    "iou": 0.993423648559779,
+    "bboxDelta": 1,
+    "colorDiff": 2.618459184724252,
+    "shadow": 0.8929765886287625,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "punch2",
+    "frame": 62,
+    "iou": 0.994907328061112,
+    "bboxDelta": 1,
+    "colorDiff": 3.577851605758594,
+    "shadow": 1.0027611468521067,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "rubNoses1",
+    "frame": 0,
+    "iou": 0.9939418046079002,
+    "bboxDelta": 1,
+    "colorDiff": 4.0753732491922365,
+    "shadow": 0.9483110016124676,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "rubNoses1",
+    "frame": 75,
+    "iou": 0.9951230532078882,
+    "bboxDelta": 1,
+    "colorDiff": 4.329398410896034,
+    "shadow": 0.9474828887609544,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "rubNoses1",
+    "frame": 150,
+    "iou": 0.9939262273763444,
+    "bboxDelta": 1,
+    "colorDiff": 4.042750566963556,
+    "shadow": 0.9373757779153498,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "rubNoses1",
+    "frame": 138,
+    "iou": 0.9935147245231849,
+    "bboxDelta": 1,
+    "colorDiff": 4.057902857312516,
+    "shadow": 0.9381832003972754,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "rubNoses1",
+    "frame": 78,
+    "iou": 0.9951165637641047,
+    "bboxDelta": 0,
+    "colorDiff": 4.310204809341682,
+    "shadow": 0.9387621080282383,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "rubNoses2",
+    "frame": 0,
+    "iou": 0.9938599706744868,
+    "bboxDelta": 1,
+    "colorDiff": 4.343035705138178,
+    "shadow": 0.9702731225463295,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "rubNoses2",
+    "frame": 75,
+    "iou": 0.994459630250125,
+    "bboxDelta": 1,
+    "colorDiff": 4.442319722964618,
+    "shadow": 0.9722551650958118,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "rubNoses2",
+    "frame": 150,
+    "iou": 0.9941038096110958,
+    "bboxDelta": 1,
+    "colorDiff": 4.326746568326257,
+    "shadow": 0.9731875602455482,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "rubNoses2",
+    "frame": 138,
+    "iou": 0.99402834626428,
+    "bboxDelta": 1,
+    "colorDiff": 4.337092520037969,
+    "shadow": 0.9704603439653492,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "rubNoses2",
+    "frame": 78,
+    "iou": 0.9945395404971814,
+    "bboxDelta": 1,
+    "colorDiff": 4.434538960910241,
+    "shadow": 0.9565311202040517,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "slapButt1",
+    "frame": 0,
+    "iou": 0.994054355622858,
+    "bboxDelta": 0,
+    "colorDiff": 4.677036229327353,
+    "shadow": 0.9376191453793589,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "slapButt1",
+    "frame": 65,
+    "iou": 0.9943066782359836,
+    "bboxDelta": 1,
+    "colorDiff": 5.023480359885313,
+    "shadow": 0.9940770410772115,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "slapButt1",
+    "frame": 130,
+    "iou": 0.9942265214410846,
+    "bboxDelta": 1,
+    "colorDiff": 5.0075230594790785,
+    "shadow": 0.9791112056134382,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "slapButt1",
+    "frame": 118,
+    "iou": 0.9942262575789891,
+    "bboxDelta": 1,
+    "colorDiff": 5.022646828983686,
+    "shadow": 0.9772412445078993,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "slapButt1",
+    "frame": 92,
+    "iou": 0.9941201559834267,
+    "bboxDelta": 1,
+    "colorDiff": 4.997318500811475,
+    "shadow": 0.9737290155616849,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "slapButt2",
+    "frame": 0,
+    "iou": 0.9951824389426501,
+    "bboxDelta": 0,
+    "colorDiff": 4.159805242183981,
+    "shadow": 0.9493449016256956,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "slapButt2",
+    "frame": 65,
+    "iou": 0.993125,
+    "bboxDelta": 1,
+    "colorDiff": 5.57820956576405,
+    "shadow": 1.0028117715617715,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "slapButt2",
+    "frame": 130,
+    "iou": 0.9941495365733454,
+    "bboxDelta": 1,
+    "colorDiff": 5.763937974082489,
+    "shadow": 0.9906835897881712,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "slapButt2",
+    "frame": 118,
+    "iou": 0.9939610647596345,
+    "bboxDelta": 1,
+    "colorDiff": 5.799403096436708,
+    "shadow": 0.9971441961278229,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "slapButt2",
+    "frame": 92,
+    "iou": 0.9923485321673954,
+    "bboxDelta": 1,
+    "colorDiff": 5.473039601363301,
+    "shadow": 1.0221292770190986,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "slapFace1",
+    "frame": 0,
+    "iou": 0.993196762387815,
+    "bboxDelta": 1,
+    "colorDiff": 4.444057102375327,
+    "shadow": 0.9687682117030969,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "slapFace1",
+    "frame": 60,
+    "iou": 0.9949653636813459,
+    "bboxDelta": 1,
+    "colorDiff": 4.4670595402378135,
+    "shadow": 0.9159781624967156,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "slapFace1",
+    "frame": 120,
+    "iou": 0.9947686066932153,
+    "bboxDelta": 1,
+    "colorDiff": 4.417173286918447,
+    "shadow": 0.9363072465921332,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "slapFace1",
+    "frame": 109,
+    "iou": 0.9946805220510917,
+    "bboxDelta": 1,
+    "colorDiff": 4.441614327466508,
+    "shadow": 0.9403285009825368,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "slapFace1",
+    "frame": 97,
+    "iou": 0.9949021257640625,
+    "bboxDelta": 1,
+    "colorDiff": 4.4276836720304935,
+    "shadow": 0.9263832136940917,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "slapFace2",
+    "frame": 0,
+    "iou": 0.9933940394842502,
+    "bboxDelta": 1,
+    "colorDiff": 5.113058288212054,
+    "shadow": 0.9812651550601948,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      1,
+      1
+    ]
+  },
+  {
+    "clip": "slapFace2",
+    "frame": 60,
+    "iou": 0.9941181236328284,
+    "bboxDelta": 1,
+    "colorDiff": 5.107728082756799,
+    "shadow": 0.9568216732205486,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "slapFace2",
+    "frame": 120,
+    "iou": 0.9924903798884576,
+    "bboxDelta": 0,
+    "colorDiff": 4.951236592197468,
+    "shadow": 0.9748996962101553,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "slapFace2",
+    "frame": 109,
+    "iou": 0.9925397175265772,
+    "bboxDelta": 1,
+    "colorDiff": 4.931709344766895,
+    "shadow": 0.9681739084348417,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "slapFace2",
+    "frame": 97,
+    "iou": 0.9924560074092784,
+    "bboxDelta": 1,
+    "colorDiff": 5.037622093647575,
+    "shadow": 0.9982539825398254,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "standBreathe",
+    "frame": 0,
+    "iou": 0.993726783705051,
+    "bboxDelta": 1,
+    "colorDiff": 5.060496546303623,
+    "shadow": 0.9528059106757429,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "standBreathe",
+    "frame": 80,
+    "iou": 0.9937118550027741,
+    "bboxDelta": 1,
+    "colorDiff": 5.041524494901828,
+    "shadow": 0.9519399767866026,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "standBreathe",
+    "frame": 160,
+    "iou": 0.9937880539499037,
+    "bboxDelta": 1,
+    "colorDiff": 5.079466021424605,
+    "shadow": 0.9531733200679849,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "standBreathe",
+    "frame": 20,
+    "iou": 0.9938315284272705,
+    "bboxDelta": 1,
+    "colorDiff": 5.10044319242941,
+    "shadow": 0.9554036940181905,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "standBreathe",
+    "frame": 44,
+    "iou": 0.9940602850450837,
+    "bboxDelta": 1,
+    "colorDiff": 5.162619029285011,
+    "shadow": 0.9552765366149955,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "tickle1",
+    "frame": 0,
+    "iou": 0.9933027578666018,
+    "bboxDelta": 1,
+    "colorDiff": 4.611483989990336,
+    "shadow": 0.9583448275862069,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "tickle1",
+    "frame": 65,
+    "iou": 0.9956020427354136,
+    "bboxDelta": 1,
+    "colorDiff": 4.8170514925618315,
+    "shadow": 0.9308998219972634,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "tickle1",
+    "frame": 130,
+    "iou": 0.9934610705596107,
+    "bboxDelta": 1,
+    "colorDiff": 4.570564824735582,
+    "shadow": 0.9500738552437223,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "tickle1",
+    "frame": 100,
+    "iou": 0.9933997844827587,
+    "bboxDelta": 1,
+    "colorDiff": 4.6656321406147985,
+    "shadow": 0.9390131013835261,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "tickle1",
+    "frame": 18,
+    "iou": 0.9933534244313256,
+    "bboxDelta": 1,
+    "colorDiff": 4.503911192382104,
+    "shadow": 0.9358257586687828,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "tickle2",
+    "frame": 0,
+    "iou": 0.9936038316382982,
+    "bboxDelta": 1,
+    "colorDiff": 5.15843185111668,
+    "shadow": 0.9724757546496494,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "tickle2",
+    "frame": 65,
+    "iou": 0.992680947495751,
+    "bboxDelta": 1,
+    "colorDiff": 4.380707788969327,
+    "shadow": 0.9826589595375722,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "tickle2",
+    "frame": 130,
+    "iou": 0.9938160267972173,
+    "bboxDelta": 1,
+    "colorDiff": 5.146039541042603,
+    "shadow": 0.9670941204935882,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "tickle2",
+    "frame": 100,
+    "iou": 0.9943516353494661,
+    "bboxDelta": 1,
+    "colorDiff": 4.408298273199272,
+    "shadow": 0.9628693441643081,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "tickle2",
+    "frame": 18,
+    "iou": 0.9937792073799843,
+    "bboxDelta": 1,
+    "colorDiff": 5.202082506335464,
+    "shadow": 0.9597690554401019,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "waveAt1",
+    "frame": 0,
+    "iou": 0.9939766460239702,
+    "bboxDelta": 1,
+    "colorDiff": 4.047120148371202,
+    "shadow": 0.9368383031665128,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "waveAt1",
+    "frame": 75,
+    "iou": 0.9936561544429738,
+    "bboxDelta": 1,
+    "colorDiff": 4.109784228468931,
+    "shadow": 0.9229028756631148,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "waveAt1",
+    "frame": 150,
+    "iou": 0.9940963743702285,
+    "bboxDelta": 1,
+    "colorDiff": 4.031004498062229,
+    "shadow": 0.932387065906463,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "waveAt1",
+    "frame": 117,
+    "iou": 0.994112374830016,
+    "bboxDelta": 1,
+    "colorDiff": 5.083479711698683,
+    "shadow": 0.9287161598423508,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "waveAt1",
+    "frame": 144,
+    "iou": 0.9940962831311336,
+    "bboxDelta": 1,
+    "colorDiff": 5.090522311873198,
+    "shadow": 0.9335946525171889,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "waveAt2",
+    "frame": 0,
+    "iou": 0.9937358595108737,
+    "bboxDelta": 1,
+    "colorDiff": 5.13480263089896,
+    "shadow": 0.9631635329942387,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "waveAt2",
+    "frame": 75,
+    "iou": 0.9942454747095594,
+    "bboxDelta": 1,
+    "colorDiff": 4.0992615704631294,
+    "shadow": 0.974326070489685,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "waveAt2",
+    "frame": 150,
+    "iou": 0.9938125288594736,
+    "bboxDelta": 1,
+    "colorDiff": 5.130642629991446,
+    "shadow": 0.9680860917672222,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "waveAt2",
+    "frame": 117,
+    "iou": 0.9942780052102717,
+    "bboxDelta": 1,
+    "colorDiff": 4.106952177462015,
+    "shadow": 0.9713116912758748,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "waveAt2",
+    "frame": 144,
+    "iou": 0.9937976144671027,
+    "bboxDelta": 1,
+    "colorDiff": 5.1136302628583925,
+    "shadow": 0.9646800977830229,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "mood_angry",
+    "frame": 0,
+    "iou": 0.9942998343301603,
+    "bboxDelta": 1,
+    "colorDiff": 4.7186623364392055,
+    "shadow": 0.9091972414825628,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "mood_angry",
+    "frame": 20,
+    "iou": 0.9938670155153254,
+    "bboxDelta": 1,
+    "colorDiff": 4.755563418488276,
+    "shadow": 0.9419979748963567,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "mood_angry",
+    "frame": 40,
+    "iou": 0.994101703484208,
+    "bboxDelta": 1,
+    "colorDiff": 4.746855590244277,
+    "shadow": 0.9029724448101432,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "mood_angry",
+    "frame": 38,
+    "iou": 0.9942290680857636,
+    "bboxDelta": 1,
+    "colorDiff": 4.74953865853136,
+    "shadow": 0.9045383411580594,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "mood_angry",
+    "frame": 33,
+    "iou": 0.9945148450795347,
+    "bboxDelta": 1,
+    "colorDiff": 4.805786935553882,
+    "shadow": 0.9071890892279242,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      16,
+      16
+    ]
+  },
+  {
+    "clip": "mood_bashful",
+    "frame": 0,
+    "iou": 0.9959638823304192,
+    "bboxDelta": 1,
+    "colorDiff": 5.32897652341449,
+    "shadow": 0.9325977773028424,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      5,
+      5
+    ]
+  },
+  {
+    "clip": "mood_bashful",
+    "frame": 20,
+    "iou": 0.9955839756881242,
+    "bboxDelta": 1,
+    "colorDiff": 5.201658717540369,
+    "shadow": 0.938893754631813,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      5,
+      5
+    ]
+  },
+  {
+    "clip": "mood_bashful",
+    "frame": 40,
+    "iou": 0.9959311973449069,
+    "bboxDelta": 1,
+    "colorDiff": 5.320259971908659,
+    "shadow": 0.9317260736463449,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      5,
+      5
+    ]
+  },
+  {
+    "clip": "mood_bashful",
+    "frame": 3,
+    "iou": 0.9954774108573877,
+    "bboxDelta": 1,
+    "colorDiff": 5.262657017151665,
+    "shadow": 0.9491362305387382,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      5,
+      5
+    ]
+  },
+  {
+    "clip": "mood_bashful",
+    "frame": 16,
+    "iou": 0.9955649219929542,
+    "bboxDelta": 1,
+    "colorDiff": 5.236517013679739,
+    "shadow": 0.9402280744271212,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      5,
+      5
+    ]
+  },
+  {
+    "clip": "mood_gonnaSoarNow",
+    "frame": 0,
+    "iou": 0.9944822351326891,
+    "bboxDelta": 1,
+    "colorDiff": 4.166573704399187,
+    "shadow": 0.93201061355912,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_gonnaSoarNow",
+    "frame": 20,
+    "iou": 0.9946446518305815,
+    "bboxDelta": 1,
+    "colorDiff": 4.11472302014606,
+    "shadow": 0.928737051193783,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_gonnaSoarNow",
+    "frame": 40,
+    "iou": 0.9942987457240593,
+    "bboxDelta": 1,
+    "colorDiff": 4.1530375205832355,
+    "shadow": 0.9332232467086091,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_gonnaSoarNow",
+    "frame": 17,
+    "iou": 0.9943331029716656,
+    "bboxDelta": 1,
+    "colorDiff": 4.033115559261915,
+    "shadow": 0.9433376519832569,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_gonnaSoarNow",
+    "frame": 33,
+    "iou": 0.994284795509691,
+    "bboxDelta": 0,
+    "colorDiff": 3.9524180546776067,
+    "shadow": 0.9604314728974195,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_happy",
+    "frame": 0,
+    "iou": 0.9957258913559296,
+    "bboxDelta": 1,
+    "colorDiff": 4.225811542285697,
+    "shadow": 0.9265568844037443,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_happy",
+    "frame": 40,
+    "iou": 0.9956924334606738,
+    "bboxDelta": 1,
+    "colorDiff": 4.210678666351202,
+    "shadow": 0.9117723518707381,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_happy",
+    "frame": 80,
+    "iou": 0.995866534647241,
+    "bboxDelta": 1,
+    "colorDiff": 4.168171201313403,
+    "shadow": 0.9194804671362212,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_happy",
+    "frame": 77,
+    "iou": 0.9956472547848769,
+    "bboxDelta": 1,
+    "colorDiff": 4.208850870409536,
+    "shadow": 0.9352494653951009,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_happy",
+    "frame": 36,
+    "iou": 0.9955068183246403,
+    "bboxDelta": 1,
+    "colorDiff": 4.226982924597062,
+    "shadow": 0.9086710056686962,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_tired",
+    "frame": 0,
+    "iou": 0.9941542932540545,
+    "bboxDelta": 1,
+    "colorDiff": 4.205841999451338,
+    "shadow": 0.9809660171006545,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      13,
+      13
+    ]
+  },
+  {
+    "clip": "mood_tired",
+    "frame": 130,
+    "iou": 0.994162039014666,
+    "bboxDelta": 1,
+    "colorDiff": 4.335810602926021,
+    "shadow": 0.9733039852742232,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "mood_tired",
+    "frame": 260,
+    "iou": 0.9943622269203665,
+    "bboxDelta": 1,
+    "colorDiff": 4.177061185920295,
+    "shadow": 0.9707387547978091,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      13,
+      13
+    ]
+  },
+  {
+    "clip": "mood_tired",
+    "frame": 7,
+    "iou": 0.994229871256087,
+    "bboxDelta": 1,
+    "colorDiff": 4.212100372370899,
+    "shadow": 0.9702650561986244,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      13,
+      13
+    ]
+  },
+  {
+    "clip": "mood_tired",
+    "frame": 204,
+    "iou": 0.9943650286069867,
+    "bboxDelta": 1,
+    "colorDiff": 4.61452882994081,
+    "shadow": 0.9735409283182805,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      13,
+      13
+    ]
+  },
+  {
+    "clip": "mood_sad",
+    "frame": 0,
+    "iou": 0.9959280863414771,
+    "bboxDelta": 0,
+    "colorDiff": 4.75587465515957,
+    "shadow": 0.9131976455570527,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      11,
+      11
+    ]
+  },
+  {
+    "clip": "mood_sad",
+    "frame": 60,
+    "iou": 0.995170510546028,
+    "bboxDelta": 1,
+    "colorDiff": 4.720553488305662,
+    "shadow": 0.9619006963528187,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      11,
+      11
+    ]
+  },
+  {
+    "clip": "mood_sad",
+    "frame": 120,
+    "iou": 0.995887381867861,
+    "bboxDelta": 0,
+    "colorDiff": 4.759629844384995,
+    "shadow": 0.9162610235554804,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      11,
+      11
+    ]
+  },
+  {
+    "clip": "mood_sad",
+    "frame": 101,
+    "iou": 0.9947269825851661,
+    "bboxDelta": 1,
+    "colorDiff": 4.483341470785971,
+    "shadow": 0.9735676525217888,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      11,
+      11
+    ]
+  },
+  {
+    "clip": "mood_sad",
+    "frame": 62,
+    "iou": 0.9952658565709068,
+    "bboxDelta": 1,
+    "colorDiff": 4.649409063534439,
+    "shadow": 0.9678968320519723,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      11,
+      11
+    ]
+  },
+  {
+    "clip": "holdHands1",
+    "frame": 0,
+    "iou": 0.9946735497732155,
+    "bboxDelta": 0,
+    "colorDiff": 4.188309058454801,
+    "shadow": 0.9529678766734672,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      24,
+      24
+    ]
+  },
+  {
+    "clip": "holdHands1",
+    "frame": 40,
+    "iou": 0.9944504560210233,
+    "bboxDelta": 1,
+    "colorDiff": 3.4437622089921867,
+    "shadow": 0.963940454302829,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "holdHands1",
+    "frame": 80,
+    "iou": 0.9946874393756249,
+    "bboxDelta": 0,
+    "colorDiff": 4.211517015477771,
+    "shadow": 0.9528492878277849,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      24,
+      24
+    ]
+  },
+  {
+    "clip": "holdHands1",
+    "frame": 77,
+    "iou": 0.9949669190674612,
+    "bboxDelta": 0,
+    "colorDiff": 4.209106374462189,
+    "shadow": 0.9315104321464661,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      24,
+      24
+    ]
+  },
+  {
+    "clip": "holdHands1",
+    "frame": 36,
+    "iou": 0.9945985987221828,
+    "bboxDelta": 1,
+    "colorDiff": 4.082304079775136,
+    "shadow": 0.9631606719925389,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      24,
+      24
+    ]
+  },
+  {
+    "clip": "holdHands2",
+    "frame": 0,
+    "iou": 0.9947955390334573,
+    "bboxDelta": 1,
+    "colorDiff": 5.266615864083034,
+    "shadow": 0.8799886256861679,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "holdHands2",
+    "frame": 40,
+    "iou": 0.9947441134070159,
+    "bboxDelta": 1,
+    "colorDiff": 5.520193633444497,
+    "shadow": 0.9337337133550488,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "holdHands2",
+    "frame": 80,
+    "iou": 0.9949101621747755,
+    "bboxDelta": 1,
+    "colorDiff": 5.26733021592174,
+    "shadow": 0.853103700097371,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "holdHands2",
+    "frame": 77,
+    "iou": 0.9950544160126047,
+    "bboxDelta": 1,
+    "colorDiff": 5.244471486308295,
+    "shadow": 0.8723934170044441,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "holdHands2",
+    "frame": 36,
+    "iou": 0.9949276667266943,
+    "bboxDelta": 1,
+    "colorDiff": 5.526330608263218,
+    "shadow": 0.929472827193161,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      23,
+      23
+    ]
+  },
+  {
+    "clip": "handshake1",
+    "frame": 0,
+    "iou": 0.9934233509014414,
+    "bboxDelta": 1,
+    "colorDiff": 4.730911537167265,
+    "shadow": 0.9572630198424585,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshake1",
+    "frame": 40,
+    "iou": 0.9949862604252037,
+    "bboxDelta": 1,
+    "colorDiff": 4.086729008188654,
+    "shadow": 0.9693138688751111,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      4,
+      4
+    ]
+  },
+  {
+    "clip": "handshake1",
+    "frame": 80,
+    "iou": 0.993744875960283,
+    "bboxDelta": 1,
+    "colorDiff": 4.700766950835135,
+    "shadow": 0.9460612411607932,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshake1",
+    "frame": 77,
+    "iou": 0.9941712590080543,
+    "bboxDelta": 1,
+    "colorDiff": 4.827818132902333,
+    "shadow": 0.9201728416056645,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshake1",
+    "frame": 36,
+    "iou": 0.995080522394039,
+    "bboxDelta": 1,
+    "colorDiff": 5.05120937872352,
+    "shadow": 0.9681929959971999,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshake2",
+    "frame": 0,
+    "iou": 0.9936364600536356,
+    "bboxDelta": 1,
+    "colorDiff": 5.175594557366059,
+    "shadow": 0.9456030430021654,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshake2",
+    "frame": 40,
+    "iou": 0.9946812771342978,
+    "bboxDelta": 1,
+    "colorDiff": 5.567309292574121,
+    "shadow": 0.9693227877613975,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshake2",
+    "frame": 80,
+    "iou": 0.9938641012044542,
+    "bboxDelta": 1,
+    "colorDiff": 5.175802845527782,
+    "shadow": 0.9324864815627562,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshake2",
+    "frame": 77,
+    "iou": 0.9939738109981725,
+    "bboxDelta": 1,
+    "colorDiff": 5.282471281832392,
+    "shadow": 0.9229883178842996,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "handshake2",
+    "frame": 36,
+    "iou": 0.9949853873548716,
+    "bboxDelta": 1,
+    "colorDiff": 5.582791625870961,
+    "shadow": 0.9595522630184394,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "kiss1",
+    "frame": 0,
+    "iou": 0.9940355828399354,
+    "bboxDelta": 0,
+    "colorDiff": 4.428160961593337,
+    "shadow": 0.9666545756036895,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "kiss1",
+    "frame": 75,
+    "iou": 0.9960896173985242,
+    "bboxDelta": 1,
+    "colorDiff": 4.2287143222055965,
+    "shadow": 0.9320234289314634,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "kiss1",
+    "frame": 150,
+    "iou": 0.9940266324776363,
+    "bboxDelta": 1,
+    "colorDiff": 4.439790115494658,
+    "shadow": 0.969828716430535,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "kiss1",
+    "frame": 96,
+    "iou": 0.9960951750415479,
+    "bboxDelta": 1,
+    "colorDiff": 4.14427172350148,
+    "shadow": 0.924048695888734,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "kiss1",
+    "frame": 58,
+    "iou": 0.9962799909006972,
+    "bboxDelta": 1,
+    "colorDiff": 4.271500141028201,
+    "shadow": 0.9260300499276749,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "kiss2",
+    "frame": 0,
+    "iou": 0.9949416805522495,
+    "bboxDelta": 1,
+    "colorDiff": 5.23588432322433,
+    "shadow": 0.9668456894130862,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "kiss2",
+    "frame": 75,
+    "iou": 0.9951401029720757,
+    "bboxDelta": 1,
+    "colorDiff": 4.591628521694053,
+    "shadow": 0.9568967832017614,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "kiss2",
+    "frame": 150,
+    "iou": 0.9948714137059611,
+    "bboxDelta": 1,
+    "colorDiff": 5.20810359855489,
+    "shadow": 0.9828825134176132,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "kiss2",
+    "frame": 96,
+    "iou": 0.9952450855246362,
+    "bboxDelta": 1,
+    "colorDiff": 4.663791537071734,
+    "shadow": 0.950598336686231,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "kiss2",
+    "frame": 58,
+    "iou": 0.9957622339311323,
+    "bboxDelta": 1,
+    "colorDiff": 4.444270041101664,
+    "shadow": 0.9513421360521478,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "gossip1",
+    "frame": 0,
+    "iou": 0.9936181896436576,
+    "bboxDelta": 1,
+    "colorDiff": 4.398437616692938,
+    "shadow": 0.9540156215283119,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gossip1",
+    "frame": 140,
+    "iou": 0.9935436102472975,
+    "bboxDelta": 1,
+    "colorDiff": 3.65635277868894,
+    "shadow": 0.956995004995005,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "gossip1",
+    "frame": 280,
+    "iou": 0.9937853357542477,
+    "bboxDelta": 0,
+    "colorDiff": 4.464692076883858,
+    "shadow": 0.9404058441558442,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gossip1",
+    "frame": 232,
+    "iou": 0.9937861612941316,
+    "bboxDelta": 1,
+    "colorDiff": 4.289574391191553,
+    "shadow": 0.9518563851489188,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "gossip1",
+    "frame": 210,
+    "iou": 0.9936776175844954,
+    "bboxDelta": 1,
+    "colorDiff": 4.3630502864163185,
+    "shadow": 0.9476505090002022,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      8,
+      8
+    ]
+  },
+  {
+    "clip": "gossip2",
+    "frame": 0,
+    "iou": 0.9954258013959506,
+    "bboxDelta": 0,
+    "colorDiff": 5.445022152245942,
+    "shadow": 0.9197250009655865,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gossip2",
+    "frame": 140,
+    "iou": 0.994184031121211,
+    "bboxDelta": 0,
+    "colorDiff": 5.882367374347413,
+    "shadow": 0.9364295797057696,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      18,
+      18
+    ]
+  },
+  {
+    "clip": "gossip2",
+    "frame": 280,
+    "iou": 0.9956564408258215,
+    "bboxDelta": 1,
+    "colorDiff": 5.401070852726969,
+    "shadow": 0.8868304440802769,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      3,
+      3
+    ]
+  },
+  {
+    "clip": "gossip2",
+    "frame": 232,
+    "iou": 0.9952017806319784,
+    "bboxDelta": 1,
+    "colorDiff": 5.480082127994597,
+    "shadow": 0.9273822333811573,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "gossip2",
+    "frame": 210,
+    "iou": 0.9954184718015565,
+    "bboxDelta": 1,
+    "colorDiff": 5.269397423305695,
+    "shadow": 0.9052268943831309,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_giggle",
+    "frame": 0,
+    "iou": 0.9958316329505043,
+    "bboxDelta": 1,
+    "colorDiff": 4.237127886894871,
+    "shadow": 0.9460281806813384,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_giggle",
+    "frame": 30,
+    "iou": 0.9954579202515613,
+    "bboxDelta": 1,
+    "colorDiff": 4.11797481682965,
+    "shadow": 0.9650170648464164,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_giggle",
+    "frame": 60,
+    "iou": 0.9958447541844054,
+    "bboxDelta": 1,
+    "colorDiff": 4.2117574142665255,
+    "shadow": 0.9505683679093807,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_giggle",
+    "frame": 1,
+    "iou": 0.9955956101460862,
+    "bboxDelta": 1,
+    "colorDiff": 4.234139266872665,
+    "shadow": 0.9550176270600891,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_giggle",
+    "frame": 56,
+    "iou": 0.9957391304347826,
+    "bboxDelta": 1,
+    "colorDiff": 4.2402167690348564,
+    "shadow": 0.9548734263924619,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_bored",
+    "frame": 0,
+    "iou": 0.9960109842462783,
+    "bboxDelta": 1,
+    "colorDiff": 5.103201091214404,
+    "shadow": 0.9076596761665771,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "mood_bored",
+    "frame": 70,
+    "iou": 0.9942094118663843,
+    "bboxDelta": 1,
+    "colorDiff": 4.826004645928435,
+    "shadow": 0.987161426650445,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "mood_bored",
+    "frame": 140,
+    "iou": 0.9962563057398494,
+    "bboxDelta": 1,
+    "colorDiff": 5.117346642678214,
+    "shadow": 0.9234350906543846,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "mood_bored",
+    "frame": 138,
+    "iou": 0.9963285778298137,
+    "bboxDelta": 1,
+    "colorDiff": 5.122565731887728,
+    "shadow": 0.9227455282997977,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "mood_bored",
+    "frame": 126,
+    "iou": 0.9960242305078865,
+    "bboxDelta": 1,
+    "colorDiff": 5.105234127789876,
+    "shadow": 0.9223515088615679,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      12,
+      12
+    ]
+  },
+  {
+    "clip": "mood_applause",
+    "frame": 0,
+    "iou": 0.9945748974622939,
+    "bboxDelta": 1,
+    "colorDiff": 4.140009310222412,
+    "shadow": 0.9496770329811353,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_applause",
+    "frame": 30,
+    "iou": 0.9948301702507452,
+    "bboxDelta": 1,
+    "colorDiff": 4.232181145191827,
+    "shadow": 0.9273519951539557,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_applause",
+    "frame": 60,
+    "iou": 0.9945728577500246,
+    "bboxDelta": 1,
+    "colorDiff": 4.158908867778093,
+    "shadow": 0.9456777047976153,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_applause",
+    "frame": 9,
+    "iou": 0.9945501788486198,
+    "bboxDelta": 1,
+    "colorDiff": 4.22795261119153,
+    "shadow": 0.9478732348449752,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_applause",
+    "frame": 10,
+    "iou": 0.9950093574547723,
+    "bboxDelta": 1,
+    "colorDiff": 4.264057160609216,
+    "shadow": 0.9452949082720942,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_inLove",
+    "frame": 0,
+    "iou": 0.9954545454545455,
+    "bboxDelta": 1,
+    "colorDiff": 4.2992840633633,
+    "shadow": 0.9612625139043381,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "mood_inLove",
+    "frame": 30,
+    "iou": 0.9952116511389539,
+    "bboxDelta": 1,
+    "colorDiff": 4.301313780346622,
+    "shadow": 0.950173686495875,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "mood_inLove",
+    "frame": 60,
+    "iou": 0.9955158323257985,
+    "bboxDelta": 1,
+    "colorDiff": 4.309827614479663,
+    "shadow": 0.9565341906398389,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "mood_inLove",
+    "frame": 1,
+    "iou": 0.9955159695759301,
+    "bboxDelta": 1,
+    "colorDiff": 4.303130924929628,
+    "shadow": 0.9562212195054156,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "mood_inLove",
+    "frame": 56,
+    "iou": 0.9950417017369347,
+    "bboxDelta": 1,
+    "colorDiff": 4.292659294689501,
+    "shadow": 0.9657666657416915,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      7,
+      7
+    ]
+  },
+  {
+    "clip": "mood_meditative",
+    "frame": 0,
+    "iou": 0.996021819192551,
+    "bboxDelta": 1,
+    "colorDiff": 5.830946774802822,
+    "shadow": 0.9418861207764998,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "mood_meditative",
+    "frame": 40,
+    "iou": 0.9959120558804188,
+    "bboxDelta": 1,
+    "colorDiff": 5.982676874936473,
+    "shadow": 0.9409230691031082,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "mood_meditative",
+    "frame": 80,
+    "iou": 0.9959351005802036,
+    "bboxDelta": 1,
+    "colorDiff": 5.842170748156665,
+    "shadow": 0.9408101803280712,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "mood_meditative",
+    "frame": 24,
+    "iou": 0.9960511238431027,
+    "bboxDelta": 1,
+    "colorDiff": 5.93051450416781,
+    "shadow": 0.9387273562408371,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "mood_meditative",
+    "frame": 70,
+    "iou": 0.9963080995419954,
+    "bboxDelta": 0,
+    "colorDiff": 5.8687548431825665,
+    "shadow": 0.9361533459263618,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      2,
+      2
+    ]
+  },
+  {
+    "clip": "mood_zombie",
+    "frame": 0,
+    "iou": 0.9937834052648127,
+    "bboxDelta": 1,
+    "colorDiff": 4.33056270581922,
+    "shadow": 0.9466070798541691,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "mood_zombie",
+    "frame": 60,
+    "iou": 0.993986473101848,
+    "bboxDelta": 1,
+    "colorDiff": 3.760760532771752,
+    "shadow": 0.935261001526607,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "mood_zombie",
+    "frame": 120,
+    "iou": 0.99372516508962,
+    "bboxDelta": 1,
+    "colorDiff": 4.318733848270309,
+    "shadow": 0.941833209967925,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "mood_zombie",
+    "frame": 5,
+    "iou": 0.9937596170285519,
+    "bboxDelta": 1,
+    "colorDiff": 4.332439665471372,
+    "shadow": 0.9496804555770596,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "mood_zombie",
+    "frame": 44,
+    "iou": 0.9936360263691105,
+    "bboxDelta": 1,
+    "colorDiff": 4.142455051984139,
+    "shadow": 0.9574710923174793,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      20,
+      20
+    ]
+  },
+  {
+    "clip": "mood_evil",
+    "frame": 0,
+    "iou": 0.9954223317212642,
+    "bboxDelta": 1,
+    "colorDiff": 5.175902301396286,
+    "shadow": 0.9224019293918873,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      17,
+      17
+    ]
+  },
+  {
+    "clip": "mood_evil",
+    "frame": 45,
+    "iou": 0.9946481785562246,
+    "bboxDelta": 1,
+    "colorDiff": 5.2096504636699335,
+    "shadow": 0.950971250971251,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      17,
+      17
+    ]
+  },
+  {
+    "clip": "mood_evil",
+    "frame": 90,
+    "iou": 0.9952703935762516,
+    "bboxDelta": 1,
+    "colorDiff": 5.20335141467327,
+    "shadow": 0.9192532371389345,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      17,
+      17
+    ]
+  },
+  {
+    "clip": "mood_evil",
+    "frame": 81,
+    "iou": 0.9955805300326525,
+    "bboxDelta": 1,
+    "colorDiff": 5.164424240574514,
+    "shadow": 0.9056741446329782,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      17,
+      17
+    ]
+  },
+  {
+    "clip": "mood_evil",
+    "frame": 7,
+    "iou": 0.9954545454545455,
+    "bboxDelta": 1,
+    "colorDiff": 5.164765351780704,
+    "shadow": 0.9269906583629893,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      17,
+      17
+    ]
+  },
+  {
+    "clip": "mood_terrified",
+    "frame": 0,
+    "iou": 0.9943832543390625,
+    "bboxDelta": 1,
+    "colorDiff": 6.54351980640225,
+    "shadow": 0.947068676716918,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      31,
+      31
+    ]
+  },
+  {
+    "clip": "mood_terrified",
+    "frame": 48,
+    "iou": 0.99373126192423,
+    "bboxDelta": 1,
+    "colorDiff": 5.8181365677245,
+    "shadow": 0.9598402836186704,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      30,
+      30
+    ]
+  },
+  {
+    "clip": "mood_terrified",
+    "frame": 95,
+    "iou": 0.9943534250269687,
+    "bboxDelta": 0,
+    "colorDiff": 6.487526768712173,
+    "shadow": 0.9677406539271384,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      31,
+      31
+    ]
+  },
+  {
+    "clip": "mood_terrified",
+    "frame": 23,
+    "iou": 0.9941790279638174,
+    "bboxDelta": 0,
+    "colorDiff": 6.531068935499589,
+    "shadow": 0.9365445046365021,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      31,
+      31
+    ]
+  },
+  {
+    "clip": "mood_terrified",
+    "frame": 91,
+    "iou": 0.9949213823257378,
+    "bboxDelta": 1,
+    "colorDiff": 6.76716866960727,
+    "shadow": 0.9152657773856673,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      31,
+      31
+    ]
+  },
+  {
+    "clip": "mood_talkToHand",
+    "frame": 0,
+    "iou": 0.994427602136567,
+    "bboxDelta": 1,
+    "colorDiff": 4.9586551303635,
+    "shadow": 0.9406663814423307,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "mood_talkToHand",
+    "frame": 85,
+    "iou": 0.9948008541453904,
+    "bboxDelta": 1,
+    "colorDiff": 4.712355472597598,
+    "shadow": 0.9318328666810252,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      25,
+      25
+    ]
+  },
+  {
+    "clip": "mood_talkToHand",
+    "frame": 170,
+    "iou": 0.9939813812513532,
+    "bboxDelta": 1,
+    "colorDiff": 4.9634953824701995,
+    "shadow": 0.9679441560616209,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "mood_talkToHand",
+    "frame": 57,
+    "iou": 0.9947978553832778,
+    "bboxDelta": 1,
+    "colorDiff": 4.944404791383859,
+    "shadow": 0.925390322449146,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "mood_talkToHand",
+    "frame": 6,
+    "iou": 0.9948517715112075,
+    "bboxDelta": 0,
+    "colorDiff": 4.991864600594403,
+    "shadow": 0.919839513577234,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      14,
+      14
+    ]
+  },
+  {
+    "clip": "mood_flying",
+    "frame": 0,
+    "iou": 0.9948940435729166,
+    "bboxDelta": 0,
+    "colorDiff": 4.562071335988164,
+    "shadow": 0.949939660880059,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_flying",
+    "frame": 50,
+    "iou": 0.9952309106359364,
+    "bboxDelta": 1,
+    "colorDiff": 4.244987337655138,
+    "shadow": 0.9421706155400467,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_flying",
+    "frame": 100,
+    "iou": 0.9943761259497141,
+    "bboxDelta": 0,
+    "colorDiff": 4.58003549898073,
+    "shadow": 0.976330885998253,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_flying",
+    "frame": 3,
+    "iou": 0.9940938079230939,
+    "bboxDelta": 1,
+    "colorDiff": 4.519593590999138,
+    "shadow": 0.9654634674734685,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_flying",
+    "frame": 55,
+    "iou": 0.995041122399613,
+    "bboxDelta": 1,
+    "colorDiff": 4.245289899112987,
+    "shadow": 0.9454429260115125,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      6,
+      6
+    ]
+  },
+  {
+    "clip": "mood_cry",
+    "frame": 0,
+    "iou": 0.9952180384457041,
+    "bboxDelta": 1,
+    "colorDiff": 4.6892753346480625,
+    "shadow": 0.9458310661083379,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      33,
+      33
+    ]
+  },
+  {
+    "clip": "mood_cry",
+    "frame": 63,
+    "iou": 0.9941070775977585,
+    "bboxDelta": 1,
+    "colorDiff": 4.8723953945514475,
+    "shadow": 0.9475990342484127,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      32,
+      32
+    ]
+  },
+  {
+    "clip": "mood_cry",
+    "frame": 125,
+    "iou": 0.9952347027626058,
+    "bboxDelta": 1,
+    "colorDiff": 4.682743700686687,
+    "shadow": 0.9483549147022088,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      33,
+      33
+    ]
+  },
+  {
+    "clip": "mood_cry",
+    "frame": 105,
+    "iou": 0.9939790984245828,
+    "bboxDelta": 1,
+    "colorDiff": 4.345866549494769,
+    "shadow": 0.9492461668825044,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      33,
+      33
+    ]
+  },
+  {
+    "clip": "mood_cry",
+    "frame": 122,
+    "iou": 0.995288855049015,
+    "bboxDelta": 1,
+    "colorDiff": 4.6909182670592315,
+    "shadow": 0.9506066881363139,
+    "world": 0,
+    "rig": 0,
+    "head": [
+      33,
+      33
+    ]
+  }
+]

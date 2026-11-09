@@ -1,0 +1,324 @@
+{
+  "generator": "BuddyPoke Studio (original BuddyRevival data)",
+  "lookCode": "eJw1UUFuxCAMvPUhPnNYSLJqeE7ICqoQxYrRSlXVB/TXlc1wGjwem7H98Sc/VPZEMTjaFCdH5W4UH4oaz44Kg_BEcbU4DCJQXBwVaRRVKckSSZWLo1QSRW_ERyLYH4knxLPh67sBtWB19BIQ0jsJXxYL32b2RP7cBmqhd7SkTuTaTJhrn_o8IDx02tWRlE5I6Z6l_mbjSfUqmfQVGsVPe3QbrF2fipAwdsOYmMdueOxGji_KXnFM0syQcAKiQqzi4WirDYiDbNzXvXWnFXFFLNi_CDqKB6/LDo5kB7HD0j4hnntckC9wsi/AJ/LQl34tubC6Sz9UwcWwcDHukOt7HOLdbebbW7d86y_//zQxpPw=",
+  "pose": "tpose",
+  "skeleton": true,
+  "rigidParts": "skin",
+  "material": "unlit",
+  "scale": 0.01,
+  "units": "metres (1 original BuddyPoke unit = 1 cm)",
+  "bones": [
+    {
+      "name": "IG_Root",
+      "parent": null,
+      "head": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Bip01",
+      "parent": null,
+      "head": [
+        0,
+        0.469739990234375,
+        0
+      ]
+    },
+    {
+      "name": "Bip01_Footsteps",
+      "parent": "Bip01",
+      "head": [
+        0,
+        0.00010997772216797541,
+        0
+      ]
+    },
+    {
+      "name": "Bip01_Pelvis",
+      "parent": "Bip01",
+      "head": [
+        0,
+        0.469739990234375,
+        0
+      ]
+    },
+    {
+      "name": "Bip01_Spine",
+      "parent": "Bip01_Pelvis",
+      "head": [
+        -0.000026177216773406886,
+        0.5843599968867114,
+        -0.00003383662221312124
+      ]
+    },
+    {
+      "name": "Bip01_L_Thigh",
+      "parent": "Bip01_Spine",
+      "head": [
+        0.07618005055173976,
+        0.4697573448545013,
+        0.000011968601327928794
+      ]
+    },
+    {
+      "name": "Bip01_L_Calf",
+      "parent": "Bip01_L_Thigh",
+      "head": [
+        0.08571914588523606,
+        0.3132219139622245,
+        0.01571469529174153
+      ]
+    },
+    {
+      "name": "Bip01_L_Foot",
+      "parent": "Bip01_L_Calf",
+      "head": [
+        0.09726681220772275,
+        0.12244464693949142,
+        -0.0035012481649851976
+      ]
+    },
+    {
+      "name": "Bip01_R_Thigh",
+      "parent": "Bip01_Spine",
+      "head": [
+        -0.07617986616798228,
+        0.46972259456919263,
+        0.00016803129180658396
+      ]
+    },
+    {
+      "name": "Bip01_R_Calf",
+      "parent": "Bip01_R_Thigh",
+      "head": [
+        -0.08580163246804112,
+        0.3131941554228487,
+        0.01589000450137835
+      ]
+    },
+    {
+      "name": "Bip01_R_Foot",
+      "parent": "Bip01_R_Calf",
+      "head": [
+        -0.09752636068838455,
+        0.12242533500928277,
+        -0.0033025617487753983
+      ]
+    },
+    {
+      "name": "Bip01_Spine1",
+      "parent": "Bip01_Spine",
+      "head": [
+        -0.00004468284570136906,
+        0.6653100090285831,
+        -0.00007535881191553351
+      ]
+    },
+    {
+      "name": "Bip01_Neck",
+      "parent": "Bip01_Spine1",
+      "head": [
+        -0.00006317823108512837,
+        0.7462600188901733,
+        -0.0001068810054853127
+      ]
+    },
+    {
+      "name": "Bip01_Head",
+      "parent": "Bip01_Neck",
+      "head": [
+        -0.0000775758453389514,
+        0.8094500132767799,
+        -0.00009245715500457551
+      ]
+    },
+    {
+      "name": "IG_HairPig_R",
+      "parent": "Bip01_Head",
+      "head": [
+        -0.450369296064453,
+        1.3016173754101459,
+        -0.17505907581890637
+      ]
+    },
+    {
+      "name": "IG_HairPony",
+      "parent": "Bip01_Head",
+      "head": [
+        -0.0008660980096027224,
+        1.417854663050561,
+        -0.6344332839885085
+      ]
+    },
+    {
+      "name": "IG_HairLong",
+      "parent": "Bip01_Head",
+      "head": [
+        -0.0005571927805877208,
+        1.043164912939811,
+        -0.4162889014714467
+      ]
+    },
+    {
+      "name": "IG_HairPig_L",
+      "parent": "Bip01_Head",
+      "head": [
+        0.44962021388704776,
+        1.3018226452272934,
+        -0.1759809376008603
+      ]
+    },
+    {
+      "name": "Bip01_L_Clavicle",
+      "parent": "Bip01_Neck",
+      "head": [
+        0.02700685825333008,
+        0.7462661816173162,
+        -0.0000846088960487533
+      ]
+    },
+    {
+      "name": "Bip01_L_UpperArm",
+      "parent": "Bip01_L_Clavicle",
+      "head": [
+        0.13451683980840778,
+        0.7462907016747603,
+        -0.00014967996510772453
+      ]
+    },
+    {
+      "name": "Bip01_L_Forearm",
+      "parent": "Bip01_L_UpperArm",
+      "head": [
+        0.2830368421735201,
+        0.7462907016747603,
+        -0.00014967996510770334
+      ]
+    },
+    {
+      "name": "Bip01_L_Hand",
+      "parent": "Bip01_L_Forearm",
+      "head": [
+        0.42219684583562944,
+        0.7462907016747603,
+        -0.00014967996510768317
+      ]
+    },
+    {
+      "name": "Bip01_L_Finger0",
+      "parent": "Bip01_L_Hand",
+      "head": [
+        0.4756168459119234,
+        0.7374083886404899,
+        0.04134088572228019
+      ]
+    },
+    {
+      "name": "Bip01_R_Clavicle",
+      "parent": "Bip01_Neck",
+      "head": [
+        -0.027133112280077386,
+        0.7462538333602211,
+        -0.000029153172221982644
+      ]
+    },
+    {
+      "name": "Bip01_R_UpperArm",
+      "parent": "Bip01_R_Clavicle",
+      "head": [
+        -0.1346430015416919,
+        0.7462293116354249,
+        0.00012602121611028248
+      ]
+    },
+    {
+      "name": "Bip01_R_Forearm",
+      "parent": "Bip01_R_UpperArm",
+      "head": [
+        -0.2831630039068042,
+        0.7462293116354249,
+        0.00012602121611026115
+      ]
+    },
+    {
+      "name": "Bip01_R_Hand",
+      "parent": "Bip01_R_Forearm",
+      "head": [
+        -0.4223230075689136,
+        0.7462293116354249,
+        0.000126021216110246
+      ]
+    },
+    {
+      "name": "Bip01_R_Finger0",
+      "parent": "Bip01_R_Hand",
+      "head": [
+        -0.47574300764520755,
+        0.7372729903924606,
+        0.04160067414643679
+      ]
+    },
+    {
+      "name": "IG_Vesp_Root",
+      "parent": "IG_Root",
+      "head": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Head",
+      "vertices": 91,
+      "triangles": 82,
+      "skinned": true,
+      "parent": null,
+      "transparent": false,
+      "texture": [
+        250,
+        125
+      ]
+    },
+    {
+      "name": "Body",
+      "vertices": 282,
+      "triangles": 292,
+      "skinned": true,
+      "parent": null,
+      "transparent": false,
+      "texture": [
+        300,
+        200
+      ]
+    },
+    {
+      "name": "Skrt",
+      "vertices": 42,
+      "triangles": 44,
+      "skinned": true,
+      "parent": null,
+      "transparent": false,
+      "texture": [
+        200,
+        60
+      ]
+    },
+    {
+      "name": "BCap",
+      "vertices": 151,
+      "triangles": 126,
+      "skinned": true,
+      "parent": null,
+      "transparent": true,
+      "texture": [
+        300,
+        150
+      ]
+    }
+  ],
+  "maxJointShift": 0.001221700039368287
+}

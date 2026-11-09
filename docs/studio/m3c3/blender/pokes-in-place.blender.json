@@ -1,0 +1,382 @@
+{
+  "file": "pokes-in-place.glb",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens in Blender (official glTF importer), scene at 30 fps",
+      "ok": true,
+      "detail": "{'FINISHED'}, 30 fps"
+    },
+    {
+      "name": "armature rest pose = the original rest pose (bind)",
+      "ok": true,
+      "detail": "max 0.000 mm (clean-rotation rest, documented \u22641.22 mm)"
+    },
+    {
+      "name": "all 56 clips imported as Actions with their original names",
+      "ok": true,
+      "detail": "56 actions"
+    },
+    {
+      "name": "every Action spans the original frames 0..n-1 at 30 fps",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "bone positions match the original engine in all 56 clips",
+      "ok": true,
+      "detail": "worst 0.0009 mm"
+    },
+    {
+      "name": "root motion matches the original engine",
+      "ok": true,
+      "detail": "worst 0.00014 mm"
+    },
+    {
+      "name": "mesh deformation, properly weighted vertices (3 clips)",
+      "ok": true,
+      "detail": "worst 0.230 mm"
+    },
+    {
+      "name": "mesh deformation, all vertices incl. glTF weight normalisation (3 clips)",
+      "ok": true,
+      "detail": "worst 5.880 mm"
+    },
+    {
+      "name": "bones, props and face in sync at every sampled frame (visible prop set and face object = engine)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop vertices where the engine puts them (21 visible-prop samples)",
+      "ok": true,
+      "detail": "worst 0.00063 mm; props ['Mic', 'Rose', 'Strat', 'Sword']"
+    },
+    {
+      "name": "face vertices where the engine puts them (24 face objects)",
+      "ok": true,
+      "detail": "worst 0.00062 mm"
+    },
+    {
+      "name": "facial expression timing: exactly the engine's face at every frame (7146 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop visibility timing: exactly the engine's props at every frame (7146 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "switching swordA1 -> hug1: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F03'] (engine Head_F03), props [] (engine [])"
+    },
+    {
+      "name": "switching hug1 -> swordA1: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F15'] (engine Head_F15), props ['Sword'] (engine ['Sword'])"
+    },
+    {
+      "name": "switching jamA1 -> rose1: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F03'] (engine Head_F03), props ['Rose'] (engine ['Rose'])"
+    },
+    {
+      "name": "switching hug1 -> holdHands1: no pose carry-over",
+      "ok": true,
+      "detail": "max 0.0005 mm"
+    },
+    {
+      "name": "switching holdHands1 -> hug1: no pose carry-over",
+      "ok": true,
+      "detail": "max 0.0003 mm"
+    },
+    {
+      "name": "renders of representative clips, props and expressions",
+      "ok": true,
+      "detail": "pokes-in-place-hug1-56.png, pokes-in-place-kick1-32.png"
+    }
+  ],
+  "ok": true,
+  "clips": {
+    "hipBump1": {
+      "bone_mm": 0.0008064543680986648,
+      "root_mm": 3.077621155269307e-05
+    },
+    "hipBump2": {
+      "bone_mm": 0.0009215859231988326,
+      "root_mm": 3.0763530178185354e-05
+    },
+    "jamB2": {
+      "bone_mm": 0.0004339283638763737,
+      "root_mm": 1.1803209301531711e-06
+    },
+    "jamB1": {
+      "bone_mm": 0.0008941671641474252,
+      "root_mm": 6.468189105597121e-05
+    },
+    "jamA2": {
+      "bone_mm": 0.000486061168619993,
+      "root_mm": 4.888422353840635e-06
+    },
+    "jamA1": {
+      "bone_mm": 0.0008941671641474252,
+      "root_mm": 6.468189105597121e-05
+    },
+    "rose2": {
+      "bone_mm": 0.00069510363278929,
+      "root_mm": 2.2109767563966084e-06
+    },
+    "rose1": {
+      "bone_mm": 0.000708236374754676,
+      "root_mm": 1.3727393573109258e-06
+    },
+    "swordA2": {
+      "bone_mm": 0.000676978629326853,
+      "root_mm": 3.121790012611162e-05
+    },
+    "swordA1": {
+      "bone_mm": 0.0006773690500493699,
+      "root_mm": 6.331469890439522e-05
+    },
+    "bearHug1": {
+      "bone_mm": 0.0005059267914701987,
+      "root_mm": 3.0438874967317396e-05
+    },
+    "bearHug2": {
+      "bone_mm": 0.000699695559676213,
+      "root_mm": 6.18340525051743e-05
+    },
+    "blowKiss1": {
+      "bone_mm": 0.0008432332631728788,
+      "root_mm": 3.106235982912366e-05
+    },
+    "blowKiss2": {
+      "bone_mm": 0.00042146848510894036,
+      "root_mm": 1.087907471017923e-09
+    },
+    "celebrate1": {
+      "bone_mm": 0.0004805480091749757,
+      "root_mm": 0.00012701775458627318
+    },
+    "celebrate2": {
+      "bone_mm": 0.0005356651386028139,
+      "root_mm": 0.00012774039373128447
+    },
+    "gimmeFive1": {
+      "bone_mm": 0.00048336987445678095,
+      "root_mm": 1.9826356603603774e-06
+    },
+    "gimmeFive2": {
+      "bone_mm": 0.00047145164071191474,
+      "root_mm": 1.9989456295963454e-06
+    },
+    "handshakeHug1": {
+      "bone_mm": 0.0005503352079576072,
+      "root_mm": 3.260932215914753e-06
+    },
+    "handshakeHug2": {
+      "bone_mm": 0.0005693725697559953,
+      "root_mm": 3.275201422513838e-06
+    },
+    "highTen1": {
+      "bone_mm": 0.0003796142102139293,
+      "root_mm": 1.0449053673752445e-06
+    },
+    "highTen2": {
+      "bone_mm": 0.00046000924826959167,
+      "root_mm": 1.0449053673752445e-06
+    },
+    "hug1": {
+      "bone_mm": 0.0005094802676820385,
+      "root_mm": 1.1931218321476648e-07,
+      "mesh_mm": 5.807319656014442,
+      "mesh_weighted_mm": 0.02950221096398309
+    },
+    "hug2": {
+      "bone_mm": 0.0005364418029785156,
+      "root_mm": 1.1931218321476648e-07
+    },
+    "idolize1": {
+      "bone_mm": 0.0006350500088143358,
+      "root_mm": 9.822633084819391e-05
+    },
+    "idolize2": {
+      "bone_mm": 0.00048451693319943867,
+      "root_mm": 2.9591955607819787e-06
+    },
+    "kick1": {
+      "bone_mm": 0.0005480135013008866,
+      "root_mm": 6.396051912468721e-05,
+      "mesh_mm": 5.5820574052631855,
+      "mesh_weighted_mm": 0.06824894808232784
+    },
+    "kick2": {
+      "bone_mm": 0.0006524684044400282,
+      "root_mm": 0.0001368603790034882
+    },
+    "kissCheek1": {
+      "bone_mm": 0.0005803806213781371,
+      "root_mm": 1.087907471017923e-09
+    },
+    "kissCheek2": {
+      "bone_mm": 0.0005990192664337688,
+      "root_mm": 3.197728790938788e-06
+    },
+    "mock1": {
+      "bone_mm": 0.0006811069599113062,
+      "root_mm": 2.9775464759947373e-06
+    },
+    "mock2": {
+      "bone_mm": 0.0004308471767545033,
+      "root_mm": 1.1304377521316759e-06
+    },
+    "pattyCakes1": {
+      "bone_mm": 0.0004989108157987358,
+      "root_mm": 1.9622479397832967e-06
+    },
+    "pattyCakes2": {
+      "bone_mm": 0.0006133506924217452,
+      "root_mm": 1.9051627104358377e-06
+    },
+    "poke1": {
+      "bone_mm": 0.0005846213801520215,
+      "root_mm": 6.751265366254148e-06
+    },
+    "poke2": {
+      "bone_mm": 0.0003952496139815539,
+      "root_mm": 8.955190585887146e-07
+    },
+    "punch1": {
+      "bone_mm": 0.0005836235293020648,
+      "root_mm": 3.078351387450539e-05
+    },
+    "punch2": {
+      "bone_mm": 0.000825443970236785,
+      "root_mm": 0.00013822444210599385
+    },
+    "rubNoses1": {
+      "bone_mm": 0.0003816559456248789,
+      "root_mm": 1.087907471017923e-09
+    },
+    "rubNoses2": {
+      "bone_mm": 0.0004676686175607209,
+      "root_mm": 1.087907471017923e-09
+    },
+    "slapButt1": {
+      "bone_mm": 0.00045154622123098166,
+      "root_mm": 3.3975268675480894e-06
+    },
+    "slapButt2": {
+      "bone_mm": 0.0004969598694340078,
+      "root_mm": 2.1419330987124265e-06
+    },
+    "slapFace1": {
+      "bone_mm": 0.0005470979139413184,
+      "root_mm": 2.5698938861915703e-06
+    },
+    "slapFace2": {
+      "bone_mm": 0.0006398829982752766,
+      "root_mm": 3.105836267044605e-05
+    },
+    "tickle1": {
+      "bone_mm": 0.0005170509687929592,
+      "root_mm": 6.751265366254148e-06
+    },
+    "tickle2": {
+      "bone_mm": 0.0004648260732573672,
+      "root_mm": 1.636050403520884e-06
+    },
+    "waveAt1": {
+      "bone_mm": 0.00036983709472390583,
+      "root_mm": 9.367575778300556e-07
+    },
+    "waveAt2": {
+      "bone_mm": 0.0003816559456248789,
+      "root_mm": 1.087907471017923e-09
+    },
+    "holdHands1": {
+      "bone_mm": 0.000512738541784443,
+      "root_mm": 1.087907471017923e-09
+    },
+    "holdHands2": {
+      "bone_mm": 0.0005213277245919675,
+      "root_mm": 1.087907471017923e-09,
+      "mesh_mm": 5.879523232579231,
+      "mesh_weighted_mm": 0.2302341745235026
+    },
+    "handshake1": {
+      "bone_mm": 0.0006558627225959841,
+      "root_mm": 4.3396464910463735e-06
+    },
+    "handshake2": {
+      "bone_mm": 0.0006558627225959841,
+      "root_mm": 4.3396464910463735e-06
+    },
+    "kiss1": {
+      "bone_mm": 0.0004826228243321671,
+      "root_mm": 1.087907471017923e-09
+    },
+    "kiss2": {
+      "bone_mm": 0.00041121873065099937,
+      "root_mm": 8.793499503724714e-07
+    },
+    "gossip1": {
+      "bone_mm": 0.0004182955279236495,
+      "root_mm": 1.336587777431026e-06
+    },
+    "gossip2": {
+      "bone_mm": 0.0005204751848153168,
+      "root_mm": 1.087907471017923e-09
+    }
+  },
+  "props": {
+    "objects": [
+      "Mic",
+      "Rose",
+      "Strat",
+      "Sword"
+    ],
+    "worst_mm": 0.0006258487701416016,
+    "checked": 21
+  },
+  "faces": {
+    "objects": [
+      "Head",
+      "Head_F02",
+      "Head_F03",
+      "Head_F04",
+      "Head_F05",
+      "Head_F06",
+      "Head_F07",
+      "Head_F08",
+      "Head_F09",
+      "Head_F10",
+      "Head_F11",
+      "Head_F12",
+      "Head_F14",
+      "Head_F15",
+      "Head_F16",
+      "Head_F18",
+      "Head_F19",
+      "Head_F20",
+      "Head_F22",
+      "Head_F23",
+      "Head_F24",
+      "Head_F25",
+      "Head_F28",
+      "Head_F29"
+    ],
+    "worst_mm": 0.0006223750688150176
+  },
+  "timeline": {
+    "frames": 7146,
+    "face_mismatches": [],
+    "prop_mismatches": []
+  },
+  "renders": [
+    "pokes-in-place-hug1-56.png",
+    "pokes-in-place-kick1-32.png"
+  ]
+}

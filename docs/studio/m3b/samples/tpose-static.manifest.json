@@ -1,0 +1,50 @@
+{
+  "generator": "BuddyPoke Studio (original BuddyRevival data)",
+  "lookCode": "eJw1UUFuxCAMvPUhPnNYSLLq8hzIKlQhihXTlapVH9BfV8bDafB4MOPh4_/7TWXNFIOjpDg5Klej6L0elJgdFW4Ub4qZ4qPXYRCB4uKoSKOoSsm9kVW5OMolU/Sd8GiE/kjmCfXc8fnTgHrh4egpIMQmCZ_9Fr662wP9Iw3M5nrJRmx1oK117BDuuu7DkRQjpJhnqb719aR6lUx6Co3iZz_YDdapd0VIGNkwNuaRDY9sZP_y_fvYpHVDwhmIG9Jv3BwlWE_wXhJb3MmcVtQVtSB9EUwUD17DDo5kBbHC0jqhnq0u6Bc4WRfgHX3oi/2WnIju1AdVcDIsnIx/2OprfMDLbG6X79O2S1/5/QezjKUt",
+  "pose": "tpose",
+  "skeleton": false,
+  "rigidParts": "skin",
+  "material": "unlit",
+  "scale": 0.01,
+  "units": "metres (1 original BuddyPoke unit = 1 cm)",
+  "bones": [],
+  "meshes": [
+    {
+      "name": "Head",
+      "vertices": 91,
+      "triangles": 70,
+      "skinned": false,
+      "parent": null,
+      "transparent": false,
+      "texture": [
+        250,
+        125
+      ]
+    },
+    {
+      "name": "Hair_Simple_ScruffySide",
+      "vertices": 125,
+      "triangles": 161,
+      "skinned": false,
+      "parent": null,
+      "transparent": true,
+      "texture": [
+        280,
+        180
+      ]
+    },
+    {
+      "name": "Body",
+      "vertices": 282,
+      "triangles": 332,
+      "skinned": false,
+      "parent": null,
+      "transparent": false,
+      "texture": [
+        300,
+        200
+      ]
+    }
+  ],
+  "maxJointShift": 0
+}

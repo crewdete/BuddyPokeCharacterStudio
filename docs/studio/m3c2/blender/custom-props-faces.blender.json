@@ -1,0 +1,171 @@
+{
+  "file": "custom-props-faces.glb",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens in Blender (official glTF importer), scene at 30 fps",
+      "ok": true,
+      "detail": "{'FINISHED'}, 30 fps"
+    },
+    {
+      "name": "armature rest pose = the original rest pose (bind)",
+      "ok": true,
+      "detail": "max 0.000 mm (clean-rotation rest, documented \u22641.22 mm)"
+    },
+    {
+      "name": "all 6 clips imported as Actions with their original names",
+      "ok": true,
+      "detail": "6 actions"
+    },
+    {
+      "name": "every Action spans the original frames 0..n-1 at 30 fps",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "bone positions match the original engine in all 6 clips",
+      "ok": true,
+      "detail": "worst 0.0009 mm"
+    },
+    {
+      "name": "root motion matches the original engine",
+      "ok": true,
+      "detail": "worst 0.00010 mm"
+    },
+    {
+      "name": "mesh deformation, properly weighted vertices (4 clips)",
+      "ok": true,
+      "detail": "worst 0.230 mm"
+    },
+    {
+      "name": "mesh deformation, all vertices incl. glTF weight normalisation (4 clips)",
+      "ok": true,
+      "detail": "worst 6.401 mm"
+    },
+    {
+      "name": "bones, props and face in sync at every sampled frame (visible prop set and face object = engine)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop vertices where the engine puts them (17 visible-prop samples)",
+      "ok": true,
+      "detail": "worst 0.00092 mm; props ['Mic', 'Rose', 'Strat', 'Sword']"
+    },
+    {
+      "name": "face vertices where the engine puts them (10 face objects)",
+      "ok": true,
+      "detail": "worst 0.00053 mm"
+    },
+    {
+      "name": "facial expression timing: exactly the engine's face at every frame (621 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop visibility timing: exactly the engine's props at every frame (621 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "switching swordA1 -> hug1: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F03'] (engine Head_F03), props [] (engine [])"
+    },
+    {
+      "name": "switching hug1 -> swordA1: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F15'] (engine Head_F15), props ['Sword'] (engine ['Sword'])"
+    },
+    {
+      "name": "switching jamA1 -> rose1: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F03'] (engine Head_F03), props ['Rose'] (engine ['Rose'])"
+    },
+    {
+      "name": "renders of representative clips, props and expressions",
+      "ok": true,
+      "detail": "custom-props-faces-swordA1-44.png, custom-props-faces-rose1-34.png, custom-props-faces-jamA1-54.png, custom-props-faces-jamA2-54.png, custom-props-faces-face15-swordA1-0.png, custom-props-faces-face19-swordA1-30.png \u2026 (13)"
+    }
+  ],
+  "ok": true,
+  "clips": {
+    "swordA1": {
+      "bone_mm": 0.0006708936517592385,
+      "root_mm": 7.03872875410735e-05,
+      "mesh_mm": 6.400942336767912,
+      "mesh_weighted_mm": 0.23031437012832612
+    },
+    "rose1": {
+      "bone_mm": 0.0007217455529160699,
+      "root_mm": 1.5875983936439367e-05,
+      "mesh_mm": 5.71652315557003,
+      "mesh_weighted_mm": 0.23031381715554744
+    },
+    "jamA1": {
+      "bone_mm": 0.0008653024243552154,
+      "root_mm": 6.537857940340134e-05,
+      "mesh_mm": 5.554500967264175,
+      "mesh_weighted_mm": 0.23049551236908883
+    },
+    "jamA2": {
+      "bone_mm": 0.0004924151790695877,
+      "root_mm": 2.9919248328269463e-05
+    },
+    "mood_cry": {
+      "bone_mm": 0.0007868038882281832,
+      "root_mm": 3.1445069268595676e-05
+    },
+    "hug1": {
+      "bone_mm": 0.000622290760809812,
+      "root_mm": 0.00010276670920948477,
+      "mesh_mm": 5.815808195620775,
+      "mesh_weighted_mm": 0.055215245083672926
+    }
+  },
+  "props": {
+    "objects": [
+      "Mic",
+      "Rose",
+      "Strat",
+      "Sword"
+    ],
+    "worst_mm": 0.0009200185218105617,
+    "checked": 17
+  },
+  "faces": {
+    "objects": [
+      "Head",
+      "Head_F03",
+      "Head_F04",
+      "Head_F15",
+      "Head_F18",
+      "Head_F19",
+      "Head_F28",
+      "Head_F29",
+      "Head_F32",
+      "Head_F33"
+    ],
+    "worst_mm": 0.0005325080678630911
+  },
+  "timeline": {
+    "frames": 621,
+    "face_mismatches": [],
+    "prop_mismatches": []
+  },
+  "renders": [
+    "custom-props-faces-swordA1-44.png",
+    "custom-props-faces-rose1-34.png",
+    "custom-props-faces-jamA1-54.png",
+    "custom-props-faces-jamA2-54.png",
+    "custom-props-faces-face15-swordA1-0.png",
+    "custom-props-faces-face19-swordA1-30.png",
+    "custom-props-faces-face18-swordA1-35.png",
+    "custom-props-faces-face03-rose1-0.png",
+    "custom-props-faces-face04-rose1-10.png",
+    "custom-props-faces-face29-jamA1-0.png",
+    "custom-props-faces-face28-jamA2-0.png",
+    "custom-props-faces-face33-mood_cry-0.png",
+    "custom-props-faces-face32-mood_cry-50.png"
+  ]
+}

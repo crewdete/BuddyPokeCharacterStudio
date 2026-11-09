@@ -1,0 +1,130 @@
+{
+  "file": "tpose-static.glb",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens in Blender (official glTF importer)",
+      "ok": true,
+      "detail": "{'FINISHED'}"
+    },
+    {
+      "name": "all meshes present",
+      "ok": true,
+      "detail": "['Body', 'Hair_Simple_ScruffySide', 'Head']"
+    },
+    {
+      "name": "Body: geometry",
+      "ok": true,
+      "detail": "274 verts, 332 tris (export: 282 verts, 332 tris)"
+    },
+    {
+      "name": "Body: material assigned",
+      "ok": true,
+      "detail": "Body"
+    },
+    {
+      "name": "Body: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_2', (300, 200), 'packed')]"
+    },
+    {
+      "name": "Body: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Body: opaque material",
+      "ok": true,
+      "detail": "render method=DITHERED"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: geometry",
+      "ok": true,
+      "detail": "121 verts, 161 tris (export: 125 verts, 161 tris)"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: material assigned",
+      "ok": true,
+      "detail": "Hair_Simple_ScruffySide"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_1', (280, 180), 'packed')]"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: transparency preserved",
+      "ok": true,
+      "detail": "alpha linked=True, render method=BLENDED"
+    },
+    {
+      "name": "Head: geometry",
+      "ok": true,
+      "detail": "52 verts, 70 tris (export: 91 verts, 70 tris)"
+    },
+    {
+      "name": "Head: material assigned",
+      "ok": true,
+      "detail": "Head"
+    },
+    {
+      "name": "Head: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_0', (250, 125), 'packed')]"
+    },
+    {
+      "name": "Head: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Head: opaque material",
+      "ok": true,
+      "detail": "render method=DITHERED"
+    },
+    {
+      "name": "static export has no armature",
+      "ok": true,
+      "detail": "0 armatures"
+    },
+    {
+      "name": "character size (metres)",
+      "ok": true,
+      "detail": "width 1.145 m, depth 0.792 m, height 1.490 m"
+    },
+    {
+      "name": "character renders in Blender from front, 3/4 and side",
+      "ok": true,
+      "detail": "front 29.2%, three-quarter 30.3%, side 23.2%"
+    }
+  ],
+  "ok": true,
+  "bone_display_shapes_ignored": [],
+  "bounds_m": {
+    "min": [
+      -0.5729933977127075,
+      -0.30490997433662415,
+      -3.148147952504815e-20
+    ],
+    "max": [
+      0.572475790977478,
+      0.4867100417613983,
+      1.4896899461746216
+    ],
+    "size": [
+      1.1454691886901855,
+      0.7916200160980225,
+      1.4896899461746216
+    ]
+  },
+  "render_coverage": {
+    "front": 0.2916480654761905,
+    "three-quarter": 0.30324032738095236,
+    "side": 0.23165550595238096
+  }
+}

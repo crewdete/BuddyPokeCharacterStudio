@@ -1,0 +1,23 @@
+{
+  "file": "display-tpose.glb",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens in Blender (official glTF importer), scene at 30 fps",
+      "ok": true,
+      "detail": "{'FINISHED'}, 30 fps"
+    },
+    {
+      "name": "armature rest pose = the original rest pose (bind)",
+      "ok": true,
+      "detail": "max 0.000 mm (clean-rotation rest, documented \u22641.22 mm)"
+    },
+    {
+      "name": "initial display pose = tpose",
+      "ok": true,
+      "detail": "max 0.000 mm"
+    }
+  ],
+  "ok": true,
+  "clips": {}
+}

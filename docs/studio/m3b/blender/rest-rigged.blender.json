@@ -1,0 +1,182 @@
+{
+  "file": "rest-rigged.glb",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens in Blender (official glTF importer)",
+      "ok": true,
+      "detail": "{'FINISHED'}"
+    },
+    {
+      "name": "all meshes present",
+      "ok": true,
+      "detail": "['Body', 'Hair_Simple_ScruffySide', 'Head']"
+    },
+    {
+      "name": "Body: geometry",
+      "ok": true,
+      "detail": "274 verts, 332 tris (export: 282 verts, 332 tris)"
+    },
+    {
+      "name": "Body: material assigned",
+      "ok": true,
+      "detail": "Body"
+    },
+    {
+      "name": "Body: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_2', (300, 200), 'packed')]"
+    },
+    {
+      "name": "Body: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Body: opaque material",
+      "ok": true,
+      "detail": "render method=DITHERED"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: geometry",
+      "ok": true,
+      "detail": "121 verts, 161 tris (export: 125 verts, 161 tris)"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: material assigned",
+      "ok": true,
+      "detail": "Hair_Simple_ScruffySide"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_1', (280, 180), 'packed')]"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: transparency preserved",
+      "ok": true,
+      "detail": "alpha linked=True, render method=BLENDED"
+    },
+    {
+      "name": "Head: geometry",
+      "ok": true,
+      "detail": "52 verts, 70 tris (export: 91 verts, 70 tris)"
+    },
+    {
+      "name": "Head: material assigned",
+      "ok": true,
+      "detail": "Head"
+    },
+    {
+      "name": "Head: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_0', (250, 125), 'packed')]"
+    },
+    {
+      "name": "Head: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Head: opaque material",
+      "ok": true,
+      "detail": "render method=DITHERED"
+    },
+    {
+      "name": "exactly one armature",
+      "ok": true,
+      "detail": "['BuddyPoke']"
+    },
+    {
+      "name": "29 original bones with original names",
+      "ok": true,
+      "detail": "29 bones"
+    },
+    {
+      "name": "bone hierarchy (parents) identical to the original",
+      "ok": true,
+      "detail": "mismatched: []"
+    },
+    {
+      "name": "joint positions match the export (pose)",
+      "ok": true,
+      "detail": "worst 3.97e-07 m"
+    },
+    {
+      "name": "Body: skinned to the armature",
+      "ok": true,
+      "detail": "29 vertex groups, armature modifier=1"
+    },
+    {
+      "name": "Body: every vertex weighted (weights sum to 1)",
+      "ok": true,
+      "detail": "unweighted=0, weight sums 1.0000\u20131.0000"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: skinned to the armature",
+      "ok": true,
+      "detail": "29 vertex groups, armature modifier=1"
+    },
+    {
+      "name": "Hair_Simple_ScruffySide: every vertex weighted (weights sum to 1)",
+      "ok": true,
+      "detail": "unweighted=0, weight sums 1.0000\u20131.0000"
+    },
+    {
+      "name": "Head: skinned to the armature",
+      "ok": true,
+      "detail": "29 vertex groups, armature modifier=1"
+    },
+    {
+      "name": "Head: every vertex weighted (weights sum to 1)",
+      "ok": true,
+      "detail": "unweighted=0, weight sums 1.0000\u20131.0000"
+    },
+    {
+      "name": "rotating a bone in Blender deforms its skinned vertices (and only those)",
+      "ok": true,
+      "detail": "forearm rotated 60\u00b0: 40/40 driven vertices moved, 0 of 234 other vertices moved"
+    },
+    {
+      "name": "character size (metres)",
+      "ok": true,
+      "detail": "width 0.720 m, depth 0.792 m, height 1.490 m"
+    },
+    {
+      "name": "character renders in Blender from front, 3/4 and side",
+      "ok": true,
+      "detail": "front 28.4%, three-quarter 30.1%, side 23.5%"
+    }
+  ],
+  "ok": true,
+  "bone_display_shapes_ignored": [
+    "Icosphere"
+  ],
+  "bounds_m": {
+    "min": [
+      -0.36066001653671265,
+      -0.3049098551273346,
+      -2.530597953409597e-07
+    ],
+    "max": [
+      0.3588702082633972,
+      0.48671016097068787,
+      1.489689826965332
+    ],
+    "size": [
+      0.7195302248001099,
+      0.7916200160980225,
+      1.4896900653839111
+    ]
+  },
+  "render_coverage": {
+    "front": 0.2838058035714286,
+    "three-quarter": 0.3014322916666667,
+    "side": 0.2346688988095238
+  }
+}

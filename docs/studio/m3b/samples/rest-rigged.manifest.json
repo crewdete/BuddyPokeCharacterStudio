@@ -1,0 +1,312 @@
+{
+  "generator": "BuddyPoke Studio (original BuddyRevival data)",
+  "lookCode": "eJw1UUFuxCAMvPUhPnNYSLLq8hzIKlQhihXTlapVH9BfV8bDafB4MOPh4_/7TWXNFIOjpDg5Klej6L0elJgdFW4Ub4qZ4qPXYRCB4uKoSKOoSsm9kVW5OMolU/Sd8GiE/kjmCfXc8fnTgHrh4egpIMQmCZ_9Fr662wP9Iw3M5nrJRmx1oK117BDuuu7DkRQjpJhnqb719aR6lUx6Co3iZz_YDdapd0VIGNkwNuaRDY9sZP_y_fvYpHVDwhmIG9Jv3BwlWE_wXhJb3MmcVtQVtSB9EUwUD17DDo5kBbHC0jqhnq0u6Bc4WRfgHX3oi/2WnIju1AdVcDIsnIx/2OprfMDLbG6X79O2S1/5/QezjKUt",
+  "pose": "rest",
+  "skeleton": true,
+  "rigidParts": "skin",
+  "material": "unlit",
+  "scale": 0.01,
+  "units": "metres (1 original BuddyPoke unit = 1 cm)",
+  "bones": [
+    {
+      "name": "IG_Root",
+      "parent": null,
+      "head": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Bip01",
+      "parent": null,
+      "head": [
+        0,
+        0.469739990234375,
+        0
+      ]
+    },
+    {
+      "name": "Bip01_Footsteps",
+      "parent": "Bip01",
+      "head": [
+        0,
+        0.00010997772216797541,
+        0
+      ]
+    },
+    {
+      "name": "Bip01_Pelvis",
+      "parent": "Bip01",
+      "head": [
+        0,
+        0.469739990234375,
+        0
+      ]
+    },
+    {
+      "name": "Bip01_Spine",
+      "parent": "Bip01_Pelvis",
+      "head": [
+        -0.000026177216773406886,
+        0.5843599968867114,
+        -0.00003383662221312124
+      ]
+    },
+    {
+      "name": "Bip01_L_Thigh",
+      "parent": "Bip01_Spine",
+      "head": [
+        0.07618005055173976,
+        0.4697573448545013,
+        0.000011968601327928794
+      ]
+    },
+    {
+      "name": "Bip01_L_Calf",
+      "parent": "Bip01_L_Thigh",
+      "head": [
+        0.08571914588523606,
+        0.3132219139622245,
+        0.01571469529174153
+      ]
+    },
+    {
+      "name": "Bip01_L_Foot",
+      "parent": "Bip01_L_Calf",
+      "head": [
+        0.09726681220772275,
+        0.12244464693949142,
+        -0.0035012481649851976
+      ]
+    },
+    {
+      "name": "Bip01_R_Thigh",
+      "parent": "Bip01_Spine",
+      "head": [
+        -0.07617986616798228,
+        0.46972259456919263,
+        0.00016803129180658396
+      ]
+    },
+    {
+      "name": "Bip01_R_Calf",
+      "parent": "Bip01_R_Thigh",
+      "head": [
+        -0.08580163246804112,
+        0.3131941554228487,
+        0.01589000450137835
+      ]
+    },
+    {
+      "name": "Bip01_R_Foot",
+      "parent": "Bip01_R_Calf",
+      "head": [
+        -0.09752636068838455,
+        0.12242533500928277,
+        -0.0033025617487753983
+      ]
+    },
+    {
+      "name": "Bip01_Spine1",
+      "parent": "Bip01_Spine",
+      "head": [
+        -0.00004468284570136906,
+        0.6653100090285831,
+        -0.00007535881191553351
+      ]
+    },
+    {
+      "name": "Bip01_Neck",
+      "parent": "Bip01_Spine1",
+      "head": [
+        -0.00006317823108512837,
+        0.7462600188901733,
+        -0.0001068810054853127
+      ]
+    },
+    {
+      "name": "Bip01_Head",
+      "parent": "Bip01_Neck",
+      "head": [
+        -0.0000775758453389514,
+        0.8094500132767799,
+        -0.00009245715500457551
+      ]
+    },
+    {
+      "name": "IG_HairPig_R",
+      "parent": "Bip01_Head",
+      "head": [
+        -0.450369296064453,
+        1.3016173754101459,
+        -0.17505907581890637
+      ]
+    },
+    {
+      "name": "IG_HairPony",
+      "parent": "Bip01_Head",
+      "head": [
+        -0.0008660980096027224,
+        1.417854663050561,
+        -0.6344332839885085
+      ]
+    },
+    {
+      "name": "IG_HairLong",
+      "parent": "Bip01_Head",
+      "head": [
+        -0.0005571927805877208,
+        1.043164912939811,
+        -0.4162889014714467
+      ]
+    },
+    {
+      "name": "IG_HairPig_L",
+      "parent": "Bip01_Head",
+      "head": [
+        0.44962021388704776,
+        1.3018226452272934,
+        -0.1759809376008603
+      ]
+    },
+    {
+      "name": "Bip01_L_Clavicle",
+      "parent": "Bip01_Neck",
+      "head": [
+        0.02700685825333008,
+        0.7462661816173162,
+        -0.0000846088960487533
+      ]
+    },
+    {
+      "name": "Bip01_L_UpperArm",
+      "parent": "Bip01_L_Clavicle",
+      "head": [
+        0.13451683980840778,
+        0.7462907016747603,
+        -0.00014967996510772453
+      ]
+    },
+    {
+      "name": "Bip01_L_Forearm",
+      "parent": "Bip01_L_UpperArm",
+      "head": [
+        0.17371730468780552,
+        0.6087360703265194,
+        -0.04015265548470628
+      ]
+    },
+    {
+      "name": "Bip01_L_Hand",
+      "parent": "Bip01_L_Forearm",
+      "head": [
+        0.21149723894850067,
+        0.4748173017135866,
+        -0.0381660504178652
+      ]
+    },
+    {
+      "name": "Bip01_L_Finger0",
+      "parent": "Bip01_L_Hand",
+      "head": [
+        0.22566491521495563,
+        0.42394411252174713,
+        0.005022541880445423
+      ]
+    },
+    {
+      "name": "Bip01_R_Clavicle",
+      "parent": "Bip01_Neck",
+      "head": [
+        -0.027133112280077386,
+        0.7462538333602211,
+        -0.000029153172221982644
+      ]
+    },
+    {
+      "name": "Bip01_R_UpperArm",
+      "parent": "Bip01_R_Clavicle",
+      "head": [
+        -0.1346430015416919,
+        0.7462293116354249,
+        0.00012602121611028248
+      ]
+    },
+    {
+      "name": "Bip01_R_Forearm",
+      "parent": "Bip01_R_UpperArm",
+      "head": [
+        -0.17386258339915472,
+        0.6086567942246507,
+        -0.03979662842943487
+      ]
+    },
+    {
+      "name": "Bip01_R_Hand",
+      "parent": "Bip01_R_Forearm",
+      "head": [
+        -0.2115772763056974,
+        0.47472080677956163,
+        -0.03773269400401928
+      ]
+    },
+    {
+      "name": "Bip01_R_Finger0",
+      "parent": "Bip01_R_Hand",
+      "head": [
+        -0.2256332387614108,
+        0.42384118033362567,
+        0.005484807846678291
+      ]
+    },
+    {
+      "name": "IG_Vesp_Root",
+      "parent": "IG_Root",
+      "head": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Head",
+      "vertices": 91,
+      "triangles": 70,
+      "skinned": true,
+      "parent": null,
+      "transparent": false,
+      "texture": [
+        250,
+        125
+      ]
+    },
+    {
+      "name": "Hair_Simple_ScruffySide",
+      "vertices": 125,
+      "triangles": 161,
+      "skinned": true,
+      "parent": null,
+      "transparent": true,
+      "texture": [
+        280,
+        180
+      ]
+    },
+    {
+      "name": "Body",
+      "vertices": 282,
+      "triangles": 332,
+      "skinned": true,
+      "parent": null,
+      "transparent": false,
+      "texture": [
+        300,
+        200
+      ]
+    }
+  ],
+  "maxJointShift": 0.001221700039368287
+}
