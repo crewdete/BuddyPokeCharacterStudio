@@ -113,8 +113,8 @@ function StudioScene({ rig }: { rig: CharacterRig | null }) {
           sectionSize={50}
           cellThickness={0.6}
           sectionThickness={1}
-          cellColor="#34373e"
-          sectionColor="#454952"
+          cellColor="#c6c6c6"
+          sectionColor="#a9a9a9"
           fadeDistance={700}
           fadeStrength={1.5}
           followCamera={false}

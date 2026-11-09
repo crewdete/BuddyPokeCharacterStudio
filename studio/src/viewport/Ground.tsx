@@ -10,12 +10,12 @@ export function Ground({ radius = 320 }: { radius?: number }) {
     canvas.width = canvas.height = size;
     const g = canvas.getContext('2d')!;
     const gradient = g.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-    // Flat and fairly light under the character so the original drop shadow (black, at most 25%
+    // Flat neutral grey under the character so the original drop shadow (black, at most 25%
     // opacity by design) reads; a highlight at the centre would cancel it out. Fades at the rim.
-    gradient.addColorStop(0, 'rgba(98, 102, 112, 1)');
-    gradient.addColorStop(0.4, 'rgba(98, 102, 112, 1)');
-    gradient.addColorStop(0.75, 'rgba(62, 65, 72, 0.75)');
-    gradient.addColorStop(1, 'rgba(36, 38, 42, 0)');
+    gradient.addColorStop(0, 'rgba(214, 214, 214, 1)');
+    gradient.addColorStop(0.4, 'rgba(214, 214, 214, 1)');
+    gradient.addColorStop(0.75, 'rgba(222, 222, 222, 0.7)');
+    gradient.addColorStop(1, 'rgba(236, 236, 236, 0)');
     g.fillStyle = gradient;
     g.fillRect(0, 0, size, size);
     const t = new THREE.CanvasTexture(canvas);
