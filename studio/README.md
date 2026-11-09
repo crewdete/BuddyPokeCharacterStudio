@@ -41,6 +41,10 @@ Plan and analysis: [`../docs/studio/ANALYSIS_AND_PLAN.md`](../docs/studio/ANALYS
   world ±X; every other bone stays at rest. Switching modes never changes the clip, frame, speed, loop or play state
   (the clock freezes outside Animation). **Skeleton** overlay of the 29 real bones (helpers dashed) with **X-ray**.
 
+- **M3B** export: **Export** tab writing **GLB** (binary glTF 2.0), rigged (original 29-bone skeleton, skin weights) or
+  static, in the exact Rest pose or the T-pose, unlit (original look) or lit, with embedded textures. Validated in
+  Blender 5.2.3 LTS (headless, official glTF importer). See *Export* below.
+
 Animation shortcuts: `Space` play/pause, `,` / `.` previous / next frame while paused (ignored in text fields and menus).
 Viewport: `B` skeleton overlay, `X` X-ray (bones through the character).
 
@@ -54,6 +58,45 @@ Preset file format (a preset is a name plus an original look code, so it also wo
 
 Viewport shortcuts: `5` perspective/orthographic, `Home` or `F` reset view, `G` grid.
 `?buddy=<look code>` wears a look on load (original BuddyRevival/Flash format).
+
+## Export
+
+Each export decodes a **fresh original buddy** from `chick.bin`, dresses it with the current look code and poses it
+(exact rest pose, or the M3A-3 T-pose). The live character, its animation state and its rig are never touched, and
+animation-only props are not exported.
+
+| | GLB · rigged | GLB · static |
+|---|---|---|
+| Meshes (only worn, visible parts; cull regions applied) | ✓ exact posed vertices | ✓ exact posed vertices |
+| Skeleton | 29 original bones, original names and parents | — |
+| Skin weights | original (≤3 per vertex), normalised to sum 1 | — |
+| Head / short hair (rigid in the original) | skinned to `Bip01_Head` (weight 1) or kept parented | baked |
+| Textures | embedded PNG (no external files, no browser URLs) | same |
+| Materials | `KHR_materials_unlit` (original look) or PBR; alpha materials as `BLEND` | same |
+| Units | metres, 1 original unit = 1 cm (≈1.49 m tall) | same |
+
+Documented adjustments: glTF nodes must be pure translation/rotation/scale, but the original rest rotations have slightly
+non-unit axes (M3A-1), so exported bones use the unit-axis rotation (joints move by ≤1.22 mm; the mesh does not move).
+Original weights that sum to 0.996–1 are normalised. Three.js writes one skin per skinned mesh, all sharing the same
+joints; Blender builds a single armature from them (verified).
+
+**Not offered yet:** *FBX* needs a binary FBX writer (no maintained browser library; `assimpjs` fails to export, see the
+M0 analysis). It will only be added once it passes the same Blender validation. *OBJ* cannot carry a skeleton, weights or
+transparency modes; the static GLB already covers static use, so OBJ adds little and is not offered.
+
+### Blender validation
+
+`tests/blender/validate_glb.py` opens a GLB in Blender with the official glTF importer and checks meshes, materials and
+embedded textures, transparency, a single armature with the original bone names and hierarchy, skin weights (vertex groups,
+Armature modifier, weights summing to 1), joint positions and T-pose alignment, that rotating a bone deforms only its
+vertices, and renders front / three-quarter / side views.
+
+```bash
+python3 -m venv /tmp/bpy && /tmp/bpy/bin/pip install bpy==5.2.3   # Blender as a Python module (Python 3.13, ~1 GB)
+BLENDER_PYTHON=/tmp/bpy/bin/python npm run test:blender
+```
+
+Without `BLENDER_PYTHON` the export suite still runs and reports the Blender step as **SKIPPED**.
 
 ## Commands
 
@@ -82,6 +125,7 @@ Vitest 4's optional peer dependencies; installing from the committed lockfile (`
 ```
 src/
   original/   typed adapter around ../web/src (no re-implementation)
+  export/     prepare.ts (fresh buddy -> export scene), glb.ts (write + self-check), index.ts (workflow)
   pose/       BindSnapshot (exact rest pose), AnimationPlayer (original showFrame, timing per Animation.step,
               rest/T-pose/animation mode), tpose.ts (T-pose solver), catalog.ts (original moods.xml / pokes.xml)
   character/  CharacterController: serialized edits through the original Wardrobe, rig update, undo history;
@@ -98,6 +142,8 @@ tests/
               presets.mjs (look codes, Default/Random, presets, files, undo/redo, storage edge cases),
               animation.mjs (94 clips / 470 frames vs the original renderer, props, Stop, bleed, timing),
               animate.mjs (Animate tab, transport, keyboard, integration, responsive),
-              tpose.mjs (modes, T-pose geometry, skeleton overlay, X-ray, camera preservation)
+              tpose.mjs (modes, T-pose geometry, skeleton overlay, X-ray, camera preservation),
+              export.mjs (GLB structure, pose, skeleton, weights, textures, isolation; Blender if available)
+  blender/    validate_glb.py (headless Blender checks of an exported GLB)
     fixtures/original-bind.html   the original renderer drawing the bind pose (reference for render.mjs)
 ```

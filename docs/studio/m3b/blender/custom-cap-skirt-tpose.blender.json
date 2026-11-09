@@ -1,0 +1,227 @@
+{
+  "file": "custom-cap-skirt-tpose.glb",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens in Blender (official glTF importer)",
+      "ok": true,
+      "detail": "{'FINISHED'}"
+    },
+    {
+      "name": "all meshes present",
+      "ok": true,
+      "detail": "['BCap', 'Body', 'Head', 'Skrt']"
+    },
+    {
+      "name": "BCap: geometry",
+      "ok": true,
+      "detail": "109 verts, 126 tris (export: 151 verts, 126 tris)"
+    },
+    {
+      "name": "BCap: material assigned",
+      "ok": true,
+      "detail": "BCap"
+    },
+    {
+      "name": "BCap: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_3', (300, 150), 'packed')]"
+    },
+    {
+      "name": "BCap: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "BCap: transparency preserved",
+      "ok": true,
+      "detail": "alpha linked=True, render method=BLENDED"
+    },
+    {
+      "name": "Body: geometry",
+      "ok": true,
+      "detail": "248 verts, 292 tris (export: 282 verts, 292 tris)"
+    },
+    {
+      "name": "Body: material assigned",
+      "ok": true,
+      "detail": "Body"
+    },
+    {
+      "name": "Body: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_1', (300, 200), 'packed')]"
+    },
+    {
+      "name": "Body: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Body: opaque material",
+      "ok": true,
+      "detail": "render method=DITHERED"
+    },
+    {
+      "name": "Head: geometry",
+      "ok": true,
+      "detail": "56 verts, 82 tris (export: 91 verts, 82 tris)"
+    },
+    {
+      "name": "Head: material assigned",
+      "ok": true,
+      "detail": "Head"
+    },
+    {
+      "name": "Head: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_0', (250, 125), 'packed')]"
+    },
+    {
+      "name": "Head: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Head: opaque material",
+      "ok": true,
+      "detail": "render method=DITHERED"
+    },
+    {
+      "name": "Skrt: geometry",
+      "ok": true,
+      "detail": "40 verts, 44 tris (export: 42 verts, 44 tris)"
+    },
+    {
+      "name": "Skrt: material assigned",
+      "ok": true,
+      "detail": "Skrt"
+    },
+    {
+      "name": "Skrt: texture embedded and loaded",
+      "ok": true,
+      "detail": "[('Image_2', (200, 60), 'packed')]"
+    },
+    {
+      "name": "Skrt: texture not missing / not external",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Skrt: opaque material",
+      "ok": true,
+      "detail": "render method=DITHERED"
+    },
+    {
+      "name": "exactly one armature",
+      "ok": true,
+      "detail": "['BuddyPoke']"
+    },
+    {
+      "name": "29 original bones with original names",
+      "ok": true,
+      "detail": "29 bones"
+    },
+    {
+      "name": "bone hierarchy (parents) identical to the original",
+      "ok": true,
+      "detail": "mismatched: []"
+    },
+    {
+      "name": "joint positions match the export (pose)",
+      "ok": true,
+      "detail": "worst 3.97e-07 m"
+    },
+    {
+      "name": "T-pose: L arm horizontal in Blender",
+      "ok": true,
+      "detail": "elbow/wrist height diff 6.0e-08 m, depth diff 8.6e-09 m"
+    },
+    {
+      "name": "T-pose: R arm horizontal in Blender",
+      "ok": true,
+      "detail": "elbow/wrist height diff 2.4e-07 m, depth diff 3.9e-08 m"
+    },
+    {
+      "name": "BCap: skinned to the armature",
+      "ok": true,
+      "detail": "29 vertex groups, armature modifier=1"
+    },
+    {
+      "name": "BCap: every vertex weighted (weights sum to 1)",
+      "ok": true,
+      "detail": "unweighted=0, weight sums 1.0000\u20131.0000"
+    },
+    {
+      "name": "Body: skinned to the armature",
+      "ok": true,
+      "detail": "29 vertex groups, armature modifier=1"
+    },
+    {
+      "name": "Body: every vertex weighted (weights sum to 1)",
+      "ok": true,
+      "detail": "unweighted=0, weight sums 1.0000\u20131.0000"
+    },
+    {
+      "name": "Head: skinned to the armature",
+      "ok": true,
+      "detail": "29 vertex groups, armature modifier=1"
+    },
+    {
+      "name": "Head: every vertex weighted (weights sum to 1)",
+      "ok": true,
+      "detail": "unweighted=0, weight sums 1.0000\u20131.0000"
+    },
+    {
+      "name": "Skrt: skinned to the armature",
+      "ok": true,
+      "detail": "29 vertex groups, armature modifier=1"
+    },
+    {
+      "name": "Skrt: every vertex weighted (weights sum to 1)",
+      "ok": true,
+      "detail": "unweighted=0, weight sums 1.0000\u20131.0000"
+    },
+    {
+      "name": "rotating a bone in Blender deforms its skinned vertices (and only those)",
+      "ok": true,
+      "detail": "forearm rotated 60\u00b0: 40/40 driven vertices moved, 0 of 208 other vertices moved"
+    },
+    {
+      "name": "character size (metres)",
+      "ok": true,
+      "detail": "width 1.145 m, depth 0.759 m, height 1.416 m"
+    },
+    {
+      "name": "character renders in Blender from front, 3/4 and side",
+      "ok": true,
+      "detail": "front 29.5%, three-quarter 29.8%, side 21.2%"
+    }
+  ],
+  "ok": true,
+  "bone_display_shapes_ignored": [
+    "Icosphere"
+  ],
+  "bounds_m": {
+    "min": [
+      -0.5729933381080627,
+      -0.35879990458488464,
+      -2.530597953409597e-07
+    ],
+    "max": [
+      0.5724759101867676,
+      0.400223970413208,
+      1.4164899587631226
+    ],
+    "size": [
+      1.1454691886901855,
+      0.759023904800415,
+      1.4164901971817017
+    ]
+  },
+  "render_coverage": {
+    "front": 0.2945833333333333,
+    "three-quarter": 0.29755952380952383,
+    "side": 0.21205357142857142
+  }
+}

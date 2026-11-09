@@ -3,6 +3,9 @@ import * as THREE from 'three';
 import type { Look } from '@original/domain/wardrobe.js';
 import type { SceneNode } from '@original/engine/scene-graph.js';
 import type { CharacterController } from './character/controller';
+import { exportCharacter, type ExportOptions } from './export';
+import { EXPORT_SCALE } from './export/prepare';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { AnimationEntry } from './pose/catalog';
 import type { AnimationPlayer } from './pose/player';
 import { toThreeMatrix } from './scene/CharacterRig';
@@ -94,7 +97,79 @@ export function createDebug(controller: CharacterController, player: AnimationPl
       engine: rig.scene.propNames.filter(name => rig.scene.node(name)?.visible).sort(),
     }),
   };
+  /** Run an export (same code path as the Export tab) and return the GLB as base64 with its manifest and check. */
+  const exportGlb = async (options: ExportOptions) => {
+    const result = await exportCharacter(controller.assets, controller.currentCode, options);
+    const bytes = new Uint8Array(result.glb);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    return { base64: btoa(binary), manifest: result.manifest, check: result.check };
+  };
+  /**
+   * Load an exported GLB and describe it; with `compareTo`, also compare its vertices and textures with the
+   * live Studio character in its current pose (vertices in metres, textures pixel by pixel).
+   */
+  const loadGlbForInspection = async (buffer: ArrayBuffer, compareTo?: boolean) => {
+    const gltf = await new GLTFLoader().parseAsync(buffer, '');
+    gltf.scene.updateMatrixWorld(true);
+    const meshes: THREE.Mesh[] = [];
+    gltf.scene.traverse(o => (o as THREE.Mesh).isMesh && meshes.push(o as THREE.Mesh));
+    const parents: Record<string, string | null> = {};
+    const skinnedOne = meshes.find(m => (m as THREE.SkinnedMesh).isSkinnedMesh) as THREE.SkinnedMesh | undefined;
+    for (const b of skinnedOne?.skeleton.bones ?? []) parents[b.name] = (b.parent as THREE.Bone)?.isBone ? b.parent!.name : null;
+    const described = meshes.map(m => {
+      const w = m.geometry.getAttribute('skinWeight');
+      let unweighted = 0, min = Infinity, max = -Infinity, maxInfluences = 0;
+      if (w) for (let i = 0; i < w.count; i++) {
+        const values = [0, 1, 2, 3].map(k => w.getComponent(i, k));
+        const sum = values.reduce((a, b) => a + b, 0);
+        if (sum === 0) unweighted++;
+        min = Math.min(min, sum); max = Math.max(max, sum);
+        maxInfluences = Math.max(maxInfluences, values.filter(v => v > 0).length);
+      }
+      return { name: m.name, skinned: (m as THREE.SkinnedMesh).isSkinnedMesh === true, parent: (m.parent as THREE.Bone)?.isBone ? m.parent!.name : null, unweighted, weightSum: { min, max }, maxInfluences };
+    });
+    if (!compareTo) return { meshes: described, parents };
+    rig.root.updateMatrixWorld(true);
+    let maxVertexError = 0;
+    let vertexCount = 0;
+    const textures: { name: string; size: string; meanDifference: number; transparentPixels: number }[] = [];
+    const v = new THREE.Vector3();
+    const u = new THREE.Vector3();
+    for (const m of meshes) {
+      const live = rig.visibleParts().find(p => p.name === m.name);
+      if (!live) throw new Error(`live part ${m.name} not found`);
+      const exported = m.geometry.getAttribute('position');
+      const source = live.geometry.getAttribute('position');
+      for (let i = 0; i < exported.count; i++) {
+        v.fromBufferAttribute(exported, i).applyMatrix4(m.matrixWorld);
+        u.fromBufferAttribute(source, i);
+        if ((live as THREE.SkinnedMesh).isSkinnedMesh) (live as THREE.SkinnedMesh).applyBoneTransform(i, u);
+        else u.applyMatrix4(live.matrixWorld);
+        maxVertexError = Math.max(maxVertexError, v.distanceTo(u.multiplyScalar(EXPORT_SCALE)));
+        vertexCount++;
+      }
+      const exportedImage = (m.material as THREE.MeshBasicMaterial).map!.image as CanvasImageSource & { width: number; height: number };
+      const liveImage = (live.material as THREE.MeshBasicMaterial).map!.image as OffscreenCanvas;
+      const pixels = (image: CanvasImageSource, w: number, h: number, flip: boolean) => {
+        const c = new OffscreenCanvas(w, h);
+        const g = c.getContext('2d')!;
+        if (flip) { g.translate(0, h); g.scale(1, -1); } // glTF images are stored flipped for flipY=false
+        g.drawImage(image, 0, 0);
+        return g.getImageData(0, 0, w, h).data;
+      };
+      const a = pixels(exportedImage, exportedImage.width, exportedImage.height, true);
+      const b = pixels(liveImage, liveImage.width, liveImage.height, false);
+      let diff = 0, transparent = 0;
+      for (let i = 0; i < a.length; i++) diff += Math.abs(a[i] - b[i]);
+      for (let i = 3; i < a.length; i += 4) if (a[i] < 128) transparent++;
+      textures.push({ name: m.name, size: `${exportedImage.width}x${exportedImage.height}`, meanDifference: diff / a.length, transparentPixels: transparent });
+    }
+    return { meshes: described, parents, maxVertexError, vertexCount, textures };
+  };
   return {
+    loadGlbForInspection,
+    exportGlb,
     anim,
     async wearCode(code: string | null) {
       await controller.wearCode(code);

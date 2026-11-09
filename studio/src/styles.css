@@ -191,6 +191,22 @@ button, input, select, textarea, code { font-family: Arial, Helvetica, sans-seri
 .anim-meta { font-size: 11px; color: var(--mid); }
 .side { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; border: 1px solid currentColor; padding: 0 4px; }
 
+/* Export tab (M3B) */
+.choice { border: 0; margin: 0; padding: 0; min-width: 0; }
+.segmented-row { display: flex; flex-wrap: wrap; }
+.segmented-row button {
+  flex: 1 1 auto; font-size: 12px; height: 28px; padding: 0 8px; cursor: pointer; color: var(--text);
+  background: var(--control); border: 1px solid var(--border-strong); margin-left: -1px;
+}
+.segmented-row button:first-child { margin-left: 0; }
+.segmented-row button[aria-checked='true'] { background: var(--dark); border-color: var(--dark); color: #f4f4f4; position: relative; }
+.segmented-row button:focus-visible { outline: 2px solid var(--text); outline-offset: 1px; position: relative; }
+.choice:disabled button { cursor: default; opacity: 0.6; }
+.export .code-field { height: 28px; resize: none; }
+.row-actions .primary { background: var(--dark); border-color: var(--dark); color: #f4f4f4; height: 30px; padding: 0 16px; }
+.row-actions .primary:hover:not(:disabled) { background: var(--text); }
+.row-actions .primary:disabled { opacity: 0.6; cursor: default; }
+
 /* Comparison mode (tests): transparent page. */
 .compare-stage { position: fixed; top: 0; left: 0; }
 html.compare, html.compare body { background: transparent; }
@@ -220,4 +236,5 @@ html.compare, html.compare body { background: transparent; }
   .transport .icon-button { width: 36px; }
   .animation-list button { padding: 9px 8px; }
   .group-filter button { height: 32px; }
+  .segmented-row button, .row-actions .primary { height: 34px; }
 }
