@@ -19,7 +19,22 @@ export interface SampledClip {
   rotations: Float32Array[];
   /** Bip01 translation per frame (metres), x y z. */
   rootTranslation: Float32Array;
+  /**
+   * M3C-2: every original prop (scene.propNames), per frame: the engine's `node.visible` after
+   * `showFrame` (the original clears all props with hideProps() and then applies the clip's visibility
+   * tracks) and the prop's own local rotation (quaternion, sign-continuous).
+   */
+  props: Record<string, { visible: Uint8Array; rotations: Float32Array }>;
+  /**
+   * M3C-2: the face (`Head` material) frame the engine shows at every frame. The original's -1 ("as
+   * dressed") is stored as 1: TextureLibrary.compose() defaults to frame 1, so both are the same bitmap.
+   */
+  faceFrames: Int16Array;
 }
+
+export const FACE_NODE = 'Head';
+/** Exported node that shows face frame `frame`: `Head` for frame 1 (the dressed face), else `Head_F<nn>`. */
+export const faceNodeName = (frame: number) => (frame === 1 ? FACE_NODE : `${FACE_NODE}_F${String(frame).padStart(2, '0')}`);
 
 export const ROOT_BONE = 'Bip01';
 
@@ -53,20 +68,34 @@ export function sampleClip(scene: Scene, clip: Animation, bind: BindSnapshot, bo
   const rotations = nodes.map(() => new Float32Array(n * 4));
   const rootTranslation = new Float32Array(n * 3);
   const q = new THREE.Quaternion();
+  const propNodes = scene.propNames.map(name => [name, scene.node(name)] as const).filter((e): e is readonly [string, SceneNode] => e[1] !== null);
+  const props = Object.fromEntries(propNodes.map(([name]) => [name, { visible: new Uint8Array(n), rotations: new Float32Array(n * 4) }]));
+  const face = scene.node(FACE_NODE)?.mesh ?? null;
+  const faceFrames = new Int16Array(n);
+  const continuous = (out: Float32Array, f: number) => {
+    // q and -q are the same rotation; keep consecutive keys on the same hemisphere.
+    if (f > 0 && q.x * out[f * 4 - 4] + q.y * out[f * 4 - 3] + q.z * out[f * 4 - 2] + q.w * out[f * 4 - 1] < 0) q.set(-q.x, -q.y, -q.z, -q.w);
+    q.toArray(out, f * 4);
+  };
   for (let f = 0; f < n; f++) {
     clip.showFrame(scene, f);
     nodes.forEach((node, b) => {
       nodeQuaternion(node, q);
-      const out = rotations[b];
-      // q and -q are the same rotation; keep consecutive keys on the same hemisphere.
-      if (f > 0 && q.x * out[f * 4 - 4] + q.y * out[f * 4 - 3] + q.z * out[f * 4 - 2] + q.w * out[f * 4 - 1] < 0) q.set(-q.x, -q.y, -q.z, -q.w);
-      q.toArray(out, f * 4);
+      continuous(rotations[b], f);
     });
+    for (const [name, node] of propNodes) {
+      props[name].visible[f] = node.visible ? 1 : 0;
+      nodeQuaternion(node, q);
+      continuous(props[name].rotations, f);
+    }
+    const frame = face?.material?.frame ?? -1;
+    faceFrames[f] = frame === -1 ? 1 : frame;
     const p = root.position;
     rootTranslation.set(p ? [p.x * scale, p.y * scale, p.z * scale] : [0, 0, 0], f * 3);
   }
   bind.restore();
-  return { name: clip.name, fps: clip.fps, frameCount: n, rotations, rootTranslation };
+  scene.hideProps(); // as dressed: no prop shown outside an animation
+  return { name: clip.name, fps: clip.fps, frameCount: n, rotations, rootTranslation, props, faceFrames };
 }
 
 /**
@@ -103,13 +132,42 @@ export function reduceStep(values: Float32Array, size: number, fps: number): { t
   return { times, values: out };
 }
 
-/** glTF animation clip: STEP (no interpolation), every bone's rotation + root translation. */
-export function toAnimationClip(sample: SampledClip, boneNames: string[]): THREE.AnimationClip {
+/** Node scale that stands for "hidden" (glTF has no visibility channel; 0 would make matrices singular). */
+export const HIDDEN_SCALE = 1e-6;
+
+/** What a clip animates besides the skeleton (M3C-2): exported props, and the face node of every face frame. */
+export interface ClipExtras {
+  props: string[];
+  /** Face frame -> exported face node name. */
+  faceNodes: Map<number, string>;
+}
+
+function visibilityTrack(node: string, shown: (f: number) => boolean, n: number, fps: number) {
+  const values = new Float32Array(n * 3);
+  for (let f = 0; f < n; f++) values.fill(shown(f) ? 1 : HIDDEN_SCALE, f * 3, f * 3 + 3);
+  const { times, values: out } = reduceStep(values, 3, fps);
+  return new THREE.VectorKeyframeTrack(`${node}.scale`, times, out, THREE.InterpolateDiscrete);
+}
+
+/**
+ * glTF animation clip: STEP (no interpolation), every bone's rotation + root translation; with `extras`, every
+ * exported prop's rotation and visibility and every face node's visibility, keyed in EVERY clip (constant
+ * where a clip does not use them), so switching clips can never carry a prop or face state over.
+ */
+export function toAnimationClip(sample: SampledClip, boneNames: string[], extras?: ClipExtras): THREE.AnimationClip {
   const tracks: THREE.KeyframeTrack[] = boneNames.map((name, b) => {
     const { times, values } = reduceStep(sample.rotations[b], 4, sample.fps);
     return new THREE.QuaternionKeyframeTrack(`${name}.quaternion`, times, values, THREE.InterpolateDiscrete);
   });
   const root = reduceStep(sample.rootTranslation, 3, sample.fps);
   tracks.push(new THREE.VectorKeyframeTrack(`${ROOT_BONE}.position`, root.times, root.values, THREE.InterpolateDiscrete));
+  const n = sample.frameCount;
+  for (const prop of extras?.props ?? []) {
+    const data = sample.props[prop];
+    const rotation = reduceStep(data.rotations, 4, sample.fps);
+    tracks.push(new THREE.QuaternionKeyframeTrack(`${prop}.quaternion`, rotation.times, rotation.values, THREE.InterpolateDiscrete));
+    tracks.push(visibilityTrack(prop, f => data.visible[f] === 1, n, sample.fps));
+  }
+  for (const [frame, node] of extras?.faceNodes ?? []) tracks.push(visibilityTrack(node, f => sample.faceFrames[f] === frame, n, sample.fps));
   return new THREE.AnimationClip(sample.name, (sample.frameCount - 1) / sample.fps, tracks);
 }

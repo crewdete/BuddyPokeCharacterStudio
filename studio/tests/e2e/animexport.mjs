@@ -94,12 +94,14 @@ await check('every bone keyed in every clip (29 rotations + root translation), S
     assert.deepEqual([...rotated].sort(), [...bones].sort(), `${a.name}: rotation channels`);
     const translated = a.channels.filter(c => c.target.path === 'translation').map(c => all.json.nodes[c.target.node].name);
     assert.deepEqual(translated, ['Bip01'], `${a.name}: translation channels`);
-    assert.ok(a.channels.every(c => c.target.path !== 'scale'), `${a.name}: no scale channels`);
+    // M3C-2: scale is used only as the visibility of props and face nodes, never on a bone.
+    const faces = new Set(all.manifest.faces.map(f => f.name)), props = new Set(all.manifest.props.map(p => p.name));
+    assert.ok(a.channels.filter(c => c.target.path === 'scale').every(c => faces.has(all.json.nodes[c.target.node].name) || props.has(all.json.nodes[c.target.node].name)), `${a.name}: scale only on props/faces`);
     assert.ok(a.samplers.every(s => s.interpolation === 'STEP'), `${a.name}: STEP`);
   }
   // Float32 key times are rounded down so a player asked for exactly f/30 shows frame f.
   const t = all.json.animations[0].samplers[0];
-  return `${all.json.animations.length * 30} channels; first key times end at ${all.json.accessors[t.input].max[0]}`;
+  return `${all.json.animations.length * 30} skeletal channels; first key times end at ${all.json.accessors[t.input].max[0]}`;
 });
 
 await check('Three.js playback of all 94 clips matches the original engine (bones, root motion, deformation)', async () => {

@@ -14,7 +14,16 @@
 // mesh does not move (inverse bind matrices are computed from this skeleton in the exported pose).
 //
 // Units: glTF uses metres. One original unit is treated as one centimetre (scale 0.01), so the buddy is
-// about 1.4 m tall. Props (hidden unless an animation shows them) and the ground shadow are not exported.
+// about 1.4 m tall. The ground shadow is not exported. Props (hidden unless an animation shows them) are
+// exported only in animated files, when an exported clip shows them (M3C-2).
+//
+// Animated files (M3C-2): props and facial expressions are separate rigid nodes parented to their original
+// bone (never skinned: glTF ignores the transform of a skinned mesh node, and visibility is node scale):
+//   - each prop used by an exported clip: its original local transform, its rotation track and its
+//     visibility track (scale 1 shown / 1e-6 hidden), hidden in the initial display and in other clips;
+//   - the face: `Head` shows frame 1 (= the dressed face) and one copy `Head_F<nn>` per other expression
+//     frame used, each with the face texture the ORIGINAL TextureLibrary composes for that frame and look.
+//     Exactly one face node is visible at every frame of every clip.
 import * as THREE from 'three';
 import type { Buddy } from '@original/domain/buddy.js';
 import type { SceneNode } from '@original/engine/scene-graph.js';
@@ -22,7 +31,8 @@ import { createBuddy, type OriginalAssets } from '../original';
 import { BindSnapshot } from '../pose/bind';
 import { ARM_CHAIN, SIDES, TPose } from '../pose/tpose';
 import { CharacterRig, GROUND_MESHES } from '../scene/CharacterRig';
-import { sampleClip, toAnimationClip } from './animation/sample';
+import { TextureCache } from '../scene/textures';
+import { FACE_NODE, faceNodeName, HIDDEN_SCALE, nodeQuaternion, sampleClip, toAnimationClip, type SampledClip } from './animation/sample';
 
 export type ExportPose = 'rest' | 'tpose';
 export type RigidParts = 'skin' | 'parent';
@@ -60,6 +70,10 @@ export interface ExportManifest {
   /** What the skin is bound to: the exported pose (M3B), or always the original rest pose (animated export). */
   bind: 'pose' | 'rest';
   animations: { name: string; frames: number; fps: number; duration: number }[];
+  /** Animated export: props shown by at least one exported clip (rigid nodes with rotation + visibility tracks). */
+  props: { name: string; parent: string }[];
+  /** Animated export: face nodes, one per original expression frame used (frame 1 = `Head`, the dressed face). */
+  faces: { name: string; frame: number }[];
 }
 
 export interface PreparedExport {
@@ -105,8 +119,30 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
   // Static/rigged (M3B): the engine itself is posed. Animated (M3C): the engine stays at rest (the bind pose).
   if (options.pose === 'tpose' && !animated) new TPose(buddy.scene, bind).apply();
   const rig = new CharacterRig(buddy); // syncPose(): engine pose (rest or T-pose) -> Three bones; update(): parts, culling, materials
-  rig.root.updateMatrixWorld(true);
   const scene = buddy.scene;
+  // Animated: sample every clip on the fresh buddy first (exact rest restore before and after each clip),
+  // to know which props and face frames the exported clips use.
+  const samples: SampledClip[] = animated ? options.animations!.map(name => {
+    const clip = buddy.animations.get(name);
+    if (!clip) throw new Error(`Unknown animation "${name}"`);
+    return sampleClip(scene, clip, bind, scene.boneNames, EXPORT_SCALE);
+  }) : [];
+  const usedProps = scene.propNames.filter(name => samples.some(s => s.props[name]?.visible.some(v => v === 1)));
+  const faceFrames = [...new Set(samples.flatMap(s => Array.from(s.faceFrames)))].filter(f => f !== 1).sort((a, b) => a - b);
+  const faceMaterial = scene.node(FACE_NODE)?.mesh?.material ?? null;
+  const faceBitmaps = new Map<number, OffscreenCanvas>();
+  for (const frame of faceFrames) {
+    faceMaterial!.showFrame(frame); // original composition of this expression frame for this look
+    faceBitmaps.set(frame, faceMaterial!.bitmap!);
+  }
+  if (usedProps.length) {
+    // Props are hidden by the original hideProps() when dressed: build their parts (geometry, material, culling).
+    for (const name of usedProps) scene.node(name)!.visible = true;
+    rig.syncVisibility();
+    scene.hideProps();
+  }
+  rig.syncPose(); // engine back at the exact rest pose (sampling restored it): refresh every world matrix
+  rig.root.updateMatrixWorld(true);
   const parentBone = hierarchy(buddy);
   const root = new THREE.Group();
   root.name = 'BuddyPoke';
@@ -165,9 +201,16 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
   // ---- meshes: exact posed geometry
   const meshes: ExportManifest['meshes'] = [];
   const disposables: { dispose(): void }[] = [];
+  const faceTextures = new TextureCache();
+  const props: ExportManifest['props'] = [];
+  const faces: ExportManifest['faces'] = [];
+  const faceNodes = new Map<number, string>([[1, FACE_NODE]]);
   const v = new THREE.Vector3();
-  for (const part of rig.visibleParts()) {
+  const parts = [...rig.visibleParts(), ...rig.allMeshes().filter(m => usedProps.includes(m.name) && !rig.visibleParts().includes(m))];
+  for (const part of parts) {
     if (GROUND_MESHES.has(part.name)) continue;
+    const isProp = animated && usedProps.includes(part.name);
+    const isFace = animated && part.name === FACE_NODE;
     const source = part.geometry;
     const position = source.getAttribute('position');
     const world = new Float32Array(position.count * 3);
@@ -183,7 +226,9 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
         const bones = [0, 1, 2, 3].map(k => skinIndex.getComponent(i, k));
         const weights = [0, 1, 2, 3].map(k => skinWeight.getComponent(i, k));
         bindShape(v.clone(), bones, weights, v);
-      } else if (animated && owner0 && (options.rigidParts === 'skin' || !options.skeleton)) {
+      } else if (isProp) {
+        v.multiplyScalar(EXPORT_SCALE); // prop local space; the node carries the original local transform
+      } else if (animated && owner0 && !isFace && (options.rigidParts === 'skin' || !options.skeleton)) {
         bindShape(v.clone().applyMatrix4(nodeWorld), [boneIndex.get(owner0.name!)!], [1], v);
       } else if (animated && owner0) {
         v.applyMatrix4(nodeWorld).applyMatrix4(engineInverseBind[boneIndex.get(owner0.name!)!]).multiplyScalar(EXPORT_SCALE).applyMatrix4(restJoint[boneIndex.get(owner0.name!)!]);
@@ -212,7 +257,18 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
     const ownerBone = skinnedSource ? null : parentBone.get(node) ?? null; // rigid part: nearest ancestor bone
     let mesh: THREE.Mesh;
     let parentName: string | null = null;
-    if (skeleton && (skinnedSource || options.rigidParts === 'skin')) {
+    if (isProp) {
+      const node = scene.node(part.name)!;
+      const bone = exportBones.get(ownerBone!.name!)!;
+      mesh = new THREE.Mesh(geometry, material);
+      const p = node.position;
+      if (p) mesh.position.set(p.x, p.y, p.z).multiplyScalar(EXPORT_SCALE);
+      nodeQuaternion(node, mesh.quaternion);
+      mesh.scale.setScalar(HIDDEN_SCALE); // hidden unless a clip shows it, as in the original
+      bone.add(mesh);
+      parentName = bone.name;
+      props.push({ name: part.name, parent: bone.name });
+    } else if (skeleton && (skinnedSource || (options.rigidParts === 'skin' && !isFace))) {
       const indices = new Uint16Array(position.count * 4);
       const weights = new Float32Array(position.count * 4);
       if (skinnedSource) {
@@ -259,16 +315,35 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
       transparent: material.transparent,
       texture: [image.width, image.height],
     });
+    if (isFace) {
+      // One copy per other expression frame: same geometry and node, the original texture of that frame.
+      faces.push({ name: FACE_NODE, frame: 1 });
+      for (const frame of faceFrames) {
+        const name = faceNodeName(frame);
+        const map = faceTextures.get(faceBitmaps.get(frame)!);
+        map.name = name;
+        const faceMaterial = material.clone();
+        faceMaterial.name = name;
+        (faceMaterial as THREE.MeshBasicMaterial).map = map;
+        disposables.push(faceMaterial);
+        const copy = new THREE.Mesh(geometry, faceMaterial);
+        copy.name = name;
+        copy.position.copy(mesh.position);
+        copy.quaternion.copy(mesh.quaternion);
+        copy.scale.setScalar(HIDDEN_SCALE);
+        mesh.parent!.add(copy);
+        faceNodes.set(frame, name);
+        faces.push({ name, frame });
+        meshes.push({ ...meshes[meshes.length - 1], name });
+      }
+    }
   }
+  disposables.push({ dispose: () => faceTextures.retain(new Set()) });
   root.updateMatrixWorld(true);
 
   // Animated: the file may *display* the T-pose; the inverse binds (above) stay the original rest pose.
   if (animated && options.pose === 'tpose') solveExportTPose(exportBones, root);
-  const animations = animated ? options.animations!.map(name => {
-    const clip = buddy.animations.get(name);
-    if (!clip) throw new Error(`Unknown animation "${name}"`);
-    return toAnimationClip(sampleClip(scene, clip, bind, scene.boneNames, EXPORT_SCALE), scene.boneNames);
-  }) : [];
+  const animations = samples.map(sample => toAnimationClip(sample, scene.boneNames, { props: props.map(p => p.name), faceNodes }));
 
   const manifest: ExportManifest = {
     generator: 'BuddyPoke Studio (original BuddyRevival data)',
@@ -293,6 +368,8 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
       const clip = buddy.animations.get(a.name)!;
       return { name: a.name, frames: clip.frameCount, fps: clip.fps, duration: a.duration };
     }),
+    props,
+    faces: animated ? faces : [],
   };
   root.userData = { buddypoke: { ...manifest, bones: undefined, meshes: undefined } };
 

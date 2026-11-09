@@ -98,6 +98,13 @@ export async function checkGlb(glb: ArrayBuffer, manifest: ExportManifest): Prom
     if (missing.length) problems.push(`${expected.name}: bones not keyed: ${missing.join(', ')}`);
     if (!a.channels.some(c => c.target.path === 'translation' && json.nodes?.[c.target.node]?.name === 'Bip01')) problems.push(`${expected.name}: no root translation`);
     if (a.samplers.some(s => s.interpolation !== 'STEP')) problems.push(`${expected.name}: non-STEP interpolation`);
+    // M3C-2: props (rotation + visibility) and face nodes (visibility) keyed in every clip: no state carry-over.
+    const channelsOf = (path: string) => new Set(a.channels.filter(c => c.target.path === path).map(c => json.nodes?.[c.target.node]?.name));
+    const scaled = channelsOf('scale');
+    const unkeyedProps = manifest.props.filter(p => !rotated.has(p.name) || !scaled.has(p.name)).map(p => p.name);
+    if (unkeyedProps.length) problems.push(`${expected.name}: props not keyed: ${unkeyedProps.join(', ')}`);
+    const unkeyedFaces = manifest.faces.filter(f => !scaled.has(f.name)).map(f => f.name);
+    if (unkeyedFaces.length) problems.push(`${expected.name}: face nodes not keyed: ${unkeyedFaces.join(', ')}`);
     const end = Math.max(...a.samplers.map(s => json.accessors?.[s.input]?.max?.[0] ?? 0));
     if (Math.abs(end - expected.duration) > 1e-4) problems.push(`${expected.name}: duration ${end}, expected ${expected.duration}`);
   }

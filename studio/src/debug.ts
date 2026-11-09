@@ -5,6 +5,7 @@ import type { SceneNode } from '@original/engine/scene-graph.js';
 import type { CharacterController } from './character/controller';
 import { exportCharacter, type ExportOptions } from './export';
 import { EXPORT_SCALE } from './export/prepare';
+import { FACE_NODE, faceNodeName } from './export/animation/sample';
 import { createBuddy } from './original';
 import { BindSnapshot } from './pose/bind';
 import { updateWorlds } from './pose/tpose';
@@ -174,12 +175,35 @@ export function createDebug(controller: CharacterController, player: AnimationPl
    * Ground truth from the ORIGINAL engine on a fresh, never-animated buddy with the current look:
    * world bone positions (metres) and, for `meshClips`, deformed skinned vertices (original Skin.deform,
    * raw weights) of the given meshes at the given frames.
+   * M3C-2: at every sampled frame also the engine's prop visibility, the world vertices of every visible
+   * prop and of the face (rigid meshes: node world matrix x local vertices), and the face frame shown.
    */
-  const animationExpectations = async ({ clips, frames, meshClips = [], meshes = ['Body'] }: { clips: string[]; frames: (n: number) => number[]; meshClips?: string[]; meshes?: string[] }) => {
+  const animationExpectations = async ({ clips, frames, meshClips = [], meshes = ['Body'], timeline = false }: { clips: string[]; frames: (n: number) => number[]; meshClips?: string[]; meshes?: string[]; timeline?: boolean }) => {
     const fresh = await createBuddy(controller.assets, controller.currentCode);
     const bind = new BindSnapshot(fresh.scene);
-    const out: Record<string, { frames: number; fps: number; samples: Record<number, { heads: Record<string, number[]>; meshes?: Record<string, { positions: number[]; weightSums: number[] }> }> }> = {};
+    type Sample = {
+      heads: Record<string, number[]>;
+      meshes?: Record<string, { positions: number[]; weightSums: number[] }>;
+      props: Record<string, boolean>;
+      propPoints: Record<string, number[]>;
+      face: number;
+      faceNode: string;
+      facePoints: number[];
+    };
+    /** Every frame: face frame shown, and per prop a '0'/'1' string of the engine's visibility. */
+    type Timeline = { face: number[]; props: Record<string, string> };
+    const out: Record<string, { frames: number; fps: number; samples: Record<number, Sample>; timeline?: Timeline }> = {};
+    const faceFrame = () => {
+      const frame = S.node(FACE_NODE)?.mesh?.material?.frame ?? -1;
+      return frame === -1 ? 1 : frame; // compose() defaults to frame 1: -1 (as dressed) is the same bitmap
+    };
     const S = fresh.scene;
+    const rigidWorld = (name: string) => {
+      const node = S.node(name)!;
+      if (!node.mesh!.decoded) node.mesh!.decode(S);
+      const e = node.world.e;
+      return node.mesh!.vertices.flatMap(v => [0, 1, 2].map(k => (e[k] * v.x + e[4 + k] * v.y + e[8 + k] * v.z + e[12 + k]) * EXPORT_SCALE));
+    };
     for (const name of clips) {
       const clip = fresh.animations.get(name)!;
       clip.decode();
@@ -188,8 +212,15 @@ export function createDebug(controller: CharacterController, player: AnimationPl
       for (const f of frames(clip.frameCount)) {
         clip.showFrame(S, f);
         updateWorlds(S);
-        const sample: (typeof out)[string]['samples'][number] = {
+        const props = Object.fromEntries(S.propNames.filter(p => S.node(p)).map(p => [p, S.node(p)!.visible]));
+        const face = faceFrame();
+        const sample: Sample = {
           heads: Object.fromEntries(S.boneNames.map(b => { const e = S.node(b)!.world.e; return [b, [e[12] * EXPORT_SCALE, e[13] * EXPORT_SCALE, e[14] * EXPORT_SCALE]]; })),
+          props,
+          propPoints: Object.fromEntries(Object.entries(props).filter(([, shown]) => shown).map(([p]) => [p, rigidWorld(p)])),
+          face,
+          faceNode: faceNodeName(face),
+          facePoints: rigidWorld(FACE_NODE),
         };
         if (meshClips.includes(name)) {
           sample.meshes = {};
@@ -208,7 +239,17 @@ export function createDebug(controller: CharacterController, player: AnimationPl
         }
         out[name].samples[f] = sample;
       }
+      if (timeline) {
+        const t: Timeline = { face: [], props: Object.fromEntries(S.propNames.filter(p => S.node(p)).map(p => [p, ''])) };
+        for (let f = 0; f < clip.frameCount; f++) {
+          clip.showFrame(S, f);
+          t.face.push(faceFrame());
+          for (const p of Object.keys(t.props)) t.props[p] += S.node(p)!.visible ? '1' : '0';
+        }
+        out[name].timeline = t;
+      }
       bind.restore();
+      S.hideProps();
     }
     return out;
   };
@@ -221,11 +262,29 @@ export function createDebug(controller: CharacterController, player: AnimationPl
     gltf.scene.traverse(o => o.name && bones.set(o.name, o));
     const skinned = new Map<string, THREE.SkinnedMesh>();
     gltf.scene.traverse(o => (o as THREE.SkinnedMesh).isSkinnedMesh && skinned.set(o.name, o as THREE.SkinnedMesh));
-    const result: Record<string, { bone: number; root: number; worstBone?: string; mesh?: number; meshWeighted?: number }> = {};
+    type ClipResult = {
+      bone: number; root: number; worstBone?: string; mesh?: number; meshWeighted?: number;
+      /** M3C-2: sampled frames whose prop visibility / visible face node differ from the engine, and positions. */
+      propMismatches: string[]; faceMismatches: string[]; prop: number; face: number; propFrames: number; timelineFrames?: number;
+    };
+    const result: Record<string, ClipResult> = {};
+    const shown = (o: THREE.Object3D) => new THREE.Vector3().setFromMatrixScale(o.matrixWorld).x > 0.5;
+    const faceObjects = [...bones.values()].filter(o => (o as THREE.Mesh).isMesh && (o.name === FACE_NODE || o.name.startsWith(`${FACE_NODE}_F`)));
+    const worldPoints = (o: THREE.Mesh) => {
+      const pos = o.geometry.getAttribute('position');
+      return Array.from({ length: pos.count }, (_, i) => v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld).toArray());
+    };
+    const maxDistance = (points: number[][], flat: number[]) => {
+      let d = 0;
+      points.forEach((p, i) => (d = Math.max(d, Math.hypot(p[0] - flat[i * 3], p[1] - flat[i * 3 + 1], p[2] - flat[i * 3 + 2]))));
+      return d;
+    };
     const v = new THREE.Vector3();
     for (const [name, clip] of Object.entries(expected)) {
       const animation = gltf.animations.find(a => a.name === name);
-      if (!animation) { result[name] = { bone: Infinity, root: Infinity }; continue; }
+      if (!animation) { result[name] = { bone: Infinity, root: Infinity, propMismatches: ['missing'], faceMismatches: ['missing'], prop: Infinity, face: Infinity, propFrames: 0 }; continue; }
+      const propMismatches: string[] = [], faceMismatches: string[] = [];
+      let prop = 0, face = 0, propFrames = 0;
       mixer.stopAllAction();
       const action = mixer.clipAction(animation);
       action.setLoop(THREE.LoopOnce, 1);
@@ -240,6 +299,15 @@ export function createDebug(controller: CharacterController, player: AnimationPl
           if (d > bone) { bone = d; worstBone = `${b}@${f}`; }
           if (b === 'Bip01') root = Math.max(root, d);
         }
+        for (const [p, visible] of Object.entries(s.props)) {
+          const object = bones.get(p);
+          const isShown = object ? shown(object) : false;
+          if (isShown !== visible) propMismatches.push(`${p}@${f}: ${isShown ? 'shown' : 'hidden'}`);
+          if (visible && object) { prop = Math.max(prop, maxDistance(worldPoints(object as THREE.Mesh), s.propPoints[p])); propFrames++; }
+        }
+        const visibleFaces = faceObjects.filter(shown);
+        if (visibleFaces.map(o => o.name).join() !== s.faceNode) faceMismatches.push(`@${f}: ${visibleFaces.map(o => o.name).join('+') || 'none'} (engine ${s.faceNode})`);
+        if (visibleFaces.length === 1) face = Math.max(face, maxDistance(worldPoints(visibleFaces[0] as THREE.Mesh), s.facePoints));
         for (const [m, data] of Object.entries(s.meshes ?? {})) {
           const sm = skinned.get(m);
           if (!sm) continue;
@@ -253,13 +321,79 @@ export function createDebug(controller: CharacterController, player: AnimationPl
           }
         }
       }
+      let timelineFrames = 0;
+      if (clip.timeline) {
+        action.reset().play(); // a LoopOnce action that reached its end is paused (clampWhenFinished)
+        for (let f = 0; f < clip.frames; f++) {
+          mixer.setTime(f / clip.fps);
+          gltf.scene.updateMatrixWorld(true);
+          const node = faceNodeName(clip.timeline.face[f]);
+          const visibleFaces = faceObjects.filter(shown).map(o => o.name).join('+');
+          if (visibleFaces !== node) faceMismatches.push(`@${f}: ${visibleFaces || 'none'} (engine ${node})`);
+          for (const [p, seq] of Object.entries(clip.timeline.props)) {
+            const object = bones.get(p);
+            if ((object ? shown(object) : false) !== (seq[f] === '1')) propMismatches.push(`${p}@${f}`);
+          }
+          timelineFrames++;
+        }
+      }
       action.stop();
-      result[name] = hasMesh ? { bone, root, worstBone, mesh, meshWeighted } : { bone, root, worstBone };
+      const extras = { propMismatches, faceMismatches, prop, face, propFrames, timelineFrames };
+      result[name] = hasMesh ? { bone, root, worstBone, mesh, meshWeighted, ...extras } : { bone, root, worstBone, ...extras };
     }
     return result;
   };
 
+  /**
+   * M3C-2: compare every exported face node texture with what the ORIGINAL engine composes for that frame
+   * (fresh buddy with the current look, Material.showFrame(frame) -> TextureLibrary.compose), pixel by pixel.
+   */
+  const checkFaceTextures = async (buffer: ArrayBuffer) => {
+    const gltf = await new GLTFLoader().parseAsync(buffer, '');
+    const fresh = await createBuddy(controller.assets, controller.currentCode);
+    const material = fresh.scene.node(FACE_NODE)!.mesh!.material!;
+    const dressed = material.bitmap!;
+    const pixels = (image: CanvasImageSource & { width: number; height: number }, flip: boolean) => {
+      const c = new OffscreenCanvas(image.width, image.height);
+      const g = c.getContext('2d')!;
+      if (flip) { g.translate(0, image.height); g.scale(1, -1); } // glTF images are stored flipped for flipY=false
+      g.drawImage(image, 0, 0);
+      return g.getImageData(0, 0, image.width, image.height).data;
+    };
+    const meanDifference = (a: Uint8ClampedArray, b: Uint8ClampedArray) => {
+      if (a.length !== b.length) return Infinity;
+      let d = 0;
+      for (let i = 0; i < a.length; i++) d += Math.abs(a[i] - b[i]);
+      return d / a.length;
+    };
+    const out: { node: string; frame: number; meanDifference: number; differsFromDressed: number }[] = [];
+    const nodes: THREE.Mesh[] = [];
+    gltf.scene.traverse(o => (o as THREE.Mesh).isMesh && (o.name === FACE_NODE || o.name.startsWith(`${FACE_NODE}_F`)) && nodes.push(o as THREE.Mesh));
+    const dressedPixels = pixels(dressed, false);
+    for (const node of nodes) {
+      const frame = node.name === FACE_NODE ? 1 : Number(node.name.slice(FACE_NODE.length + 2));
+      material.showFrame(frame);
+      const exported = pixels((node.material as THREE.MeshBasicMaterial).map!.image as ImageBitmap, true);
+      out.push({ node: node.name, frame, meanDifference: meanDifference(exported, pixels(material.bitmap!, false)), differsFromDressed: meanDifference(exported, dressedPixels) });
+    }
+    return out.sort((a, b) => a.frame - b.frame);
+  };
+
+  /** M3C-2: nodes of an animated GLB as loaded (no Action applied: the initial display) and every stored scale key value. */
+  const describeAnimatedGlb = async (buffer: ArrayBuffer) => {
+    const gltf = await new GLTFLoader().parseAsync(buffer, '');
+    gltf.scene.updateMatrixWorld(true);
+    const nodes: Record<string, { mesh: boolean; skinned: boolean; parent: string | null; worldScale: number }> = {};
+    gltf.scene.traverse(o => {
+      if (o.name) nodes[o.name] = { mesh: (o as THREE.Mesh).isMesh === true, skinned: (o as THREE.SkinnedMesh).isSkinnedMesh === true, parent: o.parent?.name ?? null, worldScale: new THREE.Vector3().setFromMatrixScale(o.matrixWorld).x };
+    });
+    const scaleValues = [...new Set(gltf.animations.flatMap(a => a.tracks.filter(t => t.name.endsWith('.scale')).flatMap(t => Array.from(t.values))))];
+    return { nodes, scaleValues };
+  };
+
   return {
+    describeAnimatedGlb,
+    checkFaceTextures,
     animationExpectations,
     checkAnimatedGlb,
     loadGlbForInspection,

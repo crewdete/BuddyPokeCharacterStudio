@@ -48,6 +48,10 @@ Plan and analysis: [`../docs/studio/ANALYSIS_AND_PLAN.md`](../docs/studio/ANALYS
 - **M3C-1** skeletal animation export (exporter only; the Export-tab controls arrive in M3C-3): all 94 original clips
   in one GLB, bound to the original rest pose, every bone keyed per clip, STEP keys at 30 fps, root motion. See below.
 
+- **M3C-2** props and facial expressions in animated GLB files (exporter only): the original Sword, Rose, guitar (`Strat`)
+  and Mic with their rotation and visibility tracks, and the original face expressions as one face node per expression
+  frame with the texture the original engine composes. Every frame matches the engine (Three.js and Blender). See below.
+
 Animation shortcuts: `Space` play/pause, `,` / `.` previous / next frame while paused (ignored in text fields and menus).
 Viewport: `B` skeleton overlay, `X` X-ray (bones through the character).
 
@@ -65,8 +69,8 @@ Viewport shortcuts: `5` perspective/orthographic, `Home` or `F` reset view, `G` 
 ## Export
 
 Each export decodes a **fresh original buddy** from `chick.bin`, dresses it with the current look code and poses it
-(exact rest pose, or the M3A-3 T-pose). The live character, its animation state and its rig are never touched, and
-animation-only props are not exported.
+(exact rest pose, or the M3A-3 T-pose). The live character, its animation state and its rig are never touched.
+Animation-only props are exported only in animated files, when an exported clip shows them (M3C-2).
 
 | | GLB · rigged | GLB · static |
 |---|---|---|
@@ -105,7 +109,32 @@ transparency modes; the static GLB already covers static use, so OBJ adds little
   weights summing to 1 while the original quantised weights sum to 0.996–1 (unavoidable, documented).
 - **Blender:** set the scene to **30 fps before importing** (Blender converts glTF seconds to frames at the scene rate and
   has no import option for it). Each clip becomes an Action with its original name.
-- Props and facial expressions are not exported yet (M3C-2).
+
+### Props and facial expressions in animated GLB (M3C-2)
+
+glTF has no visibility channel and no texture swap that Blender imports, so both use **node scale as visibility**
+(STEP keys: `1` shown, `1e-6` hidden; never on a bone). Props and face nodes are plain rigid mesh nodes parented to their
+original bone, never skinned (glTF ignores a skinned mesh node's transform) and never joints (the skin stays the 29 bones).
+
+- **Props:** each original prop that an exported clip shows (Sword, Rose, Mic under `Bip01_R_Hand`; the guitar `Strat`
+  under `Bip01_Pelvis`), with its original local position, its rotation track and its visibility track as the engine
+  applies them (`hideProps()` then the clip's tracks, including the original rule that a frame past the end of a short
+  track reads its first entry). Hidden in the initial display and keyed hidden in every clip that does not use it. Props
+  no exported clip shows (balloon, mallet, ball, scooter) are not written.
+- **Facial expressions:** `Head` is the dressed face (= frame 1: the original `TextureLibrary.compose` defaults to frame 1),
+  plus one copy `Head_F<nn>` per other expression frame used by the exported clips (up to 31 more for all 94 clips),
+  sharing the face geometry, each with the texture the original engine composes for that frame and the current look
+  (`Material.showFrame(frame)`; pixel-identical, checked). Exactly one face node is visible at every frame.
+- **No carry-over:** every clip keys every prop (rotation + visibility) and every face node, so switching Actions never
+  leaves a prop or an expression from the previous clip.
+- **Change from M3C-1, needed for this:** in animated files the face (`Head`) is always parented to `Bip01_Head` (it can
+  no longer be skinned, since its visibility is a node scale). Its vertices are placed with the engine's own rest relation,
+  so its position is unchanged (≤0.0005 mm). Bone/root animation data and skinned meshes are byte-identical to M3C-1.
+- **Measured against the original engine:** every frame of all 94 clips (11,609 frames): prop visibility and the visible
+  face equal the engine, 0 mismatches (Three.js and Blender). Prop vertices ≤0.001 mm, face vertices ≤0.001 mm.
+- **In Blender:** props and face nodes are separate objects, each with its own slot in every Action. Selecting a clip
+  means assigning the Action to the armature *and* to those objects (the importer stacks all Actions as NLA tracks on each
+  object, which plays them together; `tests/blender/validate_anim.py` shows how to select one).
 
 ### Blender validation
 
@@ -149,7 +178,7 @@ Vitest 4's optional peer dependencies; installing from the committed lockfile (`
 src/
   original/   typed adapter around ../web/src (no re-implementation)
   export/     prepare.ts (fresh buddy -> export scene), glb.ts (write + self-check), index.ts (workflow),
-              animation/sample.ts (original clips -> STEP keyframes)
+              animation/sample.ts (original clips -> STEP keyframes, prop visibility/rotation, face frames)
   pose/       BindSnapshot (exact rest pose), AnimationPlayer (original showFrame, timing per Animation.step,
               rest/T-pose/animation mode), tpose.ts (T-pose solver), catalog.ts (original moods.xml / pokes.xml)
   character/  CharacterController: serialized edits through the original Wardrobe, rig update, undo history;
@@ -168,7 +197,8 @@ tests/
               animate.mjs (Animate tab, transport, keyboard, integration, responsive),
               tpose.mjs (modes, T-pose geometry, skeleton overlay, X-ray, camera preservation),
               export.mjs (GLB structure, pose, skeleton, weights, textures, isolation; Blender if available),
-              animexport.mjs (94 clips: structure, accuracy vs the engine, display pose; Blender if available)
+              animexport.mjs (94 clips: structure, accuracy vs the engine, display pose; Blender if available),
+              animprops.mjs (props + facial expressions: every-frame timing, textures, sync; Blender if available)
   blender/    validate_glb.py (static/rigged GLB), validate_anim.py (animated GLB, M3C)
     fixtures/original-bind.html   the original renderer drawing the bind pose (reference for render.mjs)
 ```
