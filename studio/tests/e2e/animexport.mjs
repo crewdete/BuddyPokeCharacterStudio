@@ -90,8 +90,9 @@ await check('clip names, frame counts and 30 fps durations preserved', async () 
 await check('every bone keyed in every clip (29 rotations + root translation), STEP only, key times ≤ f/30', async () => {
   const bones = all.manifest.bones.map(b => b.name);
   for (const a of all.json.animations) {
+    const propNames = all.manifest.props.map(p => p.name); // M3C-2: props also carry a rotation channel
     const rotated = new Set(a.channels.filter(c => c.target.path === 'rotation').map(c => all.json.nodes[c.target.node].name));
-    assert.deepEqual([...rotated].sort(), [...bones].sort(), `${a.name}: rotation channels`);
+    assert.deepEqual([...rotated].sort(), [...bones, ...propNames].sort(), `${a.name}: rotation channels`);
     const translated = a.channels.filter(c => c.target.path === 'translation').map(c => all.json.nodes[c.target.node].name);
     assert.deepEqual(translated, ['Bip01'], `${a.name}: translation channels`);
     // M3C-2: scale is used only as the visibility of props and face nodes, never on a bone.
