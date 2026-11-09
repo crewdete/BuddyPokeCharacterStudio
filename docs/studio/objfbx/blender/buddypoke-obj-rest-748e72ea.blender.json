@@ -1,0 +1,55 @@
+{
+  "file": "buddypoke-obj-rest-748e72ea.zip",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "ZIP is valid (CRC) and holds the .obj, the .mtl and the textures",
+      "ok": true,
+      "detail": "5 files: buddypoke-obj-rest-748e72ea.obj, buddypoke-obj-rest-748e72ea.mtl, buddypoke-obj-rest-748e72ea_Head_0.png, buddypoke-obj-rest-748e72ea_Hair_Simple_ScruffySide_1.png\u2026"
+    },
+    {
+      "name": "file opens with Blender's OBJ importer",
+      "ok": true,
+      "detail": "{'FINISHED'}"
+    },
+    {
+      "name": "one object per mesh part (3)",
+      "ok": true,
+      "detail": "['Body', 'Hair_Simple_ScruffySide', 'Head']"
+    },
+    {
+      "name": "triangle count of every part = the export",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "vertex positions = the static GLB of the same look and pose (rest)",
+      "ok": true,
+      "detail": "max 0.00086 mm (OBJ stores 6 decimals)"
+    },
+    {
+      "name": "texture coordinates on every part",
+      "ok": true,
+      "detail": "missing: []"
+    },
+    {
+      "name": "every part has its original texture (loaded, original size)",
+      "ok": true,
+      "detail": "3 materials"
+    },
+    {
+      "name": "transparency: alpha from the texture exactly on the transparent parts (map_d)",
+      "ok": true,
+      "detail": "1 transparent"
+    },
+    {
+      "name": "render",
+      "ok": true,
+      "detail": "buddypoke-obj-rest-748e72ea-front.png"
+    }
+  ],
+  "ok": true,
+  "renders": [
+    "buddypoke-obj-rest-748e72ea-front.png"
+  ]
+}

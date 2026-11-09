@@ -1,0 +1,53 @@
+{
+  "file": "buddypoke-fbx-rigged-tpose-748e72ea.fbx",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens with Blender's FBX importer; scene set to 30 fps from the file",
+      "ok": true,
+      "detail": "{'FINISHED'}, 30 fps"
+    },
+    {
+      "name": "one armature",
+      "ok": true,
+      "detail": "1 armatures"
+    },
+    {
+      "name": "the 29 original bones with their original names (+ 0 Ctrl_ helper bones)",
+      "ok": true,
+      "detail": "29 original, helpers []"
+    },
+    {
+      "name": "original hierarchy (every bone's parent)",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "all 3 meshes imported",
+      "ok": true,
+      "detail": "missing []"
+    },
+    {
+      "name": "skinned meshes deformed by the armature (Armature modifier + vertex groups)",
+      "ok": true,
+      "detail": "not skinned: []"
+    },
+    {
+      "name": "embedded textures load; every mesh material has its image",
+      "ok": true,
+      "detail": "7/7 images, 3 textured materials"
+    },
+    {
+      "name": "armature rest pose = the original rest pose (bind)",
+      "ok": true,
+      "detail": "max 0.000 mm (clean unit-axis rest, \u22641.22 mm documented)"
+    },
+    {
+      "name": "initial display pose = tpose",
+      "ok": true,
+      "detail": "max 0.0003 mm"
+    }
+  ],
+  "ok": true,
+  "clips": {}
+}

@@ -1,0 +1,153 @@
+{
+  "file": "idle in-place.fbx",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens with Blender's FBX importer; scene set to 30 fps from the file",
+      "ok": true,
+      "detail": "{'FINISHED'}, 30 fps"
+    },
+    {
+      "name": "one armature",
+      "ok": true,
+      "detail": "1 armatures"
+    },
+    {
+      "name": "the 29 original bones with their original names (+ 13 Ctrl_ helper bones)",
+      "ok": true,
+      "detail": "29 original, helpers ['Ctrl_Head', 'Ctrl_Head_F02', 'Ctrl_Head_F03', 'Ctrl_Head_F04']\u2026"
+    },
+    {
+      "name": "original hierarchy (every bone's parent)",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "all 16 meshes imported",
+      "ok": true,
+      "detail": "missing []"
+    },
+    {
+      "name": "skinned meshes deformed by the armature (Armature modifier + vertex groups)",
+      "ok": true,
+      "detail": "not skinned: []"
+    },
+    {
+      "name": "embedded textures load; every mesh material has its image",
+      "ok": true,
+      "detail": "33/33 images, 16 textured materials"
+    },
+    {
+      "name": "armature rest pose = the original rest pose (bind)",
+      "ok": true,
+      "detail": "max 0.000 mm (clean unit-axis rest, \u22641.22 mm documented)"
+    },
+    {
+      "name": "all 13 clips imported as Actions (BuddyPoke|<original name>)",
+      "ok": true,
+      "detail": "13 actions"
+    },
+    {
+      "name": "every Action spans the original frames (Blender frames 1..n)",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "bone positions match the original engine in all 13 clips",
+      "ok": true,
+      "detail": "worst 0.0013 mm"
+    },
+    {
+      "name": "root motion matches the original engine",
+      "ok": true,
+      "detail": "worst 0.00006 mm"
+    },
+    {
+      "name": "mesh deformation, properly weighted vertices (3 clips)",
+      "ok": true,
+      "detail": "worst 0.030 mm"
+    },
+    {
+      "name": "mesh deformation, all vertices incl. weight normalisation (3 clips)",
+      "ok": true,
+      "detail": "worst 5.901 mm"
+    },
+    {
+      "name": "bones, props and face in sync at every sampled frame",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop vertices where the engine puts them (no props)",
+      "ok": true,
+      "detail": "worst 0.00000 mm"
+    },
+    {
+      "name": "face vertices where the engine puts them (13 face nodes)",
+      "ok": true,
+      "detail": "worst 0.00050 mm"
+    },
+    {
+      "name": "facial expression timing: the engine's face at every frame (1888 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop visibility timing: the engine's props at every frame (1888 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "renders",
+      "ok": true,
+      "detail": "idle in-place-pose_joinNow-136.png, idle in-place-pose_contra-64.png, idle in-place-pose_contra_attention-42.png"
+    }
+  ],
+  "ok": true,
+  "clips": {
+    "pose_joinNow": {
+      "bone_mm": 0.0005884661750418576
+    },
+    "pose_contra": {
+      "bone_mm": 0.0005755905040355987
+    },
+    "pose_contra_attention": {
+      "bone_mm": 0.0004356041697415752
+    },
+    "pose_contra_bow": {
+      "bone_mm": 0.0013383893628070053
+    },
+    "pose_contra_canCan": {
+      "bone_mm": 0.0012291425840438176
+    },
+    "pose_contra_lookFeet": {
+      "bone_mm": 0.0010712266418702262
+    },
+    "pose_contra_shift": {
+      "bone_mm": 0.0005705899595780906
+    },
+    "pose_contra_toStand": {
+      "bone_mm": 0.0005158148387274437
+    },
+    "pose_stand": {
+      "bone_mm": 0.0004917125320618102
+    },
+    "pose_stand_lookAround": {
+      "bone_mm": 0.00039872789860545554
+    },
+    "pose_stand_model": {
+      "bone_mm": 0.0006235828849278667
+    },
+    "pose_stand_stretch": {
+      "bone_mm": 0.0010609734838388752
+    },
+    "pose_stand_toContra": {
+      "bone_mm": 0.000400689564561651
+    }
+  },
+  "renders": [
+    "idle in-place-pose_joinNow-136.png",
+    "idle in-place-pose_contra-64.png",
+    "idle in-place-pose_contra_attention-42.png"
+  ]
+}
