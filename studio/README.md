@@ -209,11 +209,13 @@ Static site: `npm run build` writes everything to `studio/dist/` (the app plus t
 | Root Directory | `studio` |
 | Include source files outside of the Root Directory | **on** (the build reads `../web/src` and `../web/assets`) |
 | Framework / install / build / output | from `vercel.json`: Vite, `npm ci`, `npm run build`, `dist` |
-| Production Branch | `production` (a branch that does not exist until a release is approved) |
+| Production Branch | `main` |
+| Deployment Protection | Vercel Authentication on (previews need a Vercel login) |
 
 Branch strategy: development happens on `studio/analysis-plan`; every push there gets a **Preview** deployment only.
-Nothing reaches production until the `production` branch is created from an approved commit (a deliberate, separate step).
-`main` mirrors the original BuddyRevival app (no `studio/` folder), so a build of `main` fails instead of publishing.
+`main` mirrors the original BuddyRevival app and has no `studio/` folder, so a production build of `main` fails instead
+of publishing anything. Production goes live only when an approved studio commit is merged into `main` (a deliberate,
+separate step). The project was created from `main` with a deliberately failing first build, so nothing was published.
 
 ## Layout
 
