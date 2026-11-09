@@ -37,6 +37,41 @@ export function createDebug(controller: CharacterController, player: AnimationPl
     setSpeed: (speed: number) => player.setSpeed(speed),
     setLoop: (loop: boolean) => player.setLoop(loop),
     state: () => player.snapshot(),
+    showRest: () => player.showRest(),
+    showTPose: () => player.showTPose(),
+    showAnimation: () => player.showAnimation(),
+    /** World positions of the Three bones (what the skeleton overlay must show). */
+    boneWorld: () => {
+      rig.root.updateMatrixWorld(true);
+      return Object.fromEntries(rig.bones.map(b => [b.name, new THREE.Vector3().setFromMatrixPosition(b.matrixWorld).toArray()]));
+    },
+    /** Normalised world direction of each bone's local +X axis (arm alignment checks). */
+    boneAxes: () => {
+      rig.root.updateMatrixWorld(true);
+      return Object.fromEntries(rig.bones.map(b => [b.name, new THREE.Vector3().setFromMatrixColumn(b.matrixWorld, 0).normalize().toArray()]));
+    },
+    /** Skinned vertex positions of a mesh in the current pose (CPU skinning, same maths as the GPU). */
+    skinnedPositions: (name: string) => {
+      rig.root.updateMatrixWorld(true);
+      const mesh = rig.allMeshes().find(m => m.name === name) as THREE.SkinnedMesh | undefined;
+      if (!mesh?.isSkinnedMesh) return null;
+      const position = mesh.geometry.getAttribute('position');
+      const out: number[] = [];
+      const v = new THREE.Vector3();
+      for (let i = 0; i < position.count; i++) out.push(...mesh.applyBoneTransform(i, v.fromBufferAttribute(position, i)).toArray());
+      const skinIndex = mesh.geometry.getAttribute('skinIndex');
+      const skinWeight = mesh.geometry.getAttribute('skinWeight');
+      const influences = Array.from({ length: position.count }, (_, i) =>
+        [0, 1, 2, 3].filter(k => skinWeight.getComponent(i, k) > 0).map(k => rig.bones[skinIndex.getComponent(i, k)].name),
+      );
+      return { positions: out, influences, index: Array.from(mesh.geometry.index?.array ?? []) };
+    },
+    /** The skeleton overlay as drawn. */
+    skeleton: () => {
+      const view = window.__studioSkeleton;
+      if (!view) return null;
+      return { visible: view.group.visible, xray: view.xrayOn, counts: view.counts, joints: view.drawnJoints(), names: view.bones.map(b => b.name) };
+    },
     catalog: () => catalog,
     /** Engine world position of every named scene node (original transforms). */
     worldPositions: () => Object.fromEntries(named().map(n => [n.name!, [n.world.e[12], n.world.e[13], n.world.e[14]]])),

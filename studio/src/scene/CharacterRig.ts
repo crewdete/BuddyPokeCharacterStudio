@@ -33,6 +33,8 @@ export const toThreeMatrix = (m: OriginalMatrix, target = new THREE.Matrix4()) =
 export class CharacterRig {
   readonly root = new THREE.Group();
   private readonly listeners = new Set<() => void>();
+  /** Extra bounds the default framing must include (the T-pose extent; set by the app at load). */
+  framingExtra: THREE.Box3 | null = null;
   readonly skeleton: THREE.Skeleton;
   readonly scene: Scene;
   private readonly objects = new Map<SceneNode, THREE.Object3D>();

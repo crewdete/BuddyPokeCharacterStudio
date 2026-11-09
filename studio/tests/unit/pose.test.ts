@@ -274,9 +274,13 @@ describe('AnimationPlayer modes (M3A-2)', () => {
     player.play();
     player.step(1); // ignored while playing
     expect(player.snapshot().frame).toBe(39);
-    player.showRest(); // pauses
-    expect(player.snapshot()).toMatchObject({ state: 'paused', mode: 'rest' });
-    player.play(); // resumes from the kept frame in animation mode
+    player.showRest(); // M3A-3: keeps playing state, freezes the clock
+    expect(player.snapshot()).toMatchObject({ state: 'playing', mode: 'rest', frame: 39 });
+    expect(player.advancing).toBe(false);
+    player.tick(1000);
+    player.tick(9000);
+    expect(player.snapshot().frame).toBe(39);
+    player.showAnimation(); // resumes from the kept frame, still playing
     expect(player.snapshot()).toMatchObject({ state: 'playing', mode: 'animation', frame: 39 });
     player.stop();
     expect(player.snapshot()).toMatchObject({ state: 'rest', mode: 'rest', frame: 0 });

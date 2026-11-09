@@ -11,6 +11,8 @@ export function characterBounds(rig: CharacterRig): THREE.Box3 {
   rig.root.updateMatrixWorld(true);
   const box = new THREE.Box3();
   for (const mesh of rig.visibleParts()) box.expandByObject(mesh, true);
+  // Also fit the T-pose (wider than the rest pose), so switching modes never needs a camera change.
+  if (rig.framingExtra) box.union(rig.framingExtra);
   return box;
 }
 

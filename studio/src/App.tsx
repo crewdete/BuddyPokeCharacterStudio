@@ -5,6 +5,7 @@ import { AnimationPlayer } from './pose/player';
 import { createDebug, type StudioDebug } from './debug';
 import { createBuddy, describeBuddy, loadOriginalAssets, type BuddyInfo } from './original';
 import { CharacterRig } from './scene/CharacterRig';
+import { characterBounds } from './scene/framing';
 import { Sidebar } from './ui/Sidebar';
 import { DataPanel } from './ui/DataPanel';
 import { ComparisonViewport, Viewport } from './viewport/Viewport';
@@ -47,6 +48,10 @@ export function App() {
       const animation = new AnimationPlayer(buddy.scene, buddy.animations, built);
       // Re-dressing hides props and rebuilds materials: show the current animation frame again.
       built.subscribe(() => animation.reapply());
+      // Measure the T-pose once (before the first frame) so the default framing fits every mode.
+      animation.showTPose();
+      built.framingExtra = characterBounds(built);
+      animation.showRest();
       const control = await CharacterController.create(assets, buddy, built);
       const info = await describeBuddy(buddy, assets.wardrobe);
       const catalog = buildCatalog({

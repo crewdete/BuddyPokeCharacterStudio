@@ -36,7 +36,13 @@ Plan and analysis: [`../docs/studio/ANALYSIS_AND_PLAN.md`](../docs/studio/ANALYS
   search) and a transport bar under the viewport (play/pause, stop, frame counter, frame slider, loop, speed 0.25×–2×,
   clip name, Rest / Animation). Customizing, presets, look codes and undo keep the selected clip and paused frame.
 
+- **M3A-3** poses and skeleton: **Rest | T-pose | Animation** switch. The T-pose is solved from the original rest pose:
+  each arm bone (UpperArm, Forearm, Hand) gets the smallest rotation from its rest rotation that points its axis along
+  world ±X; every other bone stays at rest. Switching modes never changes the clip, frame, speed, loop or play state
+  (the clock freezes outside Animation). **Skeleton** overlay of the 29 real bones (helpers dashed) with **X-ray**.
+
 Animation shortcuts: `Space` play/pause, `,` / `.` previous / next frame while paused (ignored in text fields and menus).
+Viewport: `B` skeleton overlay, `X` X-ray (bones through the character).
 
 Editor shortcuts: `Ctrl/Cmd+Z` undo, `Ctrl/Cmd+Shift+Z` or `Ctrl+Y` redo (text fields keep their own undo).
 
@@ -77,7 +83,7 @@ Vitest 4's optional peer dependencies; installing from the committed lockfile (`
 src/
   original/   typed adapter around ../web/src (no re-implementation)
   pose/       BindSnapshot (exact rest pose), AnimationPlayer (original showFrame, timing per Animation.step,
-              rest/animation mode), catalog.ts (groups and names from the original moods.xml / pokes.xml)
+              rest/T-pose/animation mode), tpose.ts (T-pose solver), catalog.ts (original moods.xml / pokes.xml)
   character/  CharacterController: serialized edits through the original Wardrobe, rig update, undo history;
               presets.ts: look-code validation, preset files, storage (pure, unit-tested)
   scene/      engine scene -> Three.js (CharacterRig, textures, depth offset, framing)
@@ -91,6 +97,7 @@ tests/
               customize.mjs (every category via the panel; look codes checked in the original app),
               presets.mjs (look codes, Default/Random, presets, files, undo/redo, storage edge cases),
               animation.mjs (94 clips / 470 frames vs the original renderer, props, Stop, bleed, timing),
-              animate.mjs (Animate tab, transport, keyboard, integration, responsive)
+              animate.mjs (Animate tab, transport, keyboard, integration, responsive),
+              tpose.mjs (modes, T-pose geometry, skeleton overlay, X-ray, camera preservation)
     fixtures/original-bind.html   the original renderer drawing the bind pose (reference for render.mjs)
 ```

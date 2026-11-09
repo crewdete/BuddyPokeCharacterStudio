@@ -243,6 +243,13 @@ Full `npm test` and `npm run test:e2e` (smoke, render, viewport, customize, pres
   rest pose than in animated frames, where rotations are exact unit quaternions. The Studio reproduces this
   exactly. Export (M3B/M4) must decide how to present it, since glTF expects clean rotations: for example,
   orthonormalise the rest rotations and document the ≤0.26% / ≤0.07-unit change.
+- **M3A-3 T-pose (as built):** only the six arm bones change; their axes are exactly horizontal (worst 8.5e-7°).
+  The original shoulders are 0.047 units out of mirror symmetry, and the T-pose carries that offset unchanged.
+  Arm segments keep the scale they inherit from the original rest ancestors (≤0.2% from rest lengths).
+  Linear-blend skinning with the original 1–3 weights stretches the armpit folds of the arms-down rest pose
+  (median edge 1.00×, 5–95% 0.86–1.19×, extremes 0.36–6.1×); the rest of the mesh is unchanged.
+  Switching modes no longer pauses playback (the clock freezes outside Animation), per the M3A-3 requirements.
+  X-ray is on by default when the skeleton is shown, because depth-tested bones are almost entirely inside the mesh.
 - 10 clips (not 9) reveal props: jamA1/jamB1/jamB2 (guitar), jamA2 (mic), swordA1/swordA2/mood_swordTwirl (sword),
   rose1/rose2/mood_lookingForLove (rose).
 

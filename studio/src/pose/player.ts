@@ -11,6 +11,7 @@
 import type { Animation } from '@original/engine/animation.js';
 import type { Scene } from '@original/engine/scene-graph.js';
 import { BindSnapshot } from './bind';
+import { TPose } from './tpose';
 
 /** What the player drives after the original engine has applied a frame (the 3D rig in the app). */
 export interface PoseSink {
@@ -23,8 +24,8 @@ export interface PoseSink {
 }
 
 export type PlayerState = 'rest' | 'playing' | 'paused' | 'ended';
-/** What the viewport shows: the exact rest pose, or the current animation frame. */
-export type PoseMode = 'rest' | 'animation';
+/** What the viewport shows: the exact rest pose, the computed T-pose, or the current animation frame. */
+export type PoseMode = 'rest' | 'tpose' | 'animation';
 
 export interface PlayerSnapshot {
   state: PlayerState;
@@ -58,6 +59,7 @@ export function frameAt(seconds: number, fps: number, frameCount: number, loop: 
 
 export class AnimationPlayer {
   private readonly bind: BindSnapshot;
+  readonly tpose: TPose;
   private readonly listeners = new Set<() => void>();
   private clip: Animation | null = null;
   private state: PlayerState = 'rest';
@@ -77,6 +79,7 @@ export class AnimationPlayer {
     private readonly sink: PoseSink,
   ) {
     this.bind = new BindSnapshot(scene);
+    this.tpose = new TPose(scene, this.bind);
   }
 
   /** Names of every original clip, in package order. */
@@ -114,6 +117,11 @@ export class AnimationPlayer {
     return this.state === 'playing';
   }
 
+  /** True while frames actually advance (playing and showing the animation). Rest / T-pose freeze the clock. */
+  get advancing() {
+    return this.state === 'playing' && this.mode === 'animation';
+  }
+
   /**
    * Select a clip and show its first frame (paused). Always starts from the exact bind pose, so bones
    * this clip does not animate never keep the previous clip's pose (the original app lets them bleed).
@@ -140,7 +148,7 @@ export class AnimationPlayer {
       this.time = 0;
       this.frame = 0;
     }
-    if (this.mode === 'rest' || this.state === 'ended' || this.frame === 0) {
+    if (this.mode !== 'animation' || this.state === 'ended' || this.frame === 0) {
       this.mode = 'animation';
       this.applyFrame(this.frame);
     }
@@ -170,27 +178,41 @@ export class AnimationPlayer {
   }
 
   /**
-   * Show the exact rest pose but keep the clip and its position (pauses playback). Unlike stop(),
-   * switching back with showAnimation() returns to the same frame.
+   * Show the exact rest pose. The clip, frame, speed, loop and playing/paused state are all kept; the
+   * animation clock is frozen until showAnimation(). Unlike stop(), nothing is reset.
    */
   showRest() {
     if (this.mode === 'rest') return;
-    if (this.state === 'playing') this.state = 'paused';
     this.mode = 'rest';
     this.resetToBind();
-    this.sink.syncPose();
-    this.sink.syncVisibility();
-    this.sink.refreshTextures();
+    this.sync();
     this.emit();
   }
 
-  /** Show the current animation frame again (paused if it was paused or resting). */
+  /** Show the T-pose computed from the rest pose (same preservation rules as showRest()). */
+  showTPose() {
+    if (this.mode === 'tpose') return;
+    this.mode = 'tpose';
+    this.resetToBind(); // props hidden, dressed face
+    this.tpose.apply();
+    this.sync();
+    this.emit();
+  }
+
+  /** Show the animation again at the exact frame it was left on; playback resumes if it was playing. */
   showAnimation() {
     if (this.mode === 'animation' || !this.clip) return;
     this.mode = 'animation';
     if (this.state === 'rest') this.state = 'paused';
+    this.lastNow = null; // the frozen clock restarts here, no jump
     this.applyFrame(this.frame);
     this.emit();
+  }
+
+  private sync() {
+    this.sink.syncPose();
+    this.sink.syncVisibility();
+    this.sink.refreshTextures();
   }
 
   /** Step one frame while paused (clamped to the clip). */
@@ -227,7 +249,7 @@ export class AnimationPlayer {
 
   /** Advance with the wall clock (ms, e.g. performance.now()). Call once per rendered frame while playing. */
   tick(now: number) {
-    if (this.state !== 'playing' || !this.clip) return;
+    if (!this.advancing || !this.clip) return;
     if (this.lastNow !== null) this.time += ((now - this.lastNow) / 1000) * this.speed;
     this.lastNow = now;
     const { frame, ended } = frameAt(this.time, this.clip.fps, this.clip.frameCount, this.loop);
@@ -245,7 +267,7 @@ export class AnimationPlayer {
    * props and builds new materials (resetting the face frame), and the frame must show again even when paused.
    */
   reapply() {
-    if (!this.clip || this.state === 'rest' || this.mode === 'rest') return;
+    if (!this.clip || this.state === 'rest' || this.mode !== 'animation') return;
     this.prewarm();
     this.applyFrame(this.frame);
   }

@@ -9,6 +9,7 @@ import { FRONT, characterBounds, frameBox, orthoZoomFor } from '../scene/framing
 import { useViewport } from '../state/viewport';
 import type { AnimationEntry } from '../pose/catalog';
 import { Ground } from './Ground';
+import { SkeletonOverlay } from './SkeletonOverlay';
 import { Transport } from './Transport';
 import { ViewportToolbar } from './ViewportToolbar';
 
@@ -40,9 +41,9 @@ function Playback({ player, name }: { player: AnimationPlayer | null; name: stri
   useFrame(() => {
     const frames = (window.__studioFrames ??= {});
     frames[name] = (frames[name] ?? 0) + 1;
-    if (!player?.playing) return;
+    if (!player?.advancing) return;
     player.tick(performance.now());
-    if (player.playing) invalidate();
+    if (player.advancing) invalidate();
   }, -1);
   return null;
 }
@@ -157,6 +158,7 @@ function StudioScene({ rig, player }: { rig: CharacterRig | null; player: Animat
         />
       )}
       {rig && <Character rig={rig} />}
+      {rig && <SkeletonOverlay rig={rig} />}
     </>
   );
 }

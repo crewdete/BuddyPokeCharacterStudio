@@ -105,6 +105,9 @@ export function Transport({ player, entries }: { player: AnimationPlayer; entrie
           <button type="button" role="radio" aria-checked={s.mode === 'rest'} onClick={() => player.showRest()} title="Original rest pose">
             Rest
           </button>
+          <button type="button" role="radio" aria-checked={s.mode === 'tpose'} onClick={() => player.showTPose()} title="T-pose computed from the rest pose">
+            T-pose
+          </button>
           <button type="button" role="radio" aria-checked={s.mode === 'animation'} disabled={!hasClip} onClick={() => player.showAnimation()} title="Animation frame">
             Animation
           </button>
