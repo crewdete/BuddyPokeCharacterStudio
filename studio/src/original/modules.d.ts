@@ -43,6 +43,9 @@ declare module '@original/engine/skin.js' {
 declare module '@original/engine/material.js' {
   export type Bitmap = OffscreenCanvas;
   export class Material {
+    /** The catalog <material> element this bitmap is composed from (carries hasAlpha, clipRect). */
+    description: Element;
+    lightmap: string | null;
     readonly bitmap: Bitmap | null;
     frame: number;
     showFrame(frame: number): void;
@@ -106,7 +109,11 @@ declare module '@original/engine/scene-graph.js' {
     hideProps(): void;
   }
   export class Camera extends SceneNode {
+    /** Horizontal field of view in radians (the original renderer scales both axes by the width). */
     fov: number;
+    /** World-to-camera matrix, valid after update(). */
+    view: Matrix4;
+    update(viewport: { width: number; height: number }): void;
   }
   export function buildNode(raw: unknown): SceneNode;
 }

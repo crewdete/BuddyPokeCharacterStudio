@@ -57,3 +57,27 @@ body { background: var(--bg); color: var(--text); }
   .panel { border-left: 0; border-top: 1px solid var(--border); }
   .badge, .status { display: none; }
 }
+
+/* Viewport (M1) */
+.viewport-stage {
+  position: absolute; inset: 0;
+  background: radial-gradient(120% 90% at 50% 38%, #2b2d33 0%, #1d1f23 45%, #131417 100%);
+}
+.viewport-stage canvas { touch-action: none; }
+.viewport-toolbar {
+  position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; align-items: center;
+}
+.viewport-toolbar button {
+  font: inherit; font-size: 12px; color: var(--text); cursor: pointer;
+  background: rgba(26, 27, 31, 0.86); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 5px 10px; backdrop-filter: blur(6px);
+}
+.viewport-toolbar button:hover { border-color: #3d4149; }
+.viewport-toolbar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.viewport-toolbar .segmented { display: flex; }
+.viewport-toolbar .segmented button { border-radius: 0; }
+.viewport-toolbar .segmented button:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.viewport-toolbar .segmented button:last-child { border-radius: 0 var(--radius) var(--radius) 0; border-left: 0; }
+.viewport-toolbar button[aria-pressed='true'] { background: #2b3a4d; border-color: #3f5876; color: #d8e9ff; }
+.compare-stage { position: fixed; top: 0; left: 0; }
+html.compare, html.compare body { background: transparent; }

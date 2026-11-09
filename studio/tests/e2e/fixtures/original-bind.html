@@ -1,0 +1,33 @@
+<!doctype html>
+<!-- Reference renderer for the M1 comparison tests: the ORIGINAL BuddyRevival Canvas 2D engine,
+     unmodified, drawing the character in its bind pose with the original Camera_Long2 at 692x520.
+     Served from the repository root (it imports ../../../../web/src). ?buddy=<look code> picks the look. -->
+<meta charset="utf-8">
+<style>html,body{margin:0;background:transparent}</style>
+<canvas id="stage" width="692" height="520"></canvas>
+<script type="module">
+  import { Buddy } from '../../../../web/src/domain/buddy.js';
+  import { TextureLibrary } from '../../../../web/src/domain/textures.js';
+  import { Wardrobe } from '../../../../web/src/domain/wardrobe.js';
+
+  const assets = '../../../../web/assets/';
+  const canvas = document.getElementById('stage');
+  const [textures, chick, catalog, wardrobe] = await Promise.all([
+    TextureLibrary.load(assets + 'chick/'),
+    fetch(assets + 'chick.bin').then(r => r.arrayBuffer()).then(b => new Uint8Array(b)),
+    fetch(assets + 'chick/catalog.xml').then(r => r.text()),
+    Wardrobe.load(assets + 'wardrobe.xml'),
+  ]);
+  const buddy = await Buddy.load(chick, { width: canvas.width, height: canvas.height, textures, catalog });
+  buddy.camera = buddy.scene.node('Camera_Long2');
+  const g = canvas.getContext('2d');
+  // Wear a look code and redraw. No animation is ever played, so this is the bind pose.
+  async function render(code) {
+    await wardrobe.wearCode(buddy, code);
+    g.clearRect(0, 0, canvas.width, canvas.height);
+    buddy.render(g);
+    return wardrobe.codeOf(buddy);
+  }
+  const code = await render(new URLSearchParams(location.search).get('buddy'));
+  window.__original = { ready: true, code, render };
+</script>

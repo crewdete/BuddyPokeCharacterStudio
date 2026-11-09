@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { createDebug, type StudioDebug } from './debug';
 import { createBuddy, describeBuddy, loadOriginalAssets, type BuddyInfo } from './original';
+import { CharacterRig } from './scene/CharacterRig';
 import { DataPanel } from './ui/DataPanel';
-import { Viewport } from './viewport/Viewport';
+import { ComparisonViewport, Viewport } from './viewport/Viewport';
 
 export type LoadState =
   | { status: 'loading' }
@@ -10,39 +12,58 @@ export type LoadState =
 
 declare global {
   interface Window {
-    /** Read by the end-to-end smoke test. */
-    __studio?: LoadState;
+    /** Read by the end-to-end tests. */
+    __studio?: LoadState & { debug?: StudioDebug };
   }
 }
 
+const params = new URLSearchParams(location.search);
+/** ?compare=1 renders with the original camera and canvas size for renderer comparison tests. */
+const COMPARE = params.get('compare') === '1';
+/** ?buddy=<look code> wears a look on load, like the original Flash embed and BuddyRevival. */
+const LOOK = params.get('buddy');
+if (COMPARE) document.documentElement.classList.add('compare');
+
 export function App() {
   const [state, setState] = useState<LoadState>({ status: 'loading' });
+  const [rig, setRig] = useState<CharacterRig | null>(null);
 
   useEffect(() => {
     let cancelled = false;
+    let built: CharacterRig | null = null;
     const started = performance.now();
     (async () => {
       const assets = await loadOriginalAssets();
-      const buddy = await createBuddy(assets);
+      const buddy = await createBuddy(assets, LOOK);
+      built = new CharacterRig(buddy);
       const info = await describeBuddy(buddy, assets.wardrobe);
-      return { status: 'ready', info, ms: Math.round(performance.now() - started) } as const;
+      return { next: { status: 'ready', info, ms: Math.round(performance.now() - started) } as const, debug: createDebug(assets, buddy, built) };
     })()
-      .catch((error: unknown) => ({ status: 'error', message: String(error instanceof Error ? error.message : error) }) as const)
-      .then(next => {
+      .then(({ next, debug }) => {
         if (cancelled) return;
+        window.__studio = { ...next, debug };
+        setRig(built);
+        setState(next);
+      })
+      .catch((error: unknown) => {
+        if (cancelled) return;
+        const next = { status: 'error', message: String(error instanceof Error ? error.message : error) } as const;
         window.__studio = next;
         setState(next);
       });
     return () => {
       cancelled = true;
+      built?.dispose();
     };
   }, []);
+
+  if (COMPARE) return rig ? <ComparisonViewport rig={rig} /> : null;
 
   return (
     <div className="studio">
       <header className="topbar">
         <span className="brand">BuddyPoke Studio</span>
-        <span className="badge">M0 · scaffold</span>
+        <span className="badge">M1 · viewport</span>
         <span className="spacer" />
         <span className={`status status-${state.status}`}>
           {state.status === 'loading' && 'Loading original assets…'}
@@ -51,8 +72,8 @@ export function App() {
         </span>
       </header>
       <main className="viewport">
-        <Viewport />
-        <p className="viewport-note">Empty viewport. The character arrives in M1.</p>
+        <Viewport rig={rig} />
+        <p className="viewport-note">Drag to orbit · scroll to zoom · right-drag to pan</p>
       </main>
       <aside className="panel">
         <DataPanel state={state} />
