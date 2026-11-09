@@ -84,7 +84,9 @@ export class CharacterRig {
   /** Copy the engine's current local transforms (bind pose until an animation runs) into Three. */
   syncPose() {
     // Same traversal as the original SceneNode.draw(): updateWorld() rebuilds `local` from position/rotation.
+    // Cameras are skipped exactly as in the original (Camera.draw() is a no-op, so their world stays untouched).
     const walk = (node: SceneNode, parentWorld: OriginalMatrix) => {
+      if (node instanceof Camera) return;
       node.updateWorld(parentWorld);
       const object = this.objects.get(node);
       if (object) toThreeMatrix(node.local, object.matrix);
