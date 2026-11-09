@@ -6,6 +6,7 @@ import type { CharacterController } from './character/controller';
 import { exportCharacter, type ExportOptions } from './export';
 import { EXPORT_SCALE } from './export/prepare';
 import { FACE_NODE, faceNodeName } from './export/animation/sample';
+import { estimateAnimated, lookStats } from './export/estimate';
 import { createBuddy } from './original';
 import { BindSnapshot } from './pose/bind';
 import { updateWorlds } from './pose/tpose';
@@ -178,7 +179,7 @@ export function createDebug(controller: CharacterController, player: AnimationPl
    * M3C-2: at every sampled frame also the engine's prop visibility, the world vertices of every visible
    * prop and of the face (rigid meshes: node world matrix x local vertices), and the face frame shown.
    */
-  const animationExpectations = async ({ clips, frames, meshClips = [], meshes = ['Body'], timeline = false }: { clips: string[]; frames: (n: number) => number[]; meshClips?: string[]; meshes?: string[]; timeline?: boolean }) => {
+  const animationExpectations = async ({ clips, frames, meshClips = [], meshes = ['Body'], timeline = false, inPlace = false }: { clips: string[]; frames: (n: number) => number[]; meshClips?: string[]; meshes?: string[]; timeline?: boolean; inPlace?: boolean }) => {
     const fresh = await createBuddy(controller.assets, controller.currentCode);
     const bind = new BindSnapshot(fresh.scene);
     type Sample = {
@@ -198,6 +199,9 @@ export function createDebug(controller: CharacterController, player: AnimationPl
       return frame === -1 ? 1 : frame; // compose() defaults to frame 1: -1 (as dressed) is the same bitmap
     };
     const S = fresh.scene;
+    // M3C-3 in place: the original engine with Bip01's horizontal translation held at its rest value.
+    const root = S.node('Bip01')!;
+    const restRoot = root.position ? { x: root.position.x, z: root.position.z } : null;
     const rigidWorld = (name: string) => {
       const node = S.node(name)!;
       if (!node.mesh!.decoded) node.mesh!.decode(S);
@@ -211,6 +215,10 @@ export function createDebug(controller: CharacterController, player: AnimationPl
       out[name] = { frames: clip.frameCount, fps: clip.fps, samples: {} };
       for (const f of frames(clip.frameCount)) {
         clip.showFrame(S, f);
+        if (inPlace && restRoot && root.position) {
+          root.position.x = restRoot.x;
+          root.position.z = restRoot.z;
+        }
         updateWorlds(S);
         const props = Object.fromEntries(S.propNames.filter(p => S.node(p)).map(p => [p, S.node(p)!.visible]));
         const face = faceFrame();
@@ -391,7 +399,16 @@ export function createDebug(controller: CharacterController, player: AnimationPl
     return { nodes, scaleValues };
   };
 
+  /** M3C-3: the Export tab's size estimate for these options (same functions the panel uses). */
+  const exportEstimate = async (options: ExportOptions) => {
+    const base = await exportCharacter(controller.assets, controller.currentCode, { ...options, animations: options.animations ? [] : undefined, rootMotion: undefined });
+    if (!options.animations) return { bytes: base.glb.byteLength, base: base.glb.byteLength };
+    const stats = await lookStats(controller.assets, controller.currentCode);
+    return { ...estimateAnimated(stats, base.glb.byteLength, options.animations, options.rootMotion ?? 'keep'), base: base.glb.byteLength, facePng: Object.fromEntries(stats.facePng), propBytes: stats.propBytes };
+  };
+
   return {
+    exportEstimate,
     describeAnimatedGlb,
     checkFaceTextures,
     animationExpectations,

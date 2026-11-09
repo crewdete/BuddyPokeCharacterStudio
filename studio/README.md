@@ -45,12 +45,16 @@ Plan and analysis: [`../docs/studio/ANALYSIS_AND_PLAN.md`](../docs/studio/ANALYS
   static, in the exact Rest pose or the T-pose, unlit (original look) or lit, with embedded textures. Validated in
   Blender 5.2.3 LTS (headless, official glTF importer). See *Export* below.
 
-- **M3C-1** skeletal animation export (exporter only; the Export-tab controls arrive in M3C-3): all 94 original clips
+- **M3C-1** skeletal animation export: all 94 original clips
   in one GLB, bound to the original rest pose, every bone keyed per clip, STEP keys at 30 fps, root motion. See below.
 
-- **M3C-2** props and facial expressions in animated GLB files (exporter only): the original Sword, Rose, guitar (`Strat`)
+- **M3C-2** props and facial expressions in animated GLB files: the original Sword, Rose, guitar (`Strat`)
   and Mic with their rotation and visibility tracks, and the original face expressions as one face node per expression
   frame with the texture the original engine composes. Every frame matches the engine (Three.js and Blender). See below.
+
+- **M3C-3** the animated export interface in the Export tab: static / rigged / animated GLB, clip selection (all, none,
+  categories, single clips, search), Rest or T-pose initial pose, root motion or in place, size estimate, progress,
+  messages and file name. See *Export tab* below.
 
 Animation shortcuts: `Space` play/pause, `,` / `.` previous / next frame while paused (ignored in text fields and menus).
 Viewport: `B` skeleton overlay, `X` X-ray (bones through the character).
@@ -91,9 +95,32 @@ joints; Blender builds a single armature from them (verified).
 M0 analysis). It will only be added once it passes the same Blender validation. *OBJ* cannot carry a skeleton, weights or
 transparency modes; the static GLB already covers static use, so OBJ adds little and is not offered.
 
+### Export tab (M3C-3)
+
+**Format:** GLB · static mesh, GLB · rigged (M3B, unchanged) or **GLB · animated**. For animated files:
+
+- **Animations:** the 94 clips listed with the Animate tab's categories and names (Moods, Pokes, Idle, Other). Select all,
+  Deselect all, a whole category (checkbox; shows a partial state), single clips, or search. A clip listed under several
+  names (a mood that is also half of a poke) is selected and exported once. Clips that show a prop are marked (Sword,
+  Rose, Guitar, Mic). Actions are written in the original package order.
+- **Initial pose:** Rest or T-pose: only the pose the file opens in; the skin is always bound to the original Rest pose.
+- **Root motion:** *Keep root motion* (as recorded) or *In place*: `Bip01`'s horizontal translation is held at its rest
+  value in every frame; vertical motion and every rotation are kept. Nothing else in the file changes.
+- Props and facial expressions are included automatically for the selected clips (M3C-2).
+- **Estimated size** before exporting: an exact export of the same look and options without clips, plus the exact key
+  counts of the selected clips, the PNG sizes of their face textures and the props they show (within ~1% of the real
+  file in the tests; static and rigged show the exact size).
+- **Progress** (clip by clip while the original clips are sampled), success message with the file contents, and error
+  messages (a file that fails the self-check is not saved). File name: suggested from look, format, clip count and pose,
+  or typed (unsafe characters replaced, `.glb` added). Settings and selection persist while switching tabs.
+- Exporting never touches the live character: playback keeps running, the look, history and pose are unchanged.
+- **Blender: set the scene frame rate to 30 fps before importing** (stated in the tab).
+- Output is deterministic: GLTFExporter encodes textures asynchronously and stores them in the order the encodes finish;
+  the writer re-packs them in image order (`orderImages`), so the same export always gives the same bytes.
+
 ### Animated GLB (M3C-1)
 
-`exportCharacter(..., { skeleton: true, pose, animations: [clip ids] })` (used by the tests; UI in M3C-3):
+`exportCharacter(..., { skeleton: true, pose, animations: [clip ids], rootMotion })` (the Export tab uses this):
 
 - **Bind:** always the original rest pose, with clean inverse bind matrices. `pose` only sets the file's *initial display*
   (Rest, or T-pose with the arm bones turned while the bind stays the rest pose). A T-pose-bound animated file is not
@@ -178,7 +205,8 @@ Vitest 4's optional peer dependencies; installing from the committed lockfile (`
 src/
   original/   typed adapter around ../web/src (no re-implementation)
   export/     prepare.ts (fresh buddy -> export scene), glb.ts (write + self-check), index.ts (workflow),
-              animation/sample.ts (original clips -> STEP keyframes, prop visibility/rotation, face frames)
+              animation/sample.ts (original clips -> STEP keyframes, prop visibility/rotation, face frames),
+              estimate.ts (file-size estimate for the Export tab)
   pose/       BindSnapshot (exact rest pose), AnimationPlayer (original showFrame, timing per Animation.step,
               rest/T-pose/animation mode), tpose.ts (T-pose solver), catalog.ts (original moods.xml / pokes.xml)
   character/  CharacterController: serialized edits through the original Wardrobe, rig update, undo history;
@@ -198,7 +226,8 @@ tests/
               tpose.mjs (modes, T-pose geometry, skeleton overlay, X-ray, camera preservation),
               export.mjs (GLB structure, pose, skeleton, weights, textures, isolation; Blender if available),
               animexport.mjs (94 clips: structure, accuracy vs the engine, display pose; Blender if available),
-              animprops.mjs (props + facial expressions: every-frame timing, textures, sync; Blender if available)
+              animprops.mjs (props + facial expressions: every-frame timing, textures, sync; Blender if available),
+              exportui.mjs (the Export tab: selection, options, estimate, progress, errors, downloads; Blender if available)
   blender/    validate_glb.py (static/rigged GLB), validate_anim.py (animated GLB, M3C)
     fixtures/original-bind.html   the original renderer drawing the bind pose (reference for render.mjs)
 ```

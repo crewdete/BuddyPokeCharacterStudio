@@ -89,7 +89,7 @@ export function App() {
     <div className="studio">
       <header className="topbar">
         <span className="brand">BuddyPoke Studio</span>
-        <span className="badge">M3B · export</span>
+        <span className="badge">M3C · animated export</span>
         <span className="spacer" />
         <span className={`status status-${state.status}`}>
           {state.status === 'loading' && 'Loading original assets…'}

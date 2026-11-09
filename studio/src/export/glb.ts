@@ -26,7 +26,61 @@ interface GltfJson {
 }
 
 export async function writeGlb(prepared: PreparedExport): Promise<ArrayBuffer> {
-  return (await new GLTFExporter().parseAsync(prepared.root, { binary: true, trs: true, onlyVisible: true, animations: prepared.animations })) as ArrayBuffer;
+  const glb = (await new GLTFExporter().parseAsync(prepared.root, { binary: true, trs: true, onlyVisible: true, animations: prepared.animations })) as ArrayBuffer;
+  return orderImages(glb);
+}
+
+/**
+ * Deterministic output: GLTFExporter encodes PNG textures asynchronously and appends each image's buffer view
+ * when its encoding finishes, so the order of the image data in the binary chunk can change from one export
+ * to the next (same content, different bytes). Re-pack the binary chunk with the image buffer views in image
+ * order. Nothing else changes: same JSON apart from those offsets, same data, same 4-byte alignment.
+ */
+export function orderImages(glb: ArrayBuffer): ArrayBuffer {
+  const view = new DataView(glb);
+  const jsonLength = view.getUint32(12, true);
+  const json = JSON.parse(new TextDecoder().decode(new Uint8Array(glb, 20, jsonLength))) as {
+    images?: { bufferView?: number }[];
+    bufferViews: { byteOffset?: number; byteLength: number }[];
+    buffers: { byteLength: number }[];
+  };
+  const imageViews = (json.images ?? []).map(i => i.bufferView).filter((v): v is number => v !== undefined);
+  const slots = [...imageViews].sort((a, b) => a - b);
+  if (imageViews.every((v, i) => v === slots[i])) return glb; // already in order
+  const binStart = 20 + jsonLength + 8;
+  const data = json.bufferViews.map(v => new Uint8Array(glb, binStart + (v.byteOffset ?? 0), v.byteLength));
+  const views = json.bufferViews.map(v => ({ ...v }));
+  imageViews.forEach((source, i) => {
+    views[slots[i]] = { ...json.bufferViews[source] };
+    json.images![i].bufferView = slots[i];
+  });
+  const content = views.map((_, i) => data[slots.includes(i) ? imageViews[slots.indexOf(i)] : i]);
+  const pad4 = (n: number) => (n + 3) & ~3;
+  let offset = 0;
+  views.forEach((v, i) => {
+    v.byteOffset = offset;
+    v.byteLength = content[i].length;
+    offset = pad4(offset + content[i].length);
+  });
+  json.bufferViews = views;
+  json.buffers[0].byteLength = offset;
+  const bin = new Uint8Array(offset);
+  views.forEach((v, i) => bin.set(content[i], v.byteOffset));
+  let text = JSON.stringify(json);
+  text += ' '.repeat(pad4(new TextEncoder().encode(text).length) - new TextEncoder().encode(text).length);
+  const jsonBytes = new TextEncoder().encode(text);
+  const out = new ArrayBuffer(12 + 8 + jsonBytes.length + 8 + bin.length);
+  const o = new DataView(out);
+  o.setUint32(0, 0x46546c67, true);
+  o.setUint32(4, 2, true);
+  o.setUint32(8, out.byteLength, true);
+  o.setUint32(12, jsonBytes.length, true);
+  o.setUint32(16, 0x4e4f534a, true); // JSON
+  new Uint8Array(out, 20).set(jsonBytes);
+  o.setUint32(20 + jsonBytes.length, bin.length, true);
+  o.setUint32(24 + jsonBytes.length, 0x004e4942, true); // BIN
+  new Uint8Array(out, 28 + jsonBytes.length).set(bin);
+  return out;
 }
 
 /** Read the JSON chunk of a GLB (for structural checks). */
@@ -107,6 +161,14 @@ export async function checkGlb(glb: ArrayBuffer, manifest: ExportManifest): Prom
     if (unkeyedFaces.length) problems.push(`${expected.name}: face nodes not keyed: ${unkeyedFaces.join(', ')}`);
     const end = Math.max(...a.samplers.map(s => json.accessors?.[s.input]?.max?.[0] ?? 0));
     if (Math.abs(end - expected.duration) > 1e-4) problems.push(`${expected.name}: duration ${end}, expected ${expected.duration}`);
+  }
+  if (manifest.rootMotion === 'inPlace') {
+    // In place (M3C-3): Bip01 keeps one horizontal position in every clip.
+    for (const clip of gltf.animations) {
+      const v = clip.tracks.find(t => t.name === 'Bip01.position')?.values;
+      if (!v) continue;
+      for (let i = 3; i < v.length; i += 3) if (v[i] !== v[0] || v[i + 2] !== v[2]) { problems.push(`${clip.name}: root moves horizontally in an in-place export`); break; }
+    }
   }
   return {
     ok: problems.length === 0,

@@ -1,0 +1,539 @@
+{
+  "file": "buddypoke-animated-94clips-tpose-748e72ea.glb",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens in Blender (official glTF importer), scene at 30 fps",
+      "ok": true,
+      "detail": "{'FINISHED'}, 30 fps"
+    },
+    {
+      "name": "armature rest pose = the original rest pose (bind)",
+      "ok": true,
+      "detail": "max 0.000 mm (clean-rotation rest, documented \u22641.22 mm)"
+    },
+    {
+      "name": "all 94 clips imported as Actions with their original names",
+      "ok": true,
+      "detail": "94 actions"
+    },
+    {
+      "name": "every Action spans the original frames 0..n-1 at 30 fps",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "bone positions match the original engine in all 94 clips",
+      "ok": true,
+      "detail": "worst 0.0011 mm"
+    },
+    {
+      "name": "root motion matches the original engine",
+      "ok": true,
+      "detail": "worst 0.00018 mm"
+    },
+    {
+      "name": "bones, props and face in sync at every sampled frame (visible prop set and face object = engine)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop vertices where the engine puts them (27 visible-prop samples)",
+      "ok": true,
+      "detail": "worst 0.00058 mm; props ['Mic', 'Rose', 'Strat', 'Sword']"
+    },
+    {
+      "name": "face vertices where the engine puts them (32 face objects)",
+      "ok": true,
+      "detail": "worst 0.00056 mm"
+    },
+    {
+      "name": "facial expression timing: exactly the engine's face at every frame (11609 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop visibility timing: exactly the engine's props at every frame (11609 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "switching swordA1 -> hug1: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F03'] (engine Head_F03), props [] (engine [])"
+    },
+    {
+      "name": "switching hug1 -> swordA1: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F15'] (engine Head_F15), props ['Sword'] (engine ['Sword'])"
+    },
+    {
+      "name": "switching mood_swordTwirl -> jamA2: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F28'] (engine Head_F28), props ['Mic'] (engine ['Mic'])"
+    },
+    {
+      "name": "switching jamA1 -> rose1: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F03'] (engine Head_F03), props ['Rose'] (engine ['Rose'])"
+    },
+    {
+      "name": "switching rose2 -> mood_happy: no prop or face carry-over",
+      "ok": true,
+      "detail": "faces ['Head_F06'] (engine Head_F06), props [] (engine [])"
+    },
+    {
+      "name": "switching hug1 -> holdHands1: no pose carry-over",
+      "ok": true,
+      "detail": "max 0.0005 mm"
+    },
+    {
+      "name": "switching holdHands1 -> hug1: no pose carry-over",
+      "ok": true,
+      "detail": "max 0.0003 mm"
+    },
+    {
+      "name": "renders of representative clips, props and expressions",
+      "ok": true,
+      "detail": "buddypoke-animated-94clips-tpose-748e72ea-mood_happy-32.png, buddypoke-animated-94clips-tpose-748e72ea-hug1-56.png, buddypoke-animated-94clips-tpose-748e72ea-kick1-32.png, buddypoke-animated-94clips-tpose-748e72ea-swordA2-44.png, buddypoke-animated-94clips-tpose-748e72ea-jamA1-54.png"
+    }
+  ],
+  "ok": true,
+  "clips": {
+    "pose_joinNow": {
+      "bone_mm": 0.000486061168619993,
+      "root_mm": 0.0001822014624839215
+    },
+    "pose_contra": {
+      "bone_mm": 0.0005984629877812625,
+      "root_mm": 1.8749713606747085e-09
+    },
+    "pose_contra_attention": {
+      "bone_mm": 0.000613848266722142,
+      "root_mm": 2.5876693407911443e-05
+    },
+    "pose_contra_bow": {
+      "bone_mm": 0.000601977404258375,
+      "root_mm": 2.3202645665678935e-05
+    },
+    "pose_contra_canCan": {
+      "bone_mm": 0.00050931680681445,
+      "root_mm": 7.375698489406455e-05
+    },
+    "pose_contra_lookFeet": {
+      "bone_mm": 0.0005773118325415408,
+      "root_mm": 5.9604644775390625e-05
+    },
+    "pose_contra_shift": {
+      "bone_mm": 0.0004777675730550706,
+      "root_mm": 1.1558615877675408e-05
+    },
+    "pose_contra_toStand": {
+      "bone_mm": 0.000486061168619993,
+      "root_mm": 3.914690965534643e-06
+    },
+    "pose_stand": {
+      "bone_mm": 0.0003579381748874281,
+      "root_mm": 1.8749713606747085e-09
+    },
+    "pose_stand_lookAround": {
+      "bone_mm": 0.00048811254960772984,
+      "root_mm": 1.8749713606747085e-09
+    },
+    "pose_stand_model": {
+      "bone_mm": 0.0005101335873789695,
+      "root_mm": 9.978419129266149e-07
+    },
+    "pose_stand_stretch": {
+      "bone_mm": 0.0007366378900608853,
+      "root_mm": 5.65918548220036e-05
+    },
+    "pose_stand_toContra": {
+      "bone_mm": 0.0004851466594964178,
+      "root_mm": 7.524826002095578e-06
+    },
+    "mood_impatient": {
+      "bone_mm": 0.0004851466594964178,
+      "root_mm": 3.602056062784791e-06
+    },
+    "mood_lookingForLove": {
+      "bone_mm": 0.0004172325134277344,
+      "root_mm": 2.1467400044293805e-06
+    },
+    "mood_sneaky": {
+      "bone_mm": 0.00036378370570342843,
+      "root_mm": 2.996434453720349e-05
+    },
+    "mood_dreaming": {
+      "bone_mm": 0.0003367011265232659,
+      "root_mm": 6.663053348896068e-05
+    },
+    "mood_confused": {
+      "bone_mm": 0.0004826228243321671,
+      "root_mm": 1.8749713606747085e-09
+    },
+    "mood_sleeping": {
+      "bone_mm": 0.0007235123745387921,
+      "root_mm": 0.00012503384943290133
+    },
+    "hipBump1": {
+      "bone_mm": 0.0008129331186562178,
+      "root_mm": 3.030299040068071e-05
+    },
+    "hipBump2": {
+      "bone_mm": 0.0009215859231988326,
+      "root_mm": 3.030299040068071e-05
+    },
+    "mood_swordTwirl": {
+      "bone_mm": 0.0005186053679971354,
+      "root_mm": 9.215859231988327e-05
+    },
+    "jamB2": {
+      "bone_mm": 0.0004211390841323906,
+      "root_mm": 1.5841983408823893e-06
+    },
+    "jamB1": {
+      "bone_mm": 0.0008653024243552154,
+      "root_mm": 6.537857940340134e-05
+    },
+    "jamA2": {
+      "bone_mm": 0.0004924151790695877,
+      "root_mm": 2.9919248328269463e-05
+    },
+    "jamA1": {
+      "bone_mm": 0.0008653024243552154,
+      "root_mm": 6.537857940340134e-05
+    },
+    "rose2": {
+      "bone_mm": 0.0006664001874625056,
+      "root_mm": 3.848469630723193e-06
+    },
+    "rose1": {
+      "bone_mm": 0.0007217455529160699,
+      "root_mm": 4.488794308409077e-06
+    },
+    "swordA2": {
+      "bone_mm": 0.000659029018506288,
+      "root_mm": 3.0091953317455034e-05
+    },
+    "swordA1": {
+      "bone_mm": 0.0006708936517592385,
+      "root_mm": 6.582810374748816e-05
+    },
+    "bearHug1": {
+      "bone_mm": 0.0004995779578161303,
+      "root_mm": 0.00015966826043077077
+    },
+    "bearHug2": {
+      "bone_mm": 0.0007047109365295662,
+      "root_mm": 8.55253549625316e-05
+    },
+    "blowKiss1": {
+      "bone_mm": 0.0007295484343107729,
+      "root_mm": 0.00011292706264685211
+    },
+    "blowKiss2": {
+      "bone_mm": 0.00040528800112392903,
+      "root_mm": 2.3437142008433856e-09
+    },
+    "celebrate1": {
+      "bone_mm": 0.00046361533361983435,
+      "root_mm": 0.0001319087004220888
+    },
+    "celebrate2": {
+      "bone_mm": 0.0005266248299799053,
+      "root_mm": 0.00012884786818732308
+    },
+    "gimmeFive1": {
+      "bone_mm": 0.0004929222138828961,
+      "root_mm": 5.713295944743364e-05
+    },
+    "gimmeFive2": {
+      "bone_mm": 0.0004789280498024284,
+      "root_mm": 4.9226713338188824e-05
+    },
+    "handshakeHug1": {
+      "bone_mm": 0.00048628952718021636,
+      "root_mm": 0.0001106186958771801
+    },
+    "handshakeHug2": {
+      "bone_mm": 0.0005693725697559953,
+      "root_mm": 0.0001274290232669761
+    },
+    "highTen1": {
+      "bone_mm": 0.0003713350234740112,
+      "root_mm": 1.2155839859885281e-05
+    },
+    "highTen2": {
+      "bone_mm": 0.00046000924826959167,
+      "root_mm": 1.2155839859885281e-05
+    },
+    "hug1": {
+      "bone_mm": 0.0005397430144630323,
+      "root_mm": 7.634573255449234e-05
+    },
+    "hug2": {
+      "bone_mm": 0.0005364418029785156,
+      "root_mm": 7.634573255449234e-05
+    },
+    "idolize1": {
+      "bone_mm": 0.0006108141426589891,
+      "root_mm": 8.527545407366983e-05
+    },
+    "idolize2": {
+      "bone_mm": 0.0005068585679440185,
+      "root_mm": 1.5685813310142347e-05
+    },
+    "kick1": {
+      "bone_mm": 0.0005411937838555836,
+      "root_mm": 6.828569911354542e-05
+    },
+    "kick2": {
+      "bone_mm": 0.0005902234314212801,
+      "root_mm": 0.00016653484569940645
+    },
+    "kissCheek1": {
+      "bone_mm": 0.00047403495671113926,
+      "root_mm": 0.00010323827311807139
+    },
+    "kissCheek2": {
+      "bone_mm": 0.0005877936757599122,
+      "root_mm": 1.563766226879091e-05
+    },
+    "mock1": {
+      "bone_mm": 0.0006902777962823761,
+      "root_mm": 1.6037213202200888e-05
+    },
+    "mock2": {
+      "bone_mm": 0.0004140270945265831,
+      "root_mm": 1.6205104531567018e-05
+    },
+    "pattyCakes1": {
+      "bone_mm": 0.000497127393412956,
+      "root_mm": 4.447248007401936e-05
+    },
+    "pattyCakes2": {
+      "bone_mm": 0.0005257167447937486,
+      "root_mm": 4.447248007401936e-05
+    },
+    "poke1": {
+      "bone_mm": 0.0005249355719628494,
+      "root_mm": 8.018236778586754e-05
+    },
+    "poke2": {
+      "bone_mm": 0.000408917430903057,
+      "root_mm": 4.511242428061046e-06
+    },
+    "punch1": {
+      "bone_mm": 0.000584241447452168,
+      "root_mm": 3.063830838863056e-05
+    },
+    "punch2": {
+      "bone_mm": 0.0006942346093199245,
+      "root_mm": 0.0001519626234052415
+    },
+    "rubNoses1": {
+      "bone_mm": 0.0003919883500923486,
+      "root_mm": 4.967960668128101e-05
+    },
+    "rubNoses2": {
+      "bone_mm": 0.00043213367462158203,
+      "root_mm": 4.544846311163491e-06
+    },
+    "slapButt1": {
+      "bone_mm": 0.0004265742065995823,
+      "root_mm": 5.575503985246928e-05
+    },
+    "slapButt2": {
+      "bone_mm": 0.0004969598694340078,
+      "root_mm": 8.992011800470065e-06
+    },
+    "slapFace1": {
+      "bone_mm": 0.0006166002552569086,
+      "root_mm": 0.00010066903469615922
+    },
+    "slapFace2": {
+      "bone_mm": 0.0006398829982752766,
+      "root_mm": 5.06443890817773e-05
+    },
+    "standBreathe": {
+      "bone_mm": 0.0003579381748874281,
+      "root_mm": 1.8749713606747085e-09
+    },
+    "tickle1": {
+      "bone_mm": 0.0005401542472956138,
+      "root_mm": 0.00012039357838833228
+    },
+    "tickle2": {
+      "bone_mm": 0.0004537061015165124,
+      "root_mm": 1.8036611106582966e-06
+    },
+    "waveAt1": {
+      "bone_mm": 0.00036983709472390583,
+      "root_mm": 1.0012675459434782e-06
+    },
+    "waveAt2": {
+      "bone_mm": 0.0003796142102139293,
+      "root_mm": 2.3437142008433856e-09
+    },
+    "mood_angry": {
+      "bone_mm": 0.0005327555877186285,
+      "root_mm": 3.2811155851670107e-06
+    },
+    "mood_bashful": {
+      "bone_mm": 0.0005929775518924244,
+      "root_mm": 3.020842155784181e-06
+    },
+    "mood_gonnaSoarNow": {
+      "bone_mm": 0.0005224445718007746,
+      "root_mm": 3.0664574900987665e-05
+    },
+    "mood_happy": {
+      "bone_mm": 0.0005773118325415408,
+      "root_mm": 1.8550155584129255e-06
+    },
+    "mood_tired": {
+      "bone_mm": 0.0011447738895814905,
+      "root_mm": 0.00010898073983821874
+    },
+    "mood_sad": {
+      "bone_mm": 0.0005341603853981173,
+      "root_mm": 2.5506217463536965e-06
+    },
+    "holdHands1": {
+      "bone_mm": 0.0005264139691786675,
+      "root_mm": 4.6010992615455734e-05
+    },
+    "holdHands2": {
+      "bone_mm": 0.0005120885454845303,
+      "root_mm": 4.6010992615455734e-05
+    },
+    "handshake1": {
+      "bone_mm": 0.0006594526732015163,
+      "root_mm": 3.5227750470030277e-05
+    },
+    "handshake2": {
+      "bone_mm": 0.0006594526732015163,
+      "root_mm": 3.5227750470030277e-05
+    },
+    "kiss1": {
+      "bone_mm": 0.0004909616038285777,
+      "root_mm": 8.462232866585662e-05
+    },
+    "kiss2": {
+      "bone_mm": 0.00042670431921709636,
+      "root_mm": 8.899860299638002e-06
+    },
+    "gossip1": {
+      "bone_mm": 0.0004339283638763737,
+      "root_mm": 8.66191265839791e-06
+    },
+    "gossip2": {
+      "bone_mm": 0.0005240889011344007,
+      "root_mm": 2.3437142008433856e-09
+    },
+    "mood_giggle": {
+      "bone_mm": 0.0006049669578313206,
+      "root_mm": 3.397356346112091e-06
+    },
+    "mood_bored": {
+      "bone_mm": 0.0005059816493496194,
+      "root_mm": 2.421438694000244e-05
+    },
+    "mood_applause": {
+      "bone_mm": 0.000486061168619993,
+      "root_mm": 2.3437142008433856e-09
+    },
+    "mood_inLove": {
+      "bone_mm": 0.0004410970245485212,
+      "root_mm": 1.7816202074059568e-06
+    },
+    "mood_meditative": {
+      "bone_mm": 0.00040449860105336885,
+      "root_mm": 8.15948475895487e-05
+    },
+    "mood_zombie": {
+      "bone_mm": 0.0008706665729279246,
+      "root_mm": 1.4955501903489832e-05
+    },
+    "mood_evil": {
+      "bone_mm": 0.0005077339719951398,
+      "root_mm": 1.862645149230957e-05
+    },
+    "mood_terrified": {
+      "bone_mm": 0.00045491270787935694,
+      "root_mm": 3.159734666183936e-05
+    },
+    "mood_talkToHand": {
+      "bone_mm": 0.0007117157121949941,
+      "root_mm": 1.4024253533033374e-05
+    },
+    "mood_flying": {
+      "bone_mm": 0.0007267712227524286,
+      "root_mm": 0.0001326096354179643
+    },
+    "mood_cry": {
+      "bone_mm": 0.0007868038882281832,
+      "root_mm": 5.587935447692871e-06
+    }
+  },
+  "props": {
+    "objects": [
+      "Mic",
+      "Rose",
+      "Strat",
+      "Sword"
+    ],
+    "worst_mm": 0.000581718097691919,
+    "checked": 27
+  },
+  "faces": {
+    "objects": [
+      "Head",
+      "Head_F02",
+      "Head_F03",
+      "Head_F04",
+      "Head_F05",
+      "Head_F06",
+      "Head_F07",
+      "Head_F08",
+      "Head_F09",
+      "Head_F10",
+      "Head_F11",
+      "Head_F12",
+      "Head_F13",
+      "Head_F14",
+      "Head_F15",
+      "Head_F16",
+      "Head_F17",
+      "Head_F18",
+      "Head_F19",
+      "Head_F20",
+      "Head_F22",
+      "Head_F23",
+      "Head_F24",
+      "Head_F25",
+      "Head_F26",
+      "Head_F27",
+      "Head_F28",
+      "Head_F29",
+      "Head_F30",
+      "Head_F31",
+      "Head_F32",
+      "Head_F33"
+    ],
+    "worst_mm": 0.0005579982484960055
+  },
+  "timeline": {
+    "frames": 11609,
+    "face_mismatches": [],
+    "prop_mismatches": []
+  },
+  "renders": [
+    "buddypoke-animated-94clips-tpose-748e72ea-mood_happy-32.png",
+    "buddypoke-animated-94clips-tpose-748e72ea-hug1-56.png",
+    "buddypoke-animated-94clips-tpose-748e72ea-kick1-32.png",
+    "buddypoke-animated-94clips-tpose-748e72ea-swordA2-44.png",
+    "buddypoke-animated-94clips-tpose-748e72ea-jamA1-54.png"
+  ]
+}

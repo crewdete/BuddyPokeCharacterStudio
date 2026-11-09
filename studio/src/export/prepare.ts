@@ -50,7 +50,20 @@ export interface ExportOptions {
    * the ORIGINAL REST POSE (clean inverse binds) and `pose` only chooses the file's initial display pose.
    */
   animations?: string[];
+  /**
+   * Animated export: keep the original root motion (default), or export "in place": the horizontal (X/Z)
+   * translation of `Bip01` is held at its rest value in every frame; vertical motion and all rotations are kept.
+   */
+  rootMotion?: RootMotion;
 }
+
+export type RootMotion = 'keep' | 'inPlace';
+
+/** Progress of a running export (animated: one tick per sampled clip). */
+export type ExportProgress = (done: number, total: number) => void;
+
+/** Let the browser paint between clips, so a long export can show its progress. */
+const yieldToUi = () => new Promise<void>(resolve => setTimeout(resolve, 0));
 
 export const EXPORT_SCALE = 0.01;
 
@@ -69,6 +82,8 @@ export interface ExportManifest {
   maxJointShift: number;
   /** What the skin is bound to: the exported pose (M3B), or always the original rest pose (animated export). */
   bind: 'pose' | 'rest';
+  /** Animated export: root motion kept as recorded, or horizontal root translation removed. */
+  rootMotion: RootMotion;
   animations: { name: string; frames: number; fps: number; duration: number }[];
   /** Animated export: props shown by at least one exported clip (rigid nodes with rotation + visibility tracks). */
   props: { name: string; parent: string }[];
@@ -111,7 +126,7 @@ function solveExportTPose(exportBones: Map<string, THREE.Bone>, root: THREE.Obje
   }
 }
 
-export async function prepareExport(assets: OriginalAssets, lookCode: string, options: ExportOptions): Promise<PreparedExport> {
+export async function prepareExport(assets: OriginalAssets, lookCode: string, options: ExportOptions, onProgress: ExportProgress = () => {}): Promise<PreparedExport> {
   const buddy = await createBuddy(assets, lookCode);
   const bind = new BindSnapshot(buddy.scene);
   const animated = options.animations !== undefined;
@@ -122,11 +137,25 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
   const scene = buddy.scene;
   // Animated: sample every clip on the fresh buddy first (exact rest restore before and after each clip),
   // to know which props and face frames the exported clips use.
-  const samples: SampledClip[] = animated ? options.animations!.map(name => {
-    const clip = buddy.animations.get(name);
-    if (!clip) throw new Error(`Unknown animation "${name}"`);
-    return sampleClip(scene, clip, bind, scene.boneNames, EXPORT_SCALE);
-  }) : [];
+  const samples: SampledClip[] = [];
+  const unknown = (options.animations ?? []).filter(name => !buddy.animations.has(name));
+  if (unknown.length) throw new Error(`Unknown animation "${unknown.join('", "')}"`);
+  for (const [i, name] of (options.animations ?? []).entries()) {
+    samples.push(sampleClip(scene, buddy.animations.get(name)!, bind, scene.boneNames, EXPORT_SCALE));
+    onProgress(i + 1, options.animations!.length);
+    if (i % 4 === 3) await yieldToUi(); // the fresh export buddy is private: nothing else can touch it meanwhile
+  }
+  const rootMotion: RootMotion = options.rootMotion ?? 'keep';
+  if (rootMotion === 'inPlace') {
+    // Hold Bip01's horizontal translation at its rest value (sampling ends with an exact bind restore).
+    const rest = scene.node('Bip01')!.position;
+    for (const s of samples) {
+      for (let f = 0; f < s.frameCount; f++) {
+        s.rootTranslation[f * 3] = (rest?.x ?? 0) * EXPORT_SCALE;
+        s.rootTranslation[f * 3 + 2] = (rest?.z ?? 0) * EXPORT_SCALE;
+      }
+    }
+  }
   const usedProps = scene.propNames.filter(name => samples.some(s => s.props[name]?.visible.some(v => v === 1)));
   const faceFrames = [...new Set(samples.flatMap(s => Array.from(s.faceFrames)))].filter(f => f !== 1).sort((a, b) => a - b);
   const faceMaterial = scene.node(FACE_NODE)?.mesh?.material ?? null;
@@ -364,6 +393,7 @@ export async function prepareExport(assets: OriginalAssets, lookCode: string, op
     meshes,
     maxJointShift,
     bind: animated ? 'rest' : 'pose',
+    rootMotion: animated ? rootMotion : 'keep',
     animations: animations.map(a => {
       const clip = buddy.animations.get(a.name)!;
       return { name: a.name, frames: clip.frameCount, fps: clip.fps, duration: a.duration };

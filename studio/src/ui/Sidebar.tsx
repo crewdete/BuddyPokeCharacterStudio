@@ -228,7 +228,7 @@ export function Sidebar({ controller, player, entries }: { controller: Character
         {tab === 'Animate' && <AnimatePanel player={player} entries={entries} />}
         {tab === 'Presets' && <PresetsPanel controller={controller} />}
         {tab === 'Code' && <CodePanel controller={controller} />}
-        {tab === 'Export' && <ExportPanel controller={controller} />}
+        {tab === 'Export' && <ExportPanel controller={controller} entries={entries} />}
       </div>
     </div>
   );

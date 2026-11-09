@@ -1,0 +1,121 @@
+{
+  "file": "buddypoke-animated-3clips-rest-748e72ea.glb",
+  "blender": "5.2.3 LTS",
+  "checks": [
+    {
+      "name": "file opens in Blender (official glTF importer), scene at 30 fps",
+      "ok": true,
+      "detail": "{'FINISHED'}, 30 fps"
+    },
+    {
+      "name": "armature rest pose = the original rest pose (bind)",
+      "ok": true,
+      "detail": "max 0.000 mm (clean-rotation rest, documented \u22641.22 mm)"
+    },
+    {
+      "name": "all 3 clips imported as Actions with their original names",
+      "ok": true,
+      "detail": "3 actions"
+    },
+    {
+      "name": "every Action spans the original frames 0..n-1 at 30 fps",
+      "ok": true,
+      "detail": "wrong: []"
+    },
+    {
+      "name": "bone positions match the original engine in all 3 clips",
+      "ok": true,
+      "detail": "worst 0.0007 mm"
+    },
+    {
+      "name": "root motion matches the original engine",
+      "ok": true,
+      "detail": "worst 0.00007 mm"
+    },
+    {
+      "name": "bones, props and face in sync at every sampled frame (visible prop set and face object = engine)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop vertices where the engine puts them (10 visible-prop samples)",
+      "ok": true,
+      "detail": "worst 0.00058 mm; props ['Mic', 'Rose', 'Sword']"
+    },
+    {
+      "name": "face vertices where the engine puts them (8 face objects)",
+      "ok": true,
+      "detail": "worst 0.00049 mm"
+    },
+    {
+      "name": "facial expression timing: exactly the engine's face at every frame (273 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "prop visibility timing: exactly the engine's props at every frame (273 frames)",
+      "ok": true,
+      "detail": "0 wrong: []"
+    },
+    {
+      "name": "renders of representative clips, props and expressions",
+      "ok": true,
+      "detail": "buddypoke-animated-3clips-rest-748e72ea-swordA1-44.png, buddypoke-animated-3clips-rest-748e72ea-rose2-101.png, buddypoke-animated-3clips-rest-748e72ea-jamA2-54.png, buddypoke-animated-3clips-rest-748e72ea-face28-jamA2-0.png, buddypoke-animated-3clips-rest-748e72ea-face29-jamA2-5.png, buddypoke-animated-3clips-rest-748e72ea-face01-rose2-0.png \u2026 (11)"
+    }
+  ],
+  "ok": true,
+  "clips": {
+    "jamA2": {
+      "bone_mm": 0.0004924151790695877,
+      "root_mm": 2.9919248328269463e-05
+    },
+    "rose2": {
+      "bone_mm": 0.0006664001874625056,
+      "root_mm": 3.848469630723193e-06
+    },
+    "swordA1": {
+      "bone_mm": 0.0006708936517592385,
+      "root_mm": 6.582810374748816e-05
+    }
+  },
+  "props": {
+    "objects": [
+      "Mic",
+      "Rose",
+      "Sword"
+    ],
+    "worst_mm": 0.000581718097691919,
+    "checked": 10
+  },
+  "faces": {
+    "objects": [
+      "Head",
+      "Head_F02",
+      "Head_F05",
+      "Head_F15",
+      "Head_F18",
+      "Head_F19",
+      "Head_F28",
+      "Head_F29"
+    ],
+    "worst_mm": 0.0004901553438685369
+  },
+  "timeline": {
+    "frames": 273,
+    "face_mismatches": [],
+    "prop_mismatches": []
+  },
+  "renders": [
+    "buddypoke-animated-3clips-rest-748e72ea-swordA1-44.png",
+    "buddypoke-animated-3clips-rest-748e72ea-rose2-101.png",
+    "buddypoke-animated-3clips-rest-748e72ea-jamA2-54.png",
+    "buddypoke-animated-3clips-rest-748e72ea-face28-jamA2-0.png",
+    "buddypoke-animated-3clips-rest-748e72ea-face29-jamA2-5.png",
+    "buddypoke-animated-3clips-rest-748e72ea-face01-rose2-0.png",
+    "buddypoke-animated-3clips-rest-748e72ea-face02-rose2-10.png",
+    "buddypoke-animated-3clips-rest-748e72ea-face18-rose2-20.png",
+    "buddypoke-animated-3clips-rest-748e72ea-face19-rose2-50.png",
+    "buddypoke-animated-3clips-rest-748e72ea-face05-rose2-55.png",
+    "buddypoke-animated-3clips-rest-748e72ea-face15-swordA1-0.png"
+  ]
+}
